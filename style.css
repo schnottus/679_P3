@@ -1,0 +1,21 @@
+/******************
+* File: style.css
+* Author: Scott Larson
+* Date: 9 November 2012
+*******************/
+
+body  p {
+	font-family: Arial;
+	color: white;
+	font-weight: bold;
+}
+
+#container { 
+	float: left;
+	padding: 0 20px;
+	position: relative;
+}
+
+#debugDraw {
+	float: left;
+}
