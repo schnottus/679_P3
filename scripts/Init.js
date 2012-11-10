@@ -39,7 +39,9 @@ function init() {
 	(there are many more properties bodies and fixtures contain - i listed the important ones)
 			
 	The following code walks though the creation of a rectangle player ship	*/
-    playerShip = makePlayer();	
+    playerShip = makePlayer();
+
+    enemy = makeEnemy(0, 7, 7);
 	
 	//create a hard boundary so that objects don't escape the screen
 	var fixDef = new b2FixtureDef;

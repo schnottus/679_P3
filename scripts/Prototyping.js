@@ -69,12 +69,12 @@ function makeAsteroid(x, y) {
     return asteroid;
 }
 
-function makeEnemy(type) {
+function makeEnemy(type, x, y) {
     var enemy;
     switch (type) {
         case 0:
             enemy = Object.create(Tank);
-            enemy.body = makeTankBody(); //actually make Box2d body here eg) makeTankBody();
+            enemy.body = makeTankBody(x, y); //actually make Box2d body here eg) makeTankBody();
             enemy.mesh = 1; //actually make the mesh here
     }
     return enemy
@@ -87,15 +87,4 @@ function makePlayer() {
     player.mesh = 1; //actually make the mesh here
     return player;
 }
-
-//--------------------------------------
-//Examples Below
-//--------------------------------------
-
-
-var aTank = makeEnemy(0);
-//aTank.body should have its Box2d body
-var anAsteroid = makeAsteroid();
-
-//ready to be stored in a list or something
 	
