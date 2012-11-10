@@ -21,7 +21,10 @@
 		b2DebugDraw = Box2D.Dynamics.b2DebugDraw,
 		b2MouseJointDef =  Box2D.Dynamics.Joints.b2MouseJointDef;
 	//box2d world (contains all objects and has global properties such as gravity)
-	var world;
+	var world = new b2World(
+				new b2Vec2(0, 0),    //gravity
+				true                 //allow sleep
+			);;
 	
 	//change when we Joseph inserts prototyping/object managment
 	var playerShip;

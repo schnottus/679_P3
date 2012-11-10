@@ -1,4 +1,4 @@
-//ready to be stored in a list or something//Some notes on the code below:
+//Some notes on the code below:
 //this is a skeleton of what I would like to do with object construction
 //the objects will eventually be put in different files based on types
 //but for now it is small enough that I would like to keep it all together,
@@ -61,10 +61,10 @@ extend(Player, { HP: 10 });
 // Soon these functions will have to be passed variables that will be used in
 // initializing the objects, as seen in makeEnemy();
 
-function makeAsteroid() {
+function makeAsteroid(x, y) {
     var asteroid;
     asteroid = Object.create(Asteroid);
-    asteroid.body = 0; //actually make Box2d body here eg) makeAsteroidBody();
+    asteroid.body = makeAsteroidBody(x, y);
     asteroid.mesh = 1; //actually make the mesh here
     return asteroid;
 }
@@ -74,7 +74,7 @@ function makeEnemy(type) {
     switch (type) {
         case 0:
             enemy = Object.create(Tank);
-            enemy.body = 1; //actually make Box2d body here eg) makeTankBody();
+            enemy.body = makeTankBody(); //actually make Box2d body here eg) makeTankBody();
             enemy.mesh = 1; //actually make the mesh here
     }
     return enemy
@@ -83,7 +83,7 @@ function makeEnemy(type) {
 function makePlayer() {
     var player;
     player = Object.create(Player);
-    player.body = 2; //actually make Box2d body here eg) makePlayerBody();
+    player.body = makePlayerBody();
     player.mesh = 1; //actually make the mesh here
     return player;
 }

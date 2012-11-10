@@ -18,10 +18,11 @@ function init() {
 
 /***Box2d setup***/
 	//create a world with 0 gravity
-    world = new b2World(
-				new b2Vec2(0, 0),    //gravity
-				true                 //allow sleep
-			);
+   // world = new b2World(
+	//			new b2Vec2(0, 0),    //gravity
+	//			true                 //allow sleep
+    //		);
+    //initialized in global because it made stuff compile without undefined world errors in Bodies.js
 			
 			
 	/* An overview of bodies:
@@ -38,20 +39,7 @@ function init() {
 	(there are many more properties bodies and fixtures contain - i listed the important ones)
 			
 	The following code walks though the creation of a rectangle player ship	*/
-	
-	var bodyDef = new b2BodyDef; //create a body Definition
-	bodyDef.type = b2Body.b2_dynamicBody;  //set bodyDef to dynamic since this ship will move, we could do static if it doesn't move, or kinematic if it has a predefined movement
-	bodyDef.position.x = 5;  //add a starting position to the body
-	bodyDef.position.y = 5;	
-	playerShip = world.CreateBody(bodyDef);  //add this b2Body to the world and save a reference to it in playerShip
-	var fixDef = new b2FixtureDef;	//create a fixture (something to collide with)
-	fixDef.shape = new b2PolygonShape;  //make that fixture a polygon
-	fixDef.shape.SetAsBox( 0.3, 1 );  //makes a box, takes parameters( halfWidth, halfHeight ), this means the box will be 0.6 wide and 2 meters high
-	fixDef.density = 1.0; //how dense is our player ship
-	fixDef.friction = 0.5;	//how much friction does its surface have
-	fixDef.restitution = 0.3;	//how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
-	playerShip.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
-	
+    playerShip = makePlayer();	
 	
 	//create a hard boundary so that objects don't escape the screen
 	var fixDef = new b2FixtureDef;
@@ -75,13 +63,10 @@ function init() {
 	
 	
 	//create some asteroids
-	bodyDef.type = b2Body.b2_dynamicBody;
+	//bodyDef.type = b2Body.b2_dynamicBody;
 	for(var i = 0; i < 10; ++i) 
 	{
-		fixDef.shape = new b2CircleShape( 0.5 ); //b2CircleShape( radius )
-		bodyDef.position.x = Math.random() * 10;
-		bodyDef.position.y = Math.random() * 10;
-		world.CreateBody(bodyDef).CreateFixture(fixDef);
+	    var newAsteroid = makeAsteroid(Math.random() * 10, Math.random() * 10);
 	}
 	
 	//setup debug draw
@@ -151,19 +136,19 @@ function init() {
 			case 87: //w
 				//forward thrust
 				//to be fixed - just applies force
-				playerShip.ApplyImpulse(new b2Vec2(0,-5), playerShip.GetWorldCenter());
+				playerShip.body.ApplyImpulse(new b2Vec2(0,-5), playerShip.body.GetWorldCenter());
 				break;
 			case 83: //s
 				//slow down (reverse thrust)
-				playerShip.ApplyImpulse(new b2Vec2(0, 5), playerShip.GetWorldCenter());
+				playerShip.body.ApplyImpulse(new b2Vec2(0, 5), playerShip.body.GetWorldCenter());
 				break;
 			case 65: //a
 				//rotate left
-				playerShip.ApplyImpulse(new b2Vec2(-5, 0), playerShip.GetWorldCenter());
+				playerShip.body.ApplyImpulse(new b2Vec2(-5, 0), playerShip.body.GetWorldCenter());
 				break;
 			case 68: //d
 				//rotate right
-				playerShip.ApplyImpulse(new b2Vec2(5, 0), playerShip.GetWorldCenter());
+				playerShip.body.ApplyImpulse(new b2Vec2(5, 0), playerShip.body.GetWorldCenter());
 				break;
 			case 32: //space bar
 				break;
