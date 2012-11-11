@@ -37,8 +37,8 @@ function init() {
 			-Shape
 			-Collision control
 	(there are many more properties bodies and fixtures contain - i listed the important ones)
-			
-	The following code walks though the creation of a rectangle player ship	*/
+	*/
+	
     playerShip = makePlayer();
 
     enemyList.push(makeEnemy(0, 7, 7));
@@ -47,20 +47,20 @@ function init() {
 	var fixDef = new b2FixtureDef;
 	fixDef.density = 1.0;
 	fixDef.friction = 0.5;
-	fixDef.restitution = 0.1;
+	fixDef.restitution = 0.3;
 	var bodyDef = new b2BodyDef;
 	bodyDef.type = b2Body.b2_staticBody;  //staticBody (never moves)
 	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(20, 2);
-	bodyDef.position.Set(10, 400 / 30 + 1.8);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
-	bodyDef.position.Set(10, -1.8);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
-	fixDef.shape.SetAsBox(2, 14);
-	bodyDef.position.Set(-1.8, 13);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
-	bodyDef.position.Set(21.8, 13);
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
+	fixDef.shape.SetAsBox(20, 0.1);
+	bodyDef.position.Set(0, 0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef); //top wall
+	bodyDef.position.Set(0, 400/30);
+	world.CreateBody(bodyDef).CreateFixture(fixDef); //bottom wall
+	fixDef.shape.SetAsBox(0.1, 400/30);
+	bodyDef.position.Set(0, 0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef); //left wall
+	bodyDef.position.Set(20, 0);
+	world.CreateBody(bodyDef).CreateFixture(fixDef); //right
 	
 	
 	
@@ -74,7 +74,7 @@ function init() {
 	//setup debug draw
 	var debugDraw = new b2DebugDraw();
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
-		debugDraw.SetDrawScale(30.0);
+		debugDraw.SetDrawScale(30.0);  //smaller scale "zooms out"
 		debugDraw.SetFillAlpha(0.5);
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
@@ -113,7 +113,7 @@ function init() {
 	camera.rotation.z = d2r(0);
 	camera.updateMatrix();
 	
-	camera.aspect =  (0.7 * SCREEN_WIDTH) / SCREEN_HEIGHT;
+	camera.aspect =  (SCREEN_WIDTH) / SCREEN_HEIGHT;
 	camera.updateProjectionMatrix();
 
 			
@@ -153,6 +153,12 @@ function init() {
 				playerShip.body.ApplyImpulse(new b2Vec2(5, 0), playerShip.body.GetWorldCenter());
 				break;
 			case 32: //space bar
+				//fire? or click mouse to fire? or both?
+				break;
+			case 84: //t
+				//toggle debug draw div
+				var element = document.getElementById("debugDraw");
+				element.style.display = (element.style.display != 'none' ? 'none' : '' );
 				break;
 			default:
 		}

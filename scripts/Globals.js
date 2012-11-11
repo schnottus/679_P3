@@ -38,8 +38,7 @@
 	camera,
 	renderer,
 	controls;
-	var SCREEN_WIDTH = 800,   //fix to fit screen
-		SCREEN_HEIGHT = 600;
+	var SCREEN_WIDTH = window.innerWidth;
+		SCREEN_HEIGHT = window.innerHeight;
 	var keyboard = new THREEx.KeyboardState();
-	var CAMERA_DISTANCE = 15; //distance from camera to player
 	var VIEW_ANGLE = 45; //camera view angle
