@@ -1,15 +1,17 @@
 
 
 function makeAsteroidBody(x, y) {
+    var AsteroidBodyDef = new b2BodyDef;
+    AsteroidBodyDef.type = b2Body.b2_dynamicBody;
+    AsteroidBodyDef.position.Set(x, y);
+    var body = world.CreateBody(AsteroidBodyDef);
     var AsteroidFixDef = new b2FixtureDef;
+    AsteroidFixDef.shape = new b2CircleShape(0.5);
     AsteroidFixDef.density = 1.0;
     AsteroidFixDef.friction = 0.5;
     AsteroidFixDef.restitution = 0.1;
-    var AsteroidBodyDef = new b2BodyDef;
-    AsteroidBodyDef.type = b2Body.b2_dynamicBody;
-    AsteroidFixDef.shape = new b2CircleShape(0.5);
-    AsteroidBodyDef.position.Set(x, y);
-    return world.CreateBody(AsteroidBodyDef).CreateFixture(AsteroidFixDef);
+    body.CreateFixture(AsteroidFixDef);
+    return body;
 }
 
 function makeTankBody(x, y) {

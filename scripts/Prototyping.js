@@ -32,6 +32,11 @@ function extend(obj, properties) {
 var Entity = {
     body: null, //null placeholder for functions to work
     mesh: null,
+    updateMesh: function () {
+        var position = this.body.GetPosition();
+        this.mesh.position.x = position.x;
+        this.mesh.position.y = position.y;
+    },
     getPosition: function () {
         return this.body.GetPosition();
     },
@@ -40,11 +45,6 @@ var Entity = {
     },
     getPosY: function () {
         return this.body.GetPosition().y;
-    },
-    updateMesh: function () {
-        var position = this.body.GetPosition();
-        this.mesh.position.x = position.x;
-        this.mesh.position.y = position.y;
     }
 };
 
@@ -75,7 +75,10 @@ function makeAsteroid(x, y) {
     var asteroid;
     asteroid = Object.create(Asteroid);
     asteroid.body = makeAsteroidBody(x, y);
-    asteroid.mesh = 1; //actually make the mesh here
+    asteroid.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
+            color: 0xffff00
+        }));
+    scene.add(asteroid.mesh);
     return asteroid;
 }
 
@@ -85,7 +88,10 @@ function makeEnemy(type, x, y) {
         case 0:
             enemy = Object.create(Tank);
             enemy.body = makeTankBody(x, y); //actually make Box2d body here eg) makeTankBody();
-            enemy.mesh = 1; //actually make the mesh here
+            enemy.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
+                color: 0xff0000
+            }));
+            scene.add(enemy.mesh);
     }
     return enemy
 }
@@ -94,7 +100,9 @@ function makePlayer() {
     var player;
     player = Object.create(Player);
     player.body = makePlayerBody();
-    player.mesh = 1; //actually make the mesh here
+    player.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
+            color: 0xff8800
+        }));
+    scene.add(player.mesh);
     return player;
 }
-	

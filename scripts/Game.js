@@ -42,14 +42,19 @@ function updateWorld()
 	world.Step(1 / 60, 10, 10);
 	world.DrawDebugData();
 	world.ClearForces();
+    for(var i = 0; i < asteroidList.length; i ++)
+        asteroidList[i].updateMesh();
+    for (var i = 0; i < enemyList.length; i++)
+        enemyList[i].updateMesh();
+    playerShip.updateMesh();
 };
 
 //move camera to follow player
 function updateCamera()
 {
 	//camera at x=5, y=5 looking straight ahead
-	camera.position.set( 5, 5, -20 );
-	camera.lookAt( new THREE.Vector3( 5,5,0 ) );
+    camera.position.set(playerShip.getPosX(), playerShip.getPosY(), -20);
+    camera.lookAt(new THREE.Vector3(playerShip.getPosX(), playerShip.getPosY(), 0));
 	camera.rotation.z = d2r(0);
 }
 

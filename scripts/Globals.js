@@ -24,14 +24,17 @@
 	var world = new b2World(
 				new b2Vec2(0, 0),    //gravity
 				true                 //allow sleep
-			);;
+			);
 	
 	//change when we Joseph inserts prototyping/object managment
 	var playerShip;
-	
-//three.js vars
+	var asteroidList = [];
+	var enemyList = [];
+
+	//three.js vars
+	var scene = new THREE.Scene();
+
 	var container,
-	scene, 
 	camera,
 	renderer,
 	controls;

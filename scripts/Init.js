@@ -41,7 +41,7 @@ function init() {
 	The following code walks though the creation of a rectangle player ship	*/
     playerShip = makePlayer();
 
-    enemy = makeEnemy(0, 7, 7);
+    enemyList.push(makeEnemy(0, 7, 7));
 	
 	//create a hard boundary so that objects don't escape the screen
 	var fixDef = new b2FixtureDef;
@@ -68,7 +68,7 @@ function init() {
 	//bodyDef.type = b2Body.b2_dynamicBody;
 	for(var i = 0; i < 10; ++i) 
 	{
-	    var newAsteroid = makeAsteroid(Math.random() * 10, Math.random() * 10);
+	    asteroidList.push(makeAsteroid(Math.random() * 10, Math.random() * 10));
 	}
 	
 	//setup debug draw
@@ -97,7 +97,7 @@ function init() {
 	renderer.autoClear = false;
 
 	//create scene
-	scene = new THREE.Scene();
+	//scene = new THREE.Scene();
 	
 	//camera attributes
 	var	ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
@@ -109,7 +109,7 @@ function init() {
 	scene.add(camera);
 	//rotate camera view to match box2d coordinate system ( x:0 and y:0 in upper left)
 	//with this rotation positive z axis is going away from the camera
-	camera.rotation.x = d2r(180);
+	//camera.rotation.x = d2r(180);
 	camera.rotation.z = d2r(0);
 	camera.updateMatrix();
 	
