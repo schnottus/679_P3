@@ -128,6 +128,10 @@ function init() {
 	axes.scale.set( 0.1, 0.1, 0.1 );
 	scene.add( axes );
 	
+//three.js events  (from stemkoski viewport-dual example)
+	THREEx.WindowResize(renderer, camera);
+	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+	
 	
 /***Controls***/
 

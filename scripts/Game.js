@@ -26,12 +26,16 @@ function update()
 //gl render scene
 function render() 
 {	
+	SCREEN_WIDTH = window.innerWidth;
+	SCREEN_HEIGHT = window.innerHeight;
+	camera.aspect = SCREEN_WIDTH/SCREEN_HEIGHT;
+	camera.updateProjectionMatrix();
 	
+	//setViewport( lowerLeftX, lowerLeftY, viewportWidth, viewportHeight )
 	renderer.setViewport( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
 	renderer.clear();
 	
-	//setViewport(x,y,width,height);
-	renderer.setViewport( 0, 0,  SCREEN_WIDTH, SCREEN_HEIGHT );
+	//renderer.setViewport( 0, 0,  SCREEN_WIDTH, SCREEN_HEIGHT );
 	renderer.render( scene, camera );
 
 }
@@ -52,7 +56,6 @@ function updateWorld()
 //move camera to follow player
 function updateCamera()
 {
-	//camera at x=5, y=5 looking straight ahead
     camera.position.set(playerShip.getPosX(), playerShip.getPosY(), -20);
     camera.lookAt(new THREE.Vector3(playerShip.getPosX(), playerShip.getPosY(), 0));
 	camera.rotation.z = d2r(0);
