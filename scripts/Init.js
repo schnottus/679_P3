@@ -156,6 +156,34 @@ function init() {
 				//rotate right
 				playerShip.body.ApplyImpulse(new b2Vec2(5, 0), playerShip.body.GetWorldCenter());
 				break;
+			case 40: //down arrow
+				var angle = playerShip.body.GetAngle();
+				var thrustX = Math.cos( angle ); 
+				var thrustY = Math.sin( angle );
+				playerShip.body.ApplyImpulse(new b2Vec2(-thrustX,-thrustY), playerShip.body.GetWorldCenter());
+				break;
+			case 38: //up arrow
+				var angle = playerShip.body.GetAngle();
+				var thrustX = Math.cos( angle );
+				var thrustY = Math.sin( angle );
+				playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
+			break;
+			case 39: //right arrow
+				//need to discuss, how do we want the ship to rotate?
+				var angle = playerShip.body.GetAngle();
+				angle += 0.2;
+				playerShip.body.SetAngle(angle);
+				//force ship awake here (since you can rotate part of the ship iside other objects)
+				//consider normalizing rotation angle here
+				break;
+			case 37: //left arrow
+				var angle = playerShip.body.GetAngle();
+				angle -= 0.2;
+				playerShip.body.SetAngle(angle);
+				//force ship awake here (since you can rotate part of the ship iside other objects)
+				//consider normalizing rotation angle here
+				break;
+			
 			case 32: //space bar
 				//fire? or click mouse to fire? or both?
 				break;

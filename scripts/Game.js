@@ -34,8 +34,6 @@ function render()
 	//setViewport( lowerLeftX, lowerLeftY, viewportWidth, viewportHeight )
 	renderer.setViewport( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
 	renderer.clear();
-	
-	//renderer.setViewport( 0, 0,  SCREEN_WIDTH, SCREEN_HEIGHT );
 	renderer.render( scene, camera );
 
 }
@@ -43,7 +41,11 @@ function render()
 function updateWorld() 
 {
 	//TODO Fix Step to use delta time
-	world.Step(1 / 60, 10, 10);
+	world.Step(
+		1 / 60,  //frame rate
+		10,		//velocity iterations
+		10		//position iterations
+	);
 	world.DrawDebugData();
 	world.ClearForces();
     for(var i = 0; i < asteroidList.length; i ++)
