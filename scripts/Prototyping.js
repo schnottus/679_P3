@@ -32,9 +32,19 @@ function extend(obj, properties) {
 var Entity = {
     body: null, //null placeholder for functions to work
     mesh: null,
-    getPosition: function (b) {
-        //put actual Box2D position getter here
-        return this.body;
+    getPosition: function () {
+        return this.body.GetPosition();
+    },
+    getPosX: function () {
+        return this.body.GetPosition().x;
+    },
+    getPosY: function () {
+        return this.body.GetPosition().y;
+    },
+    updateMesh: function () {
+        var position = this.body.GetPosition();
+        this.mesh.position.x = position.x;
+        this.mesh.position.y = position.y;
     }
 };
 

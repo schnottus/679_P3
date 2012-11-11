@@ -5,7 +5,7 @@
 *******************/
 
 //game loop
-function animate()
+function animate() 
 {
 	requestAnimationFrame( animate ); //I've read it should be placed immediately before render(), not sure why though
 	render(); //draw game
