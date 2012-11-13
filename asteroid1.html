@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Ship model 3</title>
+		<title>Asteroid model 1</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		
@@ -90,17 +90,17 @@
 //             loader.load( { model: "js/cube.js", callback: createScene } );
             
             
-              new THREE.JSONLoader().load('mesh/ship3.js', function(geometry){
+              new THREE.JSONLoader().load('mesh/asteroid2.js', function(geometry){
               var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial());
              scene.add( mesh );
-          }, 'mesh/image');
+          }, 'mesh/images');
            
 	}
 		
 		function createScene(){
 		    var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial());
 		    scene.add( mesh );
-		     mesh.rotation.y = Math.PI/2;
+		     
 		}
 
 		// animation loop
