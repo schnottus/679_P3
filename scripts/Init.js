@@ -211,7 +211,6 @@ function init() {
 	
 	//update
 	function update() {	
-	
 		world.Step(1 / 60, 10, 10);  //if using getAnimationFrame fix to account for variable framerate
 		world.DrawDebugData();
 		world.ClearForces();

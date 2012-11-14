@@ -48,10 +48,17 @@ function updateWorld()
 	);
 	world.DrawDebugData();
 	world.ClearForces();
-    for(var i = 0; i < asteroidList.length; i ++)
+
+    for(var i = 0; i < asteroidList.length; i ++){
         asteroidList[i].updateMesh();
-    for (var i = 0; i < enemyList.length; i++)
+		if(asteroidList[i].isAwake()){
+			//console.log(i);
+		}
+	}
+    for (var i = 0; i < enemyList.length; i++){
         enemyList[i].updateMesh();
+		enemyList[i].material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+	}
     playerShip.updateMesh();
 };
 

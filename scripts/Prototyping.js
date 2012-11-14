@@ -32,11 +32,15 @@ function extend(obj, properties) {
 var Entity = {
     body: null, //null placeholder for functions to work
     mesh: null,
+	meterial : null,
     updateMesh: function () {
         var position = this.body.GetPosition();
         this.mesh.position.x = position.x;
         this.mesh.position.y = position.y;
     },
+	isAwake: function() {
+		return this.body.IsAwake();
+	},
     getPosition: function () {
         return this.body.GetPosition();
     },
@@ -73,8 +77,9 @@ extend(Player, { HP: 10 });
 
 function makeAsteroid(x, y) {
     var asteroid;
+
     asteroid = Object.create(Asteroid);
-    asteroid.body = makeAsteroidBody(x, y);
+	asteroid.body = makeAsteroidBody(x, y);
     asteroid.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
             color: 0xffff00
         }));
@@ -84,13 +89,26 @@ function makeAsteroid(x, y) {
 
 function makeEnemy(type, x, y) {
     var enemy;
+	var material = new THREE.ShaderMaterial( {
+		uniforms: { 
+			tExplosion: { type: "t", value: 0, texture: THREE.ImageUtils.loadTexture( 'textures/explosion.png' ) },
+			time: { type: "f", value: 0.0 },
+			weight: { type: "f", value: 10.0 / 19 }
+		},
+		vertexShader: document.getElementById( 'vertexShader' ).textContent,
+		fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+		
+	} );
+	
     switch (type) {
         case 0:
             enemy = Object.create(Tank);
             enemy.body = makeTankBody(x, y); //actually make Box2d body here eg) makeTankBody();
-            enemy.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
-                color: 0xff0000
-            }));
+			enemy.material = material;
+            //enemy.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
+            //    color: 0xff0000
+            //}));
+			enemy.mesh = new THREE.Mesh( new THREE.SphereGeometry( 20 / 19, 200, 200 ), material );
             scene.add(enemy.mesh);
     }
     return enemy
@@ -102,7 +120,7 @@ function makePlayer() {
     player.body = makePlayerBody();
     player.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
             color: 0xff8800
-        }));
+		}));
     scene.add(player.mesh);
     return player;
 }

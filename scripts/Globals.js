@@ -42,3 +42,4 @@
 		SCREEN_HEIGHT = window.innerHeight;
 	var keyboard = new THREEx.KeyboardState();
 	var VIEW_ANGLE = 45; //camera view angle
+	var start = Date.now();
