@@ -7,9 +7,11 @@
 //game loop
 function animate() 
 {
+	stats.begin();
 	requestAnimationFrame( animate ); //I've read it should be placed immediately before render(), not sure why though
 	render(); //draw game
 	update(); //update game state
+	stats.end();
 }
 
 //gl loop, updates on every requestAnimationFrame

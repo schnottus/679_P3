@@ -191,6 +191,9 @@ function init() {
 				//toggle debug draw div
 				var element = document.getElementById("debugDraw");
 				element.style.display = (element.style.display != 'none' ? 'none' : '' );
+				
+				element = document.getElementById("stats");
+				element.style.display = (element.style.display != 'none' ? 'none' : '' );
 				break;
 			default:
 		}
@@ -206,15 +209,25 @@ function init() {
 		}
     }, true);
 	
+	stats = new Stats();
+	stats.setMode(0); // 0: fps, 1: ms
+
+	// Align top-left
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.left = '0px';
+	stats.domElement.style.top = '0px';
+
+	document.body.appendChild(stats.domElement);
+	
 	//enter game loop to start the game
 	animate();
 	
 	//update
-	function update() {	
-		world.Step(1 / 60, 10, 10);  //if using getAnimationFrame fix to account for variable framerate
-		world.DrawDebugData();
-		world.ClearForces();
-	};
+	// function update() {	
+		// world.Step(1 / 60, 10, 10);  //if using getAnimationFrame fix to account for variable framerate
+		// world.DrawDebugData();
+		// world.ClearForces();
+	// };
 	
 	
 };

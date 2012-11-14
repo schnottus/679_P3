@@ -43,3 +43,6 @@
 	var keyboard = new THREEx.KeyboardState();
 	var VIEW_ANGLE = 45; //camera view angle
 	var start = Date.now();
+	
+	// Stats.js var
+	var stats = null; 
