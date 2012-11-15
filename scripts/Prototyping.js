@@ -37,6 +37,7 @@ var Entity = {
         var position = this.body.GetPosition();
         this.mesh.position.x = position.x;
         this.mesh.position.y = position.y;
+		this.mesh.rotation.z = this.body.GetAngle();
     },
 	isAwake: function() {
 		return this.body.IsAwake();
@@ -80,10 +81,11 @@ function makeAsteroid(x, y) {
 
     asteroid = Object.create(Asteroid);
 	asteroid.body = makeAsteroidBody(x, y);
-    asteroid.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
-            color: 0xffff00
-        }));
-    scene.add(asteroid.mesh);
+    //asteroid.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
+    //        color: 0xffff00
+   //     }));
+	//scene.add(asteroid.mesh);
+	makeAsteroidMesh(asteroid);
     return asteroid;
 }
 

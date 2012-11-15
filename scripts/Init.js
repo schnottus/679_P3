@@ -170,16 +170,18 @@ function init() {
 			break;
 			case 39: //right arrow
 				//need to discuss, how do we want the ship to rotate?
-				var angle = playerShip.body.GetAngle();
-				angle += 0.2;
-				playerShip.body.SetAngle(angle);
+				//var angle = playerShip.body.GetAngle();
+				//angle += 0.2;
+				//playerShip.body.SetAngle(angle);
+				playerShip.body.ApplyTorque(3);
 				//force ship awake here (since you can rotate part of the ship iside other objects)
 				//consider normalizing rotation angle here
 				break;
 			case 37: //left arrow
-				var angle = playerShip.body.GetAngle();
-				angle -= 0.2;
-				playerShip.body.SetAngle(angle);
+				//var angle = playerShip.body.GetAngle();
+				//angle -= 0.2;
+				//playerShip.body.SetAngle(angle);
+				playerShip.body.ApplyTorque(-3);
 				//force ship awake here (since you can rotate part of the ship iside other objects)
 				//consider normalizing rotation angle here
 				break;
