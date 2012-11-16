@@ -50,7 +50,12 @@ var Entity = {
     },
     getPosY: function () {
         return this.body.GetPosition().y;
-    }
+    },
+	destroy: function () { 
+		//scene.remove(this.mesh);
+		//world.destroyBody(this.body);
+		//remove this from it's array
+	}
 };
 
 //Asteroid mold (inherits Entity)
