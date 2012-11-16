@@ -36,6 +36,7 @@ function makePlayerBody() {
     bodyDef.type = b2Body.b2_dynamicBody;  //set bodyDef to dynamic since this ship will move, we could do static if it doesn't move, or kinematic if it has a predefined movement
     bodyDef.position.x = 5;  //add a starting position to the body
     bodyDef.position.y = 5;
+	//bodyDef.fixedRotation = true;  //body can collide but no rotation is imparted upon it
     var body = world.CreateBody(bodyDef);  //add this b2Body to the world and save a reference to it in playerShip
     var fixDef = new b2FixtureDef; //create a fixture (something to collide with)
     fixDef.shape = new b2PolygonShape;  //make that fixture a polygon

@@ -133,28 +133,45 @@ function init() {
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 	
 	
-/***Controls***/
+	/***Controls***/
 
-//Add event listeners for our controls
+	var leftInterval;
+	var rightInterval;
+	var intervalSpeed = 10;  //milliseconds between each call
+	var firstLDown = true;
+	var firstRDown = true;
+	//Add event listeners for our controls
 	document.addEventListener("keydown", function(e) {
 		switch(e.keyCode)
 		{
 			case 87: //w
 				//forward thrust
-				//to be fixed - just applies force
-				playerShip.body.ApplyImpulse(new b2Vec2(0,-5), playerShip.body.GetWorldCenter());
+				var angle = playerShip.body.GetAngle();
+				var thrustX = Math.cos( angle );
+				var thrustY = Math.sin( angle );
+				playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
 				break;
 			case 83: //s
-				//slow down (reverse thrust)
-				playerShip.body.ApplyImpulse(new b2Vec2(0, 5), playerShip.body.GetWorldCenter());
+				var angle = playerShip.body.GetAngle();
+				var thrustX = Math.cos( angle ); 
+				var thrustY = Math.sin( angle );
+				playerShip.body.ApplyImpulse(new b2Vec2(-thrustX,-thrustY), playerShip.body.GetWorldCenter());
 				break;
 			case 65: //a
 				//rotate left
-				playerShip.body.ApplyImpulse(new b2Vec2(-5, 0), playerShip.body.GetWorldCenter());
+				if(firstLDown)
+				{
+					leftInterval = setInterval('rotatePlayer(0,5)', intervalSpeed);
+				}
+				firstLDown = false;
 				break;
 			case 68: //d
 				//rotate right
-				playerShip.body.ApplyImpulse(new b2Vec2(5, 0), playerShip.body.GetWorldCenter());
+				if(firstRDown)
+				{
+					rightInterval = setInterval('rotatePlayer(1,5)', intervalSpeed);
+				}
+		firstRDown = false;
 				break;
 			case 40: //down arrow
 				var angle = playerShip.body.GetAngle();
@@ -204,6 +221,24 @@ function init() {
 	document.addEventListener("keyup", function(e) {
 		switch(e.keyCode)
 		{
+			case 87: //w
+				//end forward thrust
+				
+				break;
+			case 83: //s
+				//end reverse thrust
+				
+				break;
+			case 65: //a
+				//end rotate left
+				clearInterval(leftInterval);
+				firstLDown = true;
+				break;
+			case 68: //d
+				//end rotate right
+				clearInterval(rightInterval);
+				firstRDown = true;
+				break;
 			case 32: //space bar
 				
 				break;
