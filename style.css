@@ -8,13 +8,17 @@ body  p {
 	font-family: Arial;
 	color: white;
 	font-weight: bold;
+	margin: 0px;
+	overflow: hidden;
 }
 
 #container { 
 	background-color: #ccccff;
-	margin: 0px;
-	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
 	z-index:0;
+	overflow: hidden;
 }
 
 #debugDraw {
@@ -30,4 +34,11 @@ body  p {
 	height:400px;
 	width:600px;
 	background-color:#333333;
+}
+
+#statsDiv {
+	position:absolute;
+	bottom:0;
+	left:0;
+	z-index:1;
 }

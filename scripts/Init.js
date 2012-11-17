@@ -23,21 +23,6 @@ function init() {
 	//			true                 //allow sleep
     //		);
     //initialized in global because it made stuff compile without undefined world errors in Bodies.js
-			
-			
-	/* An overview of bodies:
-		Bodies contain:
-			-Fixtures
-			-A position
-			-Angle
-			-Type (static, dynamic, kinematic)
-		Fixtures contain:
-			-Density
-			-Friction
-			-Shape
-			-Collision control
-	(there are many more properties bodies and fixtures contain - i listed the important ones)
-	*/
 	
     playerShip = makePlayer();
 
@@ -133,45 +118,54 @@ function init() {
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 	
 	
-	/***Controls***/
+/***Controls***/
 
+	//player controls
 	var leftInterval;
 	var rightInterval;
-	var intervalSpeed = 10;  //milliseconds between each call
-	var firstLDown = true;
-	var firstRDown = true;
+	var forwardInterval;
+	var reverseInterval;
+	var intervalSpeed = 50;  //milliseconds between each call
+	var firstWKey = true;
+	var firstAKey = true;
+	var firstSKey = true;
+	var firstDKey = true;
+	
 	//Add event listeners for our controls
 	document.addEventListener("keydown", function(e) {
 		switch(e.keyCode)
 		{
 			case 87: //w
 				//forward thrust
-				var angle = playerShip.body.GetAngle();
-				var thrustX = Math.cos( angle );
-				var thrustY = Math.sin( angle );
-				playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
+				if(firstWKey)
+				{
+					forwardInterval = setInterval('thrustPlayer(1, 1)', intervalSpeed);
+				}
+				firstWKey = false;
 				break;
 			case 83: //s
-				var angle = playerShip.body.GetAngle();
-				var thrustX = Math.cos( angle ); 
-				var thrustY = Math.sin( angle );
-				playerShip.body.ApplyImpulse(new b2Vec2(-thrustX,-thrustY), playerShip.body.GetWorldCenter());
+				//reverse thrust
+				if(firstSKey)
+				{
+					reverseInterval = setInterval('thrustPlayer(0, 1)', intervalSpeed);
+				}
+				firstSKey = false;
 				break;
 			case 65: //a
 				//rotate left
-				if(firstLDown)
+				if(firstAKey)
 				{
-					leftInterval = setInterval('rotatePlayer(0,5)', intervalSpeed);
+					leftInterval = setInterval('rotatePlayer(0,20)', intervalSpeed);
 				}
-				firstLDown = false;
+				firstAKey = false;
 				break;
 			case 68: //d
 				//rotate right
-				if(firstRDown)
+				if(firstDKey)
 				{
-					rightInterval = setInterval('rotatePlayer(1,5)', intervalSpeed);
+					rightInterval = setInterval('rotatePlayer(1,20)', intervalSpeed);
 				}
-		firstRDown = false;
+				firstDKey = false;
 				break;
 			case 40: //down arrow
 				var angle = playerShip.body.GetAngle();
@@ -185,32 +179,14 @@ function init() {
 				var thrustY = Math.sin( angle );
 				playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
 			break;
-			case 39: //right arrow
-				//need to discuss, how do we want the ship to rotate?
-				//var angle = playerShip.body.GetAngle();
-				//angle += 0.2;
-				//playerShip.body.SetAngle(angle);
-				playerShip.body.ApplyTorque(3);
-				//force ship awake here (since you can rotate part of the ship iside other objects)
-				//consider normalizing rotation angle here
-				break;
-			case 37: //left arrow
-				//var angle = playerShip.body.GetAngle();
-				//angle -= 0.2;
-				//playerShip.body.SetAngle(angle);
-				playerShip.body.ApplyTorque(-3);
-				//force ship awake here (since you can rotate part of the ship iside other objects)
-				//consider normalizing rotation angle here
-				break;
-			
 			case 32: //space bar
 				//fire? or click mouse to fire? or both?
+				playerShip.body.fixedRotation = true;
 				break;
 			case 84: //t
 				//toggle debug draw div
 				var element = document.getElementById("debugDraw");
 				element.style.display = (element.style.display != 'none' ? 'none' : '' );
-				
 				element = document.getElementById("stats");
 				element.style.display = (element.style.display != 'none' ? 'none' : '' );
 				break;
@@ -223,21 +199,23 @@ function init() {
 		{
 			case 87: //w
 				//end forward thrust
-				
+				clearInterval(forwardInterval);
+				firstWKey = true;
 				break;
 			case 83: //s
 				//end reverse thrust
-				
+				clearInterval(reverseInterval);
+				firstSKey = true;
 				break;
 			case 65: //a
 				//end rotate left
 				clearInterval(leftInterval);
-				firstLDown = true;
+				firstAKey = true;
 				break;
 			case 68: //d
 				//end rotate right
 				clearInterval(rightInterval);
-				firstRDown = true;
+				firstDKey = true;
 				break;
 			case 32: //space bar
 				
@@ -246,15 +224,11 @@ function init() {
 		}
     }, true);
 	
+// framerate stats
 	stats = new Stats();
 	stats.setMode(0); // 0: fps, 1: ms
-
-	// Align top-left
-	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.left = '0px';
-	stats.domElement.style.top = '0px';
-
-	document.body.appendChild(stats.domElement);
+	var statsDiv = document.getElementById('statsDiv');
+	statsDiv.appendChild(stats.domElement);
 	
 	//enter game loop to start the game
 	animate();

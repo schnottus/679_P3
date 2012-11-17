@@ -31,7 +31,7 @@
 	var asteroidList = [];
 	var enemyList = [];
 
-	//three.js vars
+//three.js vars
 	var scene = new THREE.Scene();
 
 	var container,
@@ -46,3 +46,4 @@
 	
 	// Stats.js var
 	var stats = null; 
+	
