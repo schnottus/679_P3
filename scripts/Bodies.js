@@ -1,6 +1,31 @@
 
+var listener = new Box2D.Dynamics.b2ContactListener;
+    listener.BeginContact = function(contact) {
+		//right now I assigned 0's for bodies and 1's for sensors
+		if( contact.GetFixtureA().GetUserData() == 1){
+			console.log("object entered enemy sensor");
+		}
+        if(contact.GetFixtureB().GetUserData() == 1){
+			console.log("object entered enemy sensor");
+		}
+    }
+    listener.EndContact = function(contact) {
+        if( contact.GetFixtureA().GetUserData() == 1){
+			console.log("object left enemy sensor");
+		}
+        if(contact.GetFixtureB().GetUserData() == 1){
+			console.log("object left enemy sensor");
+		}
+    }
+    listener.PostSolve = function(contact, impulse) {
+        
+    }
+    listener.PreSolve = function(contact, oldManifold) {
 
-function makeAsteroidBody(x, y) {
+    }
+    this.world.SetContactListener(listener);
+
+function makeAsteroidBody(x, y, asteroid) {
     var AsteroidBodyDef = new b2BodyDef;
     AsteroidBodyDef.type = b2Body.b2_dynamicBody;
     AsteroidBodyDef.position.Set(x, y);
@@ -10,7 +35,9 @@ function makeAsteroidBody(x, y) {
     AsteroidFixDef.density = 1.0;
     AsteroidFixDef.friction = 0.5;
     AsteroidFixDef.restitution = 0.1;
+	AsteroidFixDef.userData = 0;
     body.CreateFixture(AsteroidFixDef);
+	body.userData = asteroid;
     return body;
 }
 
@@ -27,7 +54,14 @@ function makeTankBody(x, y) {
     fixDef.density = 1.0; //how dense is our player ship
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
+	fixDef.userData = 0;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
+	
+    var fixDef = new b2FixtureDef;
+	fixDef.shape = new b2CircleShape(2);
+	fixDef.isSensor = true;
+	fixDef.userData = 1;
+    body.CreateFixture(fixDef);
     return body;
 }
 
@@ -44,6 +78,7 @@ function makePlayerBody() {
     fixDef.density = 1.0; //how dense is our player ship
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
+	fixDef.userData = 0;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
     return body;
 }

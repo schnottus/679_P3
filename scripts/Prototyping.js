@@ -85,11 +85,7 @@ function makeAsteroid(x, y) {
     var asteroid;
 
     asteroid = Object.create(Asteroid);
-	asteroid.body = makeAsteroidBody(x, y);
-    //asteroid.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
-    //        color: 0xffff00
-   //     }));
-	//scene.add(asteroid.mesh);
+	asteroid.body = makeAsteroidBody(x, y, asteroid);
 	makeAsteroidMesh(asteroid);
     return asteroid;
 }
