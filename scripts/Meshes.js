@@ -3,7 +3,7 @@ function makeAsteroidMesh(asteroid) {
         var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial());
         asteroid.mesh = mesh;
         scene.add(mesh);
-    });
+    }, 'mesh/images');
 }
 
 function makeTankMesh() {
