@@ -1,9 +1,6 @@
 function makeAsteroidMesh(asteroid) {
-    new THREE.JSONLoader().load('mesh/asteroid2.js', function (geometry) {
-        var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial());
-        asteroid.mesh = mesh;
-        scene.add(mesh);
-    }, 'mesh/images');
+	asteroid.mesh = new THREE.Mesh(geometries.asteroid, new THREE.MeshFaceMaterial());
+	scene.add(asteroid.mesh);
 }
 
 function makeTankMesh() {

@@ -15,14 +15,15 @@
 */
 	
 function init() {
+	//had to break init into pre loadingLoop and post loadingLoop
+	new THREE.JSONLoader().load('mesh/asteroid2.js', function (geometry) {
+		geometries.asteroid = geometry;
+	}, 'mesh/images');
+	//load all other models here too, and all things that dont require models
+	loadingLoop(); //checks if models are loaded before continuing (and animates a loading screen)
+}
 
-/***Box2d setup***/
-	//create a world with 0 gravity
-   // world = new b2World(
-	//			new b2Vec2(0, 0),    //gravity
-	//			true                 //allow sleep
-    //		);
-    //initialized in global because it made stuff compile without undefined world errors in Bodies.js
+function init2() {
 	
     playerShip = makePlayer();
 
@@ -241,4 +242,22 @@ function init() {
 	// };
 	
 	
-};
+}
+
+//checks if models are loaded before continuing (and animates a loading screen)
+function loadingLoop(){
+	var finishedLoading = false;
+	var frame = null;
+	function internalLoadLoop() {
+		if (geometries.asteroid != null){ //this simple check will be made more complex when more stuff is being loaded
+			finishedLoading = true;
+		}
+		 frame = requestAnimationFrame( internalLoadLoop );
+		//render loading screen here
+		 if (finishedLoading){ //this is how the loading loop exits
+			window.cancelAnimationFrame(frame);
+			init2();
+		}
+	}
+	internalLoadLoop();
+}
