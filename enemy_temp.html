@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Ship model 2</title>
+		<title>Temp Enemy with arrow</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		
@@ -22,7 +22,7 @@
     	<div id="container"></div>
 	<!-- info on screen display -->
 	<div id="info">
-		With texture (UV messed up)
+		
 	</div> 
 
 	<script type="text/javascript">
@@ -90,7 +90,7 @@
 //             loader.load( { model: "js/cube.js", callback: createScene } );
             
             
-              new THREE.JSONLoader().load('mesh/ship1.js', function(geometry){
+              new THREE.JSONLoader().load('mesh/enemy_temp.js', function(geometry){
               var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial());
              scene.add( mesh );
           }, 'mesh/images');
