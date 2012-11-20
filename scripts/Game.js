@@ -23,6 +23,9 @@ function update()
 	updateCamera();
 	//check game state for win/lose cases
     updateGameState();
+	//check for collisions and apply damage accordingly
+	updateBullets();
+	//enforce rotation and velocity limits, check health
 	updatePlayer();
 }
 
@@ -62,6 +65,7 @@ function updateWorld()
         enemyList[i].updateMesh();
 		enemyList[i].material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
 	}
+	
     playerShip.updateMesh();
 };
 
@@ -75,7 +79,57 @@ function updateCamera()
 
 function updatePlayer()
 {
-	//set max 
+	//limit angular velocity
+	var rotationSpeed = playerShip.body.GetAngularVelocity();
+	if( Math.abs(rotationSpeed) > MAX_PLAYER_ROTATION_VELOCITY )
+	{
+		
+		if( rotationSpeed < 0 )  //negative if radotating left
+		{
+			playerShip.body.SetAngularVelocity(-MAX_PLAYER_ROTATION_VELOCITY);
+		}else{  //else rotating right
+			playerShip.body.SetAngularVelocity(MAX_PLAYER_ROTATION_VELOCITY);
+		}
+		
+	}
+	//damp angular velocity if player not turning
+	if ( dampPlayerRotation )
+	{
+		playerShip.body.SetAngularVelocity( playerRotationDampValue * rotationSpeed );
+	}
+	
+	//limit linear velocity
+		//todo
+		
+	//check health
+		//todo
+		
+	
+		
+}
+
+function updateBullets()
+{
+	
+	for (var i = 0; i < bulletList.length; i++){
+		
+		var b = bulletList[i];
+        b.updateMesh(); //update meshes (for drawing)
+		
+		//check bullet times to see if they need to be destroyed
+		//different times for different types - determines "range"
+		//don't use date.now (changes when paused)
+		if( ((Date.now() - b.start) / 1000 ) > 4 )  //after 4 seconds alive 
+		{
+			//b.destroy();
+			//remove from bulletList without messing up for loop
+		}
+	}
+	
+	//check for collisions (apply damage if collided and then delete)
+	
+	
+	
 }
 
 //check here if game won and other important events

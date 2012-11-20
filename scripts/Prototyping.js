@@ -74,6 +74,10 @@ extend(Enemy, { HP: 15 });
 var Player = Object.create(Entity);
 extend(Player, { HP: 10 });
 
+//Bullet mold (inherits Entity)
+var Bullet = Object.create(Entity);
+extend(Bullet, { owner: null, type: 0, start: null} );
+
 //--------------------------------------------------------------------
 // Initializing functions (sets specifics to this casting from a mold)
 //--------------------------------------------------------------------
@@ -126,4 +130,21 @@ function makePlayer() {
 		}));
     scene.add(player.mesh);
     return player;
+}
+
+//owner (b2Body who fired it), t = the type of bullet
+function makeBullet( owner, t )
+{
+
+	var bullet;
+	bullet = Object.create(Bullet);
+	bullet.owner = owner;
+	bullet.type = t;
+	bullet.start = Date.now(); 
+	bullet.body = makeBulletBody(owner); 
+	bullet.mesh = new THREE.Mesh(new THREE.SphereGeometry(.1,6,6), new THREE.MeshLambertMaterial({
+            color: 0xff88ff
+		}));  //change to sprite?
+	scene.add(bullet.mesh);
+	return bullet;
 }

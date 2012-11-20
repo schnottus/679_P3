@@ -30,6 +30,7 @@
 	var playerShip;
 	var asteroidList = [];
 	var enemyList = [];
+	var bulletList = [];
 
 //three.js vars
 	var scene = new THREE.Scene();
@@ -51,6 +52,7 @@
 	var stats = null; 
 	
 //player controls
-	var maxPlayerSpeed = 10;
-	var maxPlayerRotation = 60;
+	var MAX_PLAYER_ROTATION_VELOCITY = 6;  //in radians per second
+	var playerRotateForce = 30;  //force applied when rotating, larger = faster turning
 	var dampPlayerRotation = true;
+	var playerRotationDampValue = 0.88;  //between 0 and 1, larger == less dampening

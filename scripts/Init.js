@@ -156,17 +156,19 @@ function init2() {
 				//rotate left
 				if(firstAKey)
 				{
-					leftInterval = setInterval('rotatePlayer(0,20)', intervalSpeed);
+					leftInterval = setInterval('rotatePlayer(0,playerRotateForce)', intervalSpeed);
 				}
 				firstAKey = false;
+				dampPlayerRotation = false;
 				break;
 			case 68: //d
 				//rotate right
 				if(firstDKey)
 				{
-					rightInterval = setInterval('rotatePlayer(1,20)', intervalSpeed);
+					rightInterval = setInterval('rotatePlayer(1,playerRotateForce)', intervalSpeed);
 				}
 				firstDKey = false;
+				dampPlayerRotation = false;
 				break;
 			case 40: //down arrow
 				var angle = playerShip.body.GetAngle();
@@ -181,8 +183,8 @@ function init2() {
 				playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
 			break;
 			case 32: //space bar
-				//fire? or click mouse to fire? or both?
-				playerShip.body.fixedRotation = true;
+				//fire (used temporarily - change to mouse?)
+				bulletList.push(makeBullet( playerShip, 0, 10, 10));
 				break;
 			case 84: //t
 				//toggle debug draw div
@@ -212,11 +214,13 @@ function init2() {
 				//end rotate left
 				clearInterval(leftInterval);
 				firstAKey = true;
+				dampPlayerRotation = true;
 				break;
 			case 68: //d
 				//end rotate right
 				clearInterval(rightInterval);
 				firstDKey = true;
+				dampPlayerRotation = true;
 				break;
 			case 32: //space bar
 				

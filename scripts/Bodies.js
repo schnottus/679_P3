@@ -82,3 +82,27 @@ function makePlayerBody() {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
     return body;
 }
+
+//parameters: owner - the b2Body that fired the bullet
+function makeBulletBody(owner) {
+
+	var x = owner.getPosX();
+	var y = owner.getPosY();
+	var angle = owner.body.GetAngle();
+	var thrustX = Math.cos( angle );
+	var thrustY = Math.sin( angle );
+	
+	var bodyDef = new b2BodyDef; 
+    bodyDef.type = b2Body.b2_dynamicBody;  
+    bodyDef.position.x = x + thrustX;  //add thrustX,Y to offset bullet a little ahead of owner
+    bodyDef.position.y = y + thrustY;
+	bodyDef.angle = angle;
+    var body = world.CreateBody(bodyDef);  
+    var fixDef = new b2FixtureDef; 
+    fixDef.shape = new b2CircleShape(0.1);
+    fixDef.density = 1.0; 
+	fixDef.userData = 0;
+    body.CreateFixture(fixDef); 
+	body.ApplyImpulse(new b2Vec2(thrustX,thrustY), body.GetWorldCenter());
+    return body;
+}
