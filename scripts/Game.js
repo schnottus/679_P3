@@ -23,6 +23,7 @@ function update()
 	updateCamera();
 	//check game state for win/lose cases
     updateGameState();
+	updatePlayer();
 }
 
 //gl render scene
@@ -70,6 +71,11 @@ function updateCamera()
     camera.position.set(playerShip.getPosX(), playerShip.getPosY(), -20);
     camera.lookAt(new THREE.Vector3(playerShip.getPosX(), playerShip.getPosY(), 0));
 	camera.rotation.z = d2r(0);
+}
+
+function updatePlayer()
+{
+	//set max 
 }
 
 //check here if game won and other important events

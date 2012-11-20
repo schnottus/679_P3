@@ -47,3 +47,7 @@
 	// Stats.js var
 	var stats = null; 
 	
+//player controls
+	var maxPlayerSpeed = 10;
+	var maxPlayerRotation = 60;
+	var dampPlayerRotation = true;
