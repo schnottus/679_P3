@@ -51,10 +51,11 @@ var Entity = {
     getPosY: function () {
         return this.body.GetPosition().y;
     },
-	destroy: function () { 
-		//scene.remove(this.mesh);
-		//world.destroyBody(this.body);
-		//remove this from it's array
+	destroy: function (array, index) { 
+		scene.remove(this.mesh);
+		world.DestroyBody(this.body);
+		array.splice(index, 1);
+		return array;
 	}
 };
 
@@ -76,7 +77,7 @@ extend(Player, { HP: 10 });
 
 //Bullet mold (inherits Entity)
 var Bullet = Object.create(Entity);
-extend(Bullet, { owner: null, type: 0, start: null} );
+extend(Bullet, { owner: null, type: 0, start: null, deleteFlag : 0} );
 
 //--------------------------------------------------------------------
 // Initializing functions (sets specifics to this casting from a mold)

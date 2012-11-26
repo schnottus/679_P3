@@ -110,18 +110,19 @@ function updatePlayer()
 
 function updateBullets()
 {
+	var i = bulletList.length;
 	
-	for (var i = 0; i < bulletList.length; i++){
-		
+	while (i-- && i > -1){
 		var b = bulletList[i];
-        b.updateMesh(); //update meshes (for drawing)
+		b.updateMesh(); //update meshes (for drawing)
 		
 		//check bullet times to see if they need to be destroyed
 		//different times for different types - determines "range"
 		//don't use date.now (changes when paused)
-		if( ((Date.now() - b.start) / 1000 ) > 4 )  //after 4 seconds alive 
+		if( ((Date.now() - b.start) / 1000 ) > 1 )  //after 4 seconds alive 
 		{
-			//b.destroy();
+			bulletList = b.destroy(bulletList, i);
+			i--;
 			//remove from bulletList without messing up for loop
 		}
 	}
