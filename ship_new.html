@@ -22,7 +22,7 @@
     	<div id="container"></div>
 	<!-- info on screen display -->
 	<div id="info">
-		Without texture
+	
 	</div> 
 
 	<script type="text/javascript">
@@ -63,34 +63,13 @@
 			// create a camera contol
 			cameraControls	= new THREEx.DragPanControls(camera)
 
-			// transparently support window resize
-			//THREEx.WindowResize.bind(renderer, camera);
-			// allow 'p' to make screenshot
-			//THREEx.Screenshot.bindKey(renderer);
-			// allow 'f' to go fullscreen where this feature is supported
-			// if( THREEx.FullScreen.available() ){
-// 				THREEx.FullScreen.bindKey();		
-// 				document.getElementById('inlineDoc').innerHTML	+= "- <i>f</i> for fullscreen";
-// 			}
-
-			// here you add your objects
-			// - you will most likely replace this part by your own
-			 // var geometry	= new THREE.TorusGeometry( 1, 0.42 );
-//  			var material	= new THREE.MeshNormalMaterial();
-//  			var mesh	= new THREE.Mesh( geometry, material );
-//  			scene.add( mesh );
-           
             var ambient = new THREE.AmbientLight( 0xffffff );
 				scene.add( ambient );
             var directionalLight = new THREE.DirectionalLight( 0xffeedd );
 				directionalLight.position.set( 100, 70, 50 ).normalize();
 				scene.add( directionalLight );
-            
-           //  var loader = new THREE.JSONLoader();
-//             loader.load( { model: "js/cube.js", callback: createScene } );
-            
-            
-              new THREE.JSONLoader().load('mesh/ship1_notex.js', function(geometry){
+				
+              new THREE.JSONLoader().load('mesh/ship.js', function(geometry){
               var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial());
              scene.add( mesh );
           }, 'mesh/images');
