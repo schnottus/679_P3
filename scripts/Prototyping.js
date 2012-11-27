@@ -126,9 +126,10 @@ function makePlayer() {
     var player;
     player = Object.create(Player);
     player.body = makePlayerBody();
-    player.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
-            color: 0xff8800
-		}));
+    // player.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
+//             color: 0xff8800
+// 		}));
+	makePlayerMesh(player);
     scene.add(player.mesh);
     return player;
 }

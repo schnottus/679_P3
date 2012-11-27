@@ -19,6 +19,9 @@ function init() {
 	new THREE.JSONLoader().load('mesh/asteroid2.js', function (geometry) {
 		geometries.asteroid = geometry;
 	}, 'mesh/images');
+	new THREE.JSONLoader().load('mesh/ship.js', function (geometry) {
+		geometries.player = geometry;
+	}, 'mesh/images');
 	//load all other models here too, and all things that dont require models
 	loadingLoop(); //checks if models are loaded before continuing (and animates a loading screen)
 }
