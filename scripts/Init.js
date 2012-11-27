@@ -256,7 +256,7 @@ function loadingLoop(){
 	var finishedLoading = false;
 	var frame = null;
 	function internalLoadLoop() {
-		if (geometries.asteroid != null){ //this simple check will be made more complex when more stuff is being loaded
+		if (geometries.asteroid != null && geometries.player != null){ //this simple check will be made more complex when more stuff is being loaded
 			finishedLoading = true;
 		}
 		 frame = requestAnimationFrame( internalLoadLoop );
