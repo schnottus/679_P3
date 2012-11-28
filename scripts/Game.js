@@ -121,6 +121,7 @@ function updateBullets()
 		//don't use date.now (changes when paused)
 		if( ((Date.now() - b.start) / 1000 ) > 1 )  //after 4 seconds alive 
 		{
+			Namer.recycledBulletIDs.push(bulletList[i].ID);
 			bulletList = b.destroy(bulletList, i);
 			i--;
 			//remove from bulletList without messing up for loop

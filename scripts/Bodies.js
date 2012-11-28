@@ -1,20 +1,42 @@
+var ASTEROID =          0x0001;
+var	PLAYER_SHIP =       0x0002;
+var ENEMY_SHIP =       	0x0004;
+var ALL =        		0x0007;
+
+
 
 var listener = new Box2D.Dynamics.b2ContactListener;
     listener.BeginContact = function(contact) {
-		//right now I assigned 0's for bodies and 1's for sensors
-		if( contact.GetFixtureA().GetUserData() == 1){
-			console.log("object entered enemy sensor");
+	
+		//the following line would tell you what two things are colliding
+		//console.log(contact.GetFixtureA().GetBody().userData.ID + " " + contact.GetFixtureB().GetBody().userData.ID);
+		
+		
+		//right now I assigned 0's for bodies and 1's for sensors, and 2's for bullets
+		//for now the bullets just announce that they hit something
+		
+		if (contact.GetFixtureA().GetUserData() + contact.GetFixtureB().GetUserData() == 0){
+			//collide two floating bodies
 		}
-        if(contact.GetFixtureB().GetUserData() == 1){
-			console.log("object entered enemy sensor");
+		else if(contact.GetFixtureA().GetUserData() == 2){
+			console.log(contact.GetFixtureB().GetBody().userData.ID + " was hit by a bullet");
+		}
+		else if(contact.GetFixtureB().GetUserData() == 2){
+			console.log(contact.GetFixtureA().GetBody().userData.ID + " was hit by a bullet");
+		}
+		else if(contact.GetFixtureA().GetUserData() == 1){
+			contact.GetFixtureA().GetBody().userData.sensor[contact.GetFixtureB().GetBody().userData.ID] = contact.GetFixtureB().GetBody();
+		}
+        else if(contact.GetFixtureB().GetUserData() == 1){
+			contact.GetFixtureB().GetBody().userData.sensor[contact.GetFixtureA().GetBody().userData.ID] = contact.GetFixtureA().GetBody();
 		}
     }
     listener.EndContact = function(contact) {
         if( contact.GetFixtureA().GetUserData() == 1){
-			console.log("object left enemy sensor");
+			delete contact.GetFixtureA().GetBody().userData.sensor[(contact.GetFixtureB().GetBody().userData.ID)];
 		}
         if(contact.GetFixtureB().GetUserData() == 1){
-			console.log("object left enemy sensor");
+			delete contact.GetFixtureB().GetBody().userData.sensor[(contact.GetFixtureA().GetBody().userData.ID)];
 		}
     }
     listener.PostSolve = function(contact, impulse) {
@@ -25,6 +47,8 @@ var listener = new Box2D.Dynamics.b2ContactListener;
     }
     this.world.SetContactListener(listener);
 
+
+	
 function makeAsteroidBody(x, y, asteroid) {
     var AsteroidBodyDef = new b2BodyDef;
     AsteroidBodyDef.type = b2Body.b2_dynamicBody;
@@ -36,12 +60,14 @@ function makeAsteroidBody(x, y, asteroid) {
     AsteroidFixDef.friction = 0.5;
     AsteroidFixDef.restitution = 0.1;
 	AsteroidFixDef.userData = 0;
+	AsteroidFixDef.filter.categoryBits = ASTEROID;
+	AsteroidFixDef.filter.maskBits = ALL;
     body.CreateFixture(AsteroidFixDef);
 	body.userData = asteroid;
     return body;
 }
 
-function makeTankBody(x, y) {
+function makeTankBody(x, y, tank) {
     var bodyDef = new b2BodyDef; //create a body Definition
     bodyDef.type = b2Body.b2_dynamicBody;  //set bodyDef to dynamic since this ship will move, we could do static if it doesn't move, or kinematic if it has a predefined movement
     bodyDef.position.x = x;  //add a starting position to the body
@@ -55,6 +81,8 @@ function makeTankBody(x, y) {
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
 	fixDef.userData = 0;
+	fixDef.filter.categoryBits = ENEMY_SHIP;
+	fixDef.filter.maskBits = ALL;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	
     var fixDef = new b2FixtureDef;
@@ -62,10 +90,11 @@ function makeTankBody(x, y) {
 	fixDef.isSensor = true;
 	fixDef.userData = 1;
     body.CreateFixture(fixDef);
+	body.userData = tank;
     return body;
 }
 
-function makePlayerBody() {
+function makePlayerBody(player) {
     var bodyDef = new b2BodyDef; //create a body Definition
     bodyDef.type = b2Body.b2_dynamicBody;  //set bodyDef to dynamic since this ship will move, we could do static if it doesn't move, or kinematic if it has a predefined movement
     bodyDef.position.x = 5;  //add a starting position to the body
@@ -79,12 +108,15 @@ function makePlayerBody() {
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
 	fixDef.userData = 0;
+	fixDef.filter.categoryBits = PLAYER_SHIP;
+	fixDef.filter.maskBits = ALL;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
+	body.userData = player;
     return body;
 }
 
 //parameters: owner - the b2Body that fired the bullet
-function makeBulletBody(owner) {
+function makeBulletBody(owner, bullet) {
 
 	var x = owner.getPosX();
 	var y = owner.getPosY();
@@ -101,8 +133,9 @@ function makeBulletBody(owner) {
     var fixDef = new b2FixtureDef; 
     fixDef.shape = new b2CircleShape(0.1);
     fixDef.density = 1.0; 
-	fixDef.userData = 0;
+	fixDef.userData = 2;
     body.CreateFixture(fixDef); 
 	body.ApplyImpulse(new b2Vec2(thrustX,thrustY), body.GetWorldCenter());
+	body.userData = bullet
     return body;
 }

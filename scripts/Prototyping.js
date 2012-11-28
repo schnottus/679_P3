@@ -33,6 +33,7 @@ var Entity = {
     body: null, //null placeholder for functions to work
     mesh: null,
 	meterial : null,
+	ID : null,
     updateMesh: function () {
         var position = this.body.GetPosition();
         this.mesh.position.x = position.x;
@@ -69,7 +70,7 @@ extend(Enemy, {});
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
-extend(Enemy, { HP: 15 });
+extend(Enemy, { HP: 15, sensor: {} });
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
@@ -88,10 +89,10 @@ extend(Bullet, { owner: null, type: 0, start: null, deleteFlag : 0} );
 
 function makeAsteroid(x, y) {
     var asteroid;
-
     asteroid = Object.create(Asteroid);
 	asteroid.body = makeAsteroidBody(x, y, asteroid);
 	makeAsteroidMesh(asteroid);
+	asteroid.ID = Namer.NewAsteroidID();
     return asteroid;
 }
 
@@ -111,7 +112,7 @@ function makeEnemy(type, x, y) {
     switch (type) {
         case 0:
             enemy = Object.create(Tank);
-            enemy.body = makeTankBody(x, y); //actually make Box2d body here eg) makeTankBody();
+            enemy.body = makeTankBody(x, y, enemy); //actually make Box2d body here eg) makeTankBody();
 			enemy.material = material;
             //enemy.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
             //    color: 0xff0000
@@ -119,18 +120,20 @@ function makeEnemy(type, x, y) {
 			enemy.mesh = new THREE.Mesh( new THREE.SphereGeometry( 20 / 19, 200, 200 ), material );
             scene.add(enemy.mesh);
     }
+	enemy.ID = Namer.NewEnemyID();
     return enemy
 }
 
 function makePlayer() {
     var player;
     player = Object.create(Player);
-    player.body = makePlayerBody();
+    player.body = makePlayerBody(player);
     // player.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
 //             color: 0xff8800
 // 		}));
 	makePlayerMesh(player);
     scene.add(player.mesh);
+	player.ID = Namer.NewPlayerID();
     return player;
 }
 
@@ -143,10 +146,11 @@ function makeBullet( owner, t )
 	bullet.owner = owner;
 	bullet.type = t;
 	bullet.start = Date.now(); 
-	bullet.body = makeBulletBody(owner); 
+	bullet.body = makeBulletBody(owner, bullet); 
 	bullet.mesh = new THREE.Mesh(new THREE.SphereGeometry(.1,6,6), new THREE.MeshLambertMaterial({
             color: 0xff88ff
 		}));  //change to sprite?
 	scene.add(bullet.mesh);
+	bullet.ID = Namer.NewBulletID();
 	return bullet;
 }
