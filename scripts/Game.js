@@ -55,7 +55,10 @@ function updateWorld()
 	world.DrawDebugData();
 	world.ClearForces();
 	while (destroyList.length > 0) {
-	    destroyList.pop().destroy();
+		var thingy = destroyList.pop()
+		console.log(thingy.ID);
+		thingy.destroy();
+	    //destroyList.pop().destroy();
 	}
 	
 	var temp = asteroidList.head;
@@ -129,7 +132,6 @@ function updateBullets()
 		temp.stored.updateMesh();
 		if( ((Date.now() - temp.stored.start) / 1000 ) > 1 )  //after 4 seconds alive 
 		{
-			Namer.recycledBulletIDs.push(temp.stored.ID);
 			temp.stored.destroy();
 		}
 		temp = temp.next;

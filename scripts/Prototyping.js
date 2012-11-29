@@ -93,6 +93,7 @@ extend(Bullet, { owner: null, type: 0, start: null, deleteFlag : 0} );
 Bullet.destroy = function () {
     scene.remove(this.mesh);
     world.DestroyBody(this.body);
+	Namer.recycledBulletIDs.push(this.ID);
     bulletList.remove(this.node);
 }
 //--------------------------------------------------------------------

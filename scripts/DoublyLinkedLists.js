@@ -25,13 +25,19 @@ var DLL = {
 		if(node.previous != null){
 			node.previous.next = node.next;
 			if(node.next == null){
-				node.previous = this.end
+				this.end = node.previous;
+			}
+			else{
+				node.next.previous = node.previous;
 			}
 		}
-		else{ 
+		else{
 			this.head = node.next
-			if (node.next = null){
+			if (node.next == null){
 				this.end = null;
+			}
+			else {
+				node.next.previous = null;
 			}
 		}
 	}

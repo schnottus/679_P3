@@ -14,8 +14,11 @@ listener.BeginContact = function (contact) {
 
     //right now I assigned 0's for bodies and 1's for sensors, and 2's for bullets
     //for now the bullets just announce that they hit something
-
-    if (contact.GetFixtureA().GetUserData() + contact.GetFixtureB().GetUserData() == 0) {
+	if (contact.GetFixtureA().GetUserData()==undefined || contact.GetFixtureB().GetUserData()==undefined){
+	}
+	
+	
+    else if (contact.GetFixtureA().GetUserData() + contact.GetFixtureB().GetUserData() == 0) {
         //collide two floating bodies
     }
     else if (contact.GetFixtureA().GetUserData() == 2) {
