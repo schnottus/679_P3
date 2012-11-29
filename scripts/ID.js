@@ -30,6 +30,11 @@ var Namer = {
 			return this.recycledBulletIDs.pop();
 		}
 	},
+
+	NewStationID : function(){
+		return "S";
+	},
+
 	reset : function(){
 		this.AsteroidIDCount = 0,
 		this.EnemyIDCount = 0,
