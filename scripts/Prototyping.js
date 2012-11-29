@@ -95,6 +95,15 @@ Bullet.destroy = function () {
     world.DestroyBody(this.body);
     bulletList.remove(this.node);
 }
+
+//Station mold (inherits Entity)
+var Station = Object.create(Entity);
+extend(Station, { });
+//We don't need Destory function for Station
+Station.destroy = function () {
+    //console.log("Station was destroyed");
+}
+
 //--------------------------------------------------------------------
 // Initializing functions (sets specifics to this casting from a mold)
 //--------------------------------------------------------------------
@@ -168,4 +177,17 @@ function makeBullet( owner, t )
 	scene.add(bullet.mesh);
 	bullet.ID = Namer.NewBulletID();
 	return bullet;
+}
+
+function makeStation() {
+    var station;
+    station = Object.create(Station);
+    station.body = makeStationBody(station);
+    // player.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
+//             color: 0xff8800
+// 		}));
+	makeStationMesh(station);
+    scene.add(station.mesh);
+	station.ID = Namer.NewStationID();
+    return station;
 }

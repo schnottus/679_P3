@@ -32,12 +32,14 @@
 	var enemyList = newDLL();
 	var bulletList = newDLL();
 	var destroyList = new Array();
+	var homeStation;
 
 //three.js vars
 	var scene = new THREE.Scene();
 	var geometries = {
 		asteroid : null,
-		player: null
+		player: null,
+		station: null
 	};
 
 	var container,

@@ -80,6 +80,7 @@ function updateWorld()
 	//	enemyList[i].material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
 	//}
     playerShip.updateMesh();
+	homeStation.updateMesh();
 };
 
 //move camera to follow player

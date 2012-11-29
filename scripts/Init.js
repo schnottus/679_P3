@@ -22,6 +22,9 @@ function init() {
 	new THREE.JSONLoader().load('mesh/ship.js', function (geometry) {
 		geometries.player = geometry;
 	}, 'mesh/images');
+	new THREE.JSONLoader().load('mesh/station.js', function (geometry) {
+		geometries.station = geometry;
+	}, 'mesh/images');
 	//load all other models here too, and all things that dont require models
 	loadingLoop(); //checks if models are loaded before continuing (and animates a loading screen)
 }
@@ -29,6 +32,7 @@ function init() {
 function init2() {
 	
     playerShip = makePlayer();
+	homeStation = makeStation();
 
     enemyList.add(makeEnemy(0, 7, 7));
 	
