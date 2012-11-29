@@ -28,9 +28,10 @@
 	
 	//change when we Joseph inserts prototyping/object managment
 	var playerShip;
-	var asteroidList = [];
-	var enemyList = [];
-	var bulletList = [];
+	var asteroidList = newDLL();
+	var enemyList = newDLL();
+	var bulletList = newDLL();
+	var destroyList = new Array();
 
 //three.js vars
 	var scene = new THREE.Scene();

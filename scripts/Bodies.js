@@ -6,31 +6,35 @@ var ALL =        		0x0007;
 
 
 var listener = new Box2D.Dynamics.b2ContactListener;
-    listener.BeginContact = function(contact) {
-	
-		//the following line would tell you what two things are colliding
-		//console.log(contact.GetFixtureA().GetBody().userData.ID + " " + contact.GetFixtureB().GetBody().userData.ID);
-		
-		
-		//right now I assigned 0's for bodies and 1's for sensors, and 2's for bullets
-		//for now the bullets just announce that they hit something
-		
-		if (contact.GetFixtureA().GetUserData() + contact.GetFixtureB().GetUserData() == 0){
-			//collide two floating bodies
-		}
-		else if(contact.GetFixtureA().GetUserData() == 2){
-			console.log(contact.GetFixtureB().GetBody().userData.ID + " was hit by a bullet");
-		}
-		else if(contact.GetFixtureB().GetUserData() == 2){
-			console.log(contact.GetFixtureA().GetBody().userData.ID + " was hit by a bullet");
-		}
-		else if(contact.GetFixtureA().GetUserData() == 1){
-			contact.GetFixtureA().GetBody().userData.sensor[contact.GetFixtureB().GetBody().userData.ID] = contact.GetFixtureB().GetBody();
-		}
-        else if(contact.GetFixtureB().GetUserData() == 1){
-			contact.GetFixtureB().GetBody().userData.sensor[contact.GetFixtureA().GetBody().userData.ID] = contact.GetFixtureA().GetBody();
-		}
+listener.BeginContact = function (contact) {
+
+    //the following line would tell you what two things are colliding
+    //console.log(contact.GetFixtureA().GetBody().userData.ID + " " + contact.GetFixtureB().GetBody().userData.ID);
+
+
+    //right now I assigned 0's for bodies and 1's for sensors, and 2's for bullets
+    //for now the bullets just announce that they hit something
+
+    if (contact.GetFixtureA().GetUserData() + contact.GetFixtureB().GetUserData() == 0) {
+        //collide two floating bodies
     }
+    else if (contact.GetFixtureA().GetUserData() == 2) {
+        console.log(contact.GetFixtureB().GetBody().userData.ID + " was hit by a bullet");
+        destroyList.push(contact.GetFixtureA().GetBody().userData);
+        destroyList.push(contact.GetFixtureB().GetBody().userData);
+    }
+    else if (contact.GetFixtureB().GetUserData() == 2) {
+        console.log(contact.GetFixtureA().GetBody().userData.ID + " was hit by a bullet");
+        destroyList.push(contact.GetFixtureA().GetBody().userData);
+        destroyList.push(contact.GetFixtureB().GetBody().userData);
+    }
+    else if (contact.GetFixtureA().GetUserData() == 1) {
+        contact.GetFixtureA().GetBody().userData.sensor[contact.GetFixtureB().GetBody().userData.ID] = contact.GetFixtureB().GetBody();
+    }
+    else if (contact.GetFixtureB().GetUserData() == 1) {
+        contact.GetFixtureB().GetBody().userData.sensor[contact.GetFixtureA().GetBody().userData.ID] = contact.GetFixtureA().GetBody();
+    }
+}
     listener.EndContact = function(contact) {
         if( contact.GetFixtureA().GetUserData() == 1){
 			delete contact.GetFixtureA().GetBody().userData.sensor[(contact.GetFixtureB().GetBody().userData.ID)];

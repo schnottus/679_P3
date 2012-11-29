@@ -30,7 +30,7 @@ function init2() {
 	
     playerShip = makePlayer();
 
-    enemyList.push(makeEnemy(0, 7, 7));
+    enemyList.add(makeEnemy(0, 7, 7));
 	
 	//create a hard boundary so that objects don't escape the screen
 	var fixDef = new b2FixtureDef;
@@ -57,7 +57,7 @@ function init2() {
 	//bodyDef.type = b2Body.b2_dynamicBody;
 	for(var i = 0; i < 10; ++i) 
 	{
-	    asteroidList.push(makeAsteroid(Math.random() * 10, Math.random() * 10));
+	    asteroidList.add(makeAsteroid(Math.random() * 10, Math.random() * 10));
 	}
 	
 	//setup debug draw
@@ -187,7 +187,7 @@ function init2() {
 			break;
 			case 32: //space bar
 				//fire (used temporarily - change to mouse?)
-				bulletList.push(makeBullet( playerShip, 0, 10, 10));
+				bulletList.add(makeBullet( playerShip, 0, 10, 10));
 				break;
 			case 84: //t
 				//toggle debug draw div

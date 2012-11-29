@@ -34,6 +34,7 @@ var Entity = {
     mesh: null,
 	meterial : null,
 	ID : null,
+	node : null,
     updateMesh: function () {
         var position = this.body.GetPosition();
         this.mesh.position.x = position.x;
@@ -52,21 +53,28 @@ var Entity = {
     getPosY: function () {
         return this.body.GetPosition().y;
     },
-	destroy: function (array, index) { 
-		scene.remove(this.mesh);
-		world.DestroyBody(this.body);
-		array.splice(index, 1);
-		return array;
-	}
+    destroy: function () {
+        console.log("something was destroyed");
+    }
 };
 
 //Asteroid mold (inherits Entity)
 var Asteroid = Object.create(Entity);   //adds inheritance
-extend(Asteroid, { HP: 3 });            //adds more variables and functions, just like how entity is declared with variables and functions
+extend(Asteroid, { HP: 3});            //adds more variables and functions, just like how entity is declared with variables and functions
+Asteroid.destroy = function (){
+	scene.remove(this.mesh);
+	world.DestroyBody(this.body);
+	asteroidList.remove(this.node);
+}
 
 //Enemy mold (inherits Entity)
 var Enemy = Object.create(Entity);
 extend(Enemy, {});
+Enemy.destroy = function () {
+    scene.remove(this.mesh);
+    world.DestroyBody(this.body);
+    enemyList.remove(this.node);
+}
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
@@ -75,11 +83,18 @@ extend(Enemy, { HP: 15, sensor: {} });
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
 extend(Player, { HP: 10 });
+Player.destroy = function () {
+    console.log("player was destroyed");
+}
 
 //Bullet mold (inherits Entity)
 var Bullet = Object.create(Entity);
 extend(Bullet, { owner: null, type: 0, start: null, deleteFlag : 0} );
-
+Bullet.destroy = function () {
+    scene.remove(this.mesh);
+    world.DestroyBody(this.body);
+    bulletList.remove(this.node);
+}
 //--------------------------------------------------------------------
 // Initializing functions (sets specifics to this casting from a mold)
 //--------------------------------------------------------------------

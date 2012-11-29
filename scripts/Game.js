@@ -46,7 +46,7 @@ function render()
 
 function updateWorld() 
 {
-	//TODO Fix Step to use delta time
+    //TODO Fix Step to use delta time
 	world.Step(
 		1 / 60,  //frame rate
 		10,		//velocity iterations
@@ -54,18 +54,31 @@ function updateWorld()
 	);
 	world.DrawDebugData();
 	world.ClearForces();
-
-    for(var i = 0; i < asteroidList.length; i ++){
-        asteroidList[i].updateMesh();
-		if(asteroidList[i].isAwake()){
-			//console.log(i);
-		}
-	}
-    for (var i = 0; i < enemyList.length; i++){
-        enemyList[i].updateMesh();
-		enemyList[i].material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+	while (destroyList.length > 0) {
+	    destroyList.pop().destroy();
 	}
 	
+	var temp = asteroidList.head;
+    while(temp != null){
+		temp.stored.updateMesh();
+		temp = temp.next;
+	}
+	//for(var i = 0; i < asteroidList.length; i ++){
+    //    asteroidList[i].updateMesh();
+	//	if(asteroidList[i].isAwake()){
+			//console.log(i);
+	//	}
+	//}
+	temp = enemyList.head;
+	while(temp != null){
+		temp.stored.updateMesh();
+		temp.stored.material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+		temp = temp.next;
+	}
+    //for (var i = 0; i < enemyList.length; i++){
+    //    enemyList[i].updateMesh();
+	//	enemyList[i].material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+	//}
     playerShip.updateMesh();
 };
 
@@ -110,6 +123,20 @@ function updatePlayer()
 
 function updateBullets()
 {
+
+	var temp = bulletList.head;
+    while(temp != null){
+		temp.stored.updateMesh();
+		if( ((Date.now() - temp.stored.start) / 1000 ) > 1 )  //after 4 seconds alive 
+		{
+			Namer.recycledBulletIDs.push(temp.stored.ID);
+			temp.stored.destroy();
+		}
+		temp = temp.next;
+	}
+	
+	/*
+	
 	var i = bulletList.length;
 	
 	while (i-- && i > -1){
@@ -130,7 +157,7 @@ function updateBullets()
 	
 	//check for collisions (apply damage if collided and then delete)
 	
-	
+	*/
 	
 }
 
