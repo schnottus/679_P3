@@ -25,6 +25,9 @@ function init() {
 	new THREE.JSONLoader().load('mesh/station.js', function (geometry) {
 		geometries.station = geometry;
 	}, 'mesh/images');
+	new THREE.JSONLoader().load('mesh/crystal_purple.js', function (geometry) {
+		geometries.crystal = geometry;
+	}, 'mesh/images');
 	//load all other models here too, and all things that dont require models
 	loadingLoop(); //checks if models are loaded before continuing (and animates a loading screen)
 }
@@ -216,7 +219,7 @@ function loadingLoop(){
 	var finishedLoading = false;
 	var frame = null;
 	function internalLoadLoop() {
-		if (geometries.asteroid != null && geometries.player != null){ //this simple check will be made more complex when more stuff is being loaded
+		if (geometries.asteroid != null && geometries.player != null && geometries.station != null && geometries.crystal != null){ //this simple check will be made more complex when more stuff is being loaded
 			finishedLoading = true;
 		}
 		 frame = requestAnimationFrame( internalLoadLoop );

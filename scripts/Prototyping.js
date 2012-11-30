@@ -63,8 +63,24 @@ var Asteroid = Object.create(Entity);   //adds inheritance
 extend(Asteroid, { HP: 3});            //adds more variables and functions, just like how entity is declared with variables and functions
 Asteroid.destroy = function (){
 	scene.remove(this.mesh);
+	var position = this.getPosition();
+	//console.log(position.x + " " + position.y);
+	var vel = this.body.GetLinearVelocity();
 	world.DestroyBody(this.body);
+	console.log(position.x + " " + position.y);
+	for(var i = 0; i < 3; ++i){
+		crystalList.add(makeCrystal(position.x, position.y));
+	}
 	asteroidList.remove(this.node);
+}
+
+var Crystal = Object.create(Entity);   //adds inheritance
+extend(Crystal, {});            //adds more variables and functions, just like how entity is declared with variables and functions
+Crystal.destroy = function (){
+	scene.remove(this.mesh);
+	world.DestroyBody(this.body);
+	Namer.recycledCrystalIDs.push(this.ID);
+	crystalList.remove(this.node);
 }
 
 //Enemy mold (inherits Entity)
@@ -119,6 +135,15 @@ function makeAsteroid(x, y) {
 	makeAsteroidMesh(asteroid);
 	asteroid.ID = Namer.NewAsteroidID();
     return asteroid;
+}
+
+function makeCrystal(x, y) {
+    var crystal;
+    crystal = Object.create(Crystal);
+	crystal.body = makeCrystalBody(x, y, crystal);
+	makeCrystalMesh(crystal);
+	crystal.ID = Namer.NewCrystalID();
+    return crystal;
 }
 
 function makeEnemy(type, x, y) {

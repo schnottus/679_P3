@@ -3,6 +3,11 @@ function makeAsteroidMesh(asteroid) {
 	scene.add(asteroid.mesh);
 }
 
+function makeCrystalMesh(crystal) {
+	crystal.mesh = new THREE.Mesh(geometries.crystal, new THREE.MeshFaceMaterial());
+	scene.add(crystal.mesh);
+}
+
 function makeTankMesh() {
     return mesh;
 }

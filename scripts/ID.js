@@ -2,12 +2,25 @@ var Namer = {
 	AsteroidIDCount : 0,
 	EnemyIDCount : 0,
 	BulletIDCount : 0,
+	CrystalIDCount : 0,
 	recycledBulletIDs : new Array(),
+	recycledCrystalIDs : new Array(),
 		
 	NewAsteroidID : function(){
 		var ID = "A" + this.AsteroidIDCount.toString(16);
 		this.AsteroidIDCount++;
 		return ID;
+	},
+	
+	NewCrystalID : function(){
+		if (this.recycledCrystalIDs.length == 0){
+			var ID = "B" + this.CrystalIDCount.toString(16);
+			this.CrystalIDCount ++;
+			return ID;
+		}
+		else{
+			return this.recycledCrystalIDs.pop();
+		}
 	},
 	
 	NewEnemyID : function(){

@@ -31,6 +31,7 @@
 	var asteroidList = newDLL();
 	var enemyList = newDLL();
 	var bulletList = newDLL();
+	var crystalList = newDLL();
 	var destroyList = new Array();
 	var homeStation;
 
