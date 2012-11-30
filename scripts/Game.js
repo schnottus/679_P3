@@ -9,8 +9,8 @@ function animate()
 {
 	stats.begin();
 	requestAnimationFrame( animate ); //I've read it should be placed immediately before render(), not sure why though
-	render(); //draw game
 	update(); //update game state
+	render(); //draw game
 	stats.end();
 }
 
@@ -56,7 +56,7 @@ function updateWorld()
 	world.ClearForces();
 	while (destroyList.length > 0) {
 		var thingy = destroyList.pop()
-		console.log(thingy.ID);
+		//console.log(thingy.ID);
 		thingy.destroy();
 	    //destroyList.pop().destroy();
 	}

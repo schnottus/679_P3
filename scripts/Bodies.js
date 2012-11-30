@@ -29,13 +29,19 @@ listener.BeginContact = function (contact) {
 		contact.GetFixtureB().GetBody().userData.sensor[contact.GetFixtureA().GetBody().userData.ID] = contact.GetFixtureA().GetBody();
 	}
 	else if (contact.GetFixtureA().GetUserData() == 2) {
-		console.log(contact.GetFixtureB().GetBody().userData.ID + " was hit by a bullet");
 		destroyList.push(contact.GetFixtureA().GetBody().userData);
 		destroyList.push(contact.GetFixtureB().GetBody().userData);
 	}
 	else if (contact.GetFixtureB().GetUserData() == 2) {
-		console.log(contact.GetFixtureA().GetBody().userData.ID + " was hit by a bullet");
 		destroyList.push(contact.GetFixtureA().GetBody().userData);
+		destroyList.push(contact.GetFixtureB().GetBody().userData);
+	}
+	else if ((contact.GetFixtureA().GetUserData() == 3 && contact.GetFixtureB().GetUserData() == 4 )){
+		contact.GetFixtureB().GetUserData().crystals ++;
+		destroyList.push(contact.GetFixtureA().GetBody().userData);
+	}
+	else if (contact.GetFixtureA().GetUserData() == 4 && contact.GetFixtureB().GetUserData() == 3) {
+		contact.GetFixtureA().GetUserData().crystals ++;
 		destroyList.push(contact.GetFixtureB().GetBody().userData);
 	}
 }
@@ -88,7 +94,7 @@ function makeCrystalBody(x, y, crystal) {
     fixDef.density = 1.0;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.1;
-	fixDef.userData = 0;
+	fixDef.userData = 3;
 	fixDef.filter.categoryBits = ASTEROID;
 	fixDef.filter.maskBits = NON_BULLETS;
     body.CreateFixture(fixDef);
@@ -136,7 +142,7 @@ function makePlayerBody(player) {
     fixDef.density = 1.0; //how dense is our player ship
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
-	fixDef.userData = 0;
+	fixDef.userData = 4;
 	fixDef.filter.categoryBits = PLAYER_SHIP;
 	fixDef.filter.maskBits = ALL;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
@@ -164,7 +170,7 @@ function makeBulletBody(owner, bullet) {
     fixDef.density = 1.0; 
 	fixDef.userData = 2;
 	fixDef.filter.categoryBits = PLAYER_BULLETS;
-	 fixDef.filter.maskBits = PLAYER_TARGETS;
+	fixDef.filter.maskBits = PLAYER_TARGETS;
     body.CreateFixture(fixDef); 
 	body.ApplyImpulse(new b2Vec2(thrustX,thrustY), body.GetWorldCenter());
 	body.userData = bullet;
