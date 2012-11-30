@@ -32,3 +32,9 @@ function thrustPlayer(d, a)
 		//throw error
 	}
 }
+
+//param: type - type of bullet
+function playerShoot( type )
+{
+	bulletList.add(makeBullet( playerShip, 0, 10, 10));
+}
