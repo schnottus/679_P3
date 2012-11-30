@@ -164,6 +164,10 @@ function init2() {
 				} 
 				firstShotPress = false;
 				
+				
+				
+				//asteroidList.empty();
+				
 				break;
 			case 84: //t
 				//toggle debug draw div
@@ -204,6 +208,12 @@ function init2() {
 			case 32: //space bar
 				clearInterval(shootInterval);
 				firstShotPress = true;
+				//if(!(player.firstShotFired))
+				
+					alert(player.firstShotFired);
+					bulletList.add(makeBullet( playerShip, 0, 10, 10));
+					player.firstShotFired = false;
+				
 				break;
 			default:
 		}

@@ -96,7 +96,10 @@ extend(Enemy, { HP: 15, sensor: {} });
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
-extend(Player, { HP: 10, crystals : 0 });
+extend(Player, { 	HP: 10, 
+					crystals : 0,
+					firstShotFired: false
+				});
 Player.destroy = function () {
     console.log("player was destroyed");
 }

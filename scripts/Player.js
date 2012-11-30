@@ -37,4 +37,5 @@ function thrustPlayer(d, a)
 function playerShoot( type )
 {
 	bulletList.add(makeBullet( playerShip, 0, 10, 10));
+	player.firstShotFired = true;
 }

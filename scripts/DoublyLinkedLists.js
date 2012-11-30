@@ -40,6 +40,13 @@ var DLL = {
 				node.next.previous = null;
 			}
 		}
+	}, 
+	empty : function (){
+		/*while(this.head != null)
+		{
+			this.head.stored.destroy();
+			this.remove(this.head);
+		}*/                                                                                                                       
 	}
 }
 function newDLL() {

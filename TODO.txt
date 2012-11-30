@@ -1,9 +1,11 @@
 Important things todo:
 
-Keybindings - Dongyoung
-HealthPoints/damage - Dongyoung
-UI -scott
-AI -Joey
+Keybindings - Dongyoung (shooting is fixed, still need to set ship max speed)
+HealthPoints/damage - Dongyoung (Joey got health working for everthing)
+UI -scott, levels, warpgate, pausing
+AI, list destroyer -Joey
+
+
 
 Station/portal stuff
 Pause state and buying stuff(station needs a sensor for this)
