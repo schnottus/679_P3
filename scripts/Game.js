@@ -72,6 +72,13 @@ function updateWorld()
 			//console.log(i);
 	//	}
 	//}
+	
+	temp = crystalList.head;
+    while(temp != null){
+		temp.stored.updateMesh();
+		temp = temp.next;
+	}
+	
 	temp = enemyList.head;
 	while(temp != null){
 		temp.stored.updateMesh();
