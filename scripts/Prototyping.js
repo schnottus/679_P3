@@ -35,6 +35,8 @@ var Entity = {
 	meterial : null,
 	ID : null,
 	node : null,
+	maxHP: 1,
+	currentHP: 1,
     updateMesh: function () {
         var position = this.body.GetPosition();
         this.mesh.position.x = position.x;
@@ -53,6 +55,12 @@ var Entity = {
     getPosY: function () {
         return this.body.GetPosition().y;
     },
+	damage: function (amount){
+		this.currentHP -= amount;
+		if (this.currentHP <= 0){
+			destroyList.push(this);
+		}
+	},
     destroy: function () {
         console.log("something was destroyed");
     }
@@ -60,7 +68,8 @@ var Entity = {
 
 //Asteroid mold (inherits Entity)
 var Asteroid = Object.create(Entity);   //adds inheritance
-extend(Asteroid, { HP: 3});            //adds more variables and functions, just like how entity is declared with variables and functions
+extend(Asteroid, { });            //adds more variables and functions, just like how entity is declared with variables and functions
+Asteroid.maxHP = 3;
 Asteroid.destroy = function (){
 	scene.remove(this.mesh);
 	var position = this.getPosition();
@@ -92,11 +101,13 @@ Enemy.destroy = function () {
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
-extend(Enemy, { HP: 15, sensor: {} });
+extend(Enemy, { sensor: {} });
+Tank.maxHP = 15; 
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
-extend(Player, { HP: 10, crystals : 0 });
+extend(Player, { crystals : 0 });
+Player.maxHP = 10;
 Player.destroy = function () {
     console.log("player was destroyed");
 }
@@ -115,6 +126,9 @@ Bullet.destroy = function () {
 var Station = Object.create(Entity);
 extend(Station, { });
 //We don't need Destory function for Station
+Station.damage = function (amount){
+
+}
 Station.destroy = function () {
     //console.log("Station was destroyed");
 }
@@ -129,6 +143,7 @@ Station.destroy = function () {
 function makeAsteroid(x, y) {
     var asteroid;
     asteroid = Object.create(Asteroid);
+	asteroid.currentHP = asteroid.maxHP;
 	asteroid.body = makeAsteroidBody(x, y, asteroid);
 	makeAsteroidMesh(asteroid);
 	asteroid.ID = Namer.NewAsteroidID();
@@ -168,6 +183,7 @@ function makeEnemy(type, x, y) {
 			enemy.mesh = new THREE.Mesh( new THREE.SphereGeometry( 20 / 19, 200, 200 ), material );
             scene.add(enemy.mesh);
     }
+	enemy.currentHP = enemy.maxHP;
 	enemy.ID = Namer.NewEnemyID();
     return enemy
 }

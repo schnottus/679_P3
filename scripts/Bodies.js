@@ -29,12 +29,12 @@ listener.BeginContact = function (contact) {
 		contact.GetFixtureB().GetBody().userData.sensor[contact.GetFixtureA().GetBody().userData.ID] = contact.GetFixtureA().GetBody();
 	}
 	else if (contact.GetFixtureA().GetUserData() == 2) {
-		destroyList.push(contact.GetFixtureA().GetBody().userData);
-		destroyList.push(contact.GetFixtureB().GetBody().userData);
+		contact.GetFixtureA().GetBody().userData.damage(1);
+		contact.GetFixtureB().GetBody().userData.damage(1);
 	}
 	else if (contact.GetFixtureB().GetUserData() == 2) {
-		destroyList.push(contact.GetFixtureA().GetBody().userData);
-		destroyList.push(contact.GetFixtureB().GetBody().userData);
+		contact.GetFixtureA().GetBody().userData.damage(1);
+		contact.GetFixtureB().GetBody().userData.damage(1);
 	}
 	else if ((contact.GetFixtureA().GetUserData() == 3 && contact.GetFixtureB().GetUserData() == 4 )){
 		contact.GetFixtureB().GetUserData().crystals ++;
