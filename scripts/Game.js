@@ -176,3 +176,17 @@ function updateGameState()
 {
 	
 }
+
+function startGame()
+{
+	//stop displaying start menu
+	var divStartMenu = document.getElementById("startMenu");
+	divStartMenu.style.display = "none";  
+	
+	//start showing game container
+	var divContainer = document.getElementById("container");
+	divContainer.style.display = "block";
+	
+	//start game loop
+	animate();
+}

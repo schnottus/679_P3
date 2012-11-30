@@ -28,11 +28,33 @@
 </head>
 
 <body onload="init();">
-    <div id="container">
+    <div id="container" style="display: none;">
 		<div id="debugDraw">
 			<canvas id="canvas" width="600" height="400"></canvas>
 		</div>
 		<div id="statsDiv"></div>
+	</div>
+	<div id="startMenu" class="menuPage" style="display: block;">
+		<h1>Space Fighter</h1>
+		<img id="loadImage" src="resources/loadImage.png"/>
+		<div class="instructions">
+			<h3>Instructions</h3>
+			<div>
+				<p>Collect resources and defeat enemies. //add more instructions later</p>
+			</div>
+		</div>
+		<div class="controls">
+			<h3>Controls</h3>
+			<div>
+				<p>Use the W-set to move forward/backward and rotate. </br>
+					Use space to shoot.</br>
+					"t" disables debug draw overlay</br>
+					Use mouse to shoot (not implemented yet)</p>
+			</div>
+		</div>
+		<div class="startBtnWrapper">
+			<button id="btnStart" type="button" onclick="startGame();" disabled="disabled">Start</button>
+		</div>
 	</div>
 	<script type="x-shader/x-vertex" id="vertexShader">
 

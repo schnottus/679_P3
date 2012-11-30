@@ -34,47 +34,8 @@ function init() {
 
 function init2() {
 	
-    playerShip = makePlayer();
-	homeStation = makeStation();
-
-    enemyList.add(makeEnemy(0, 7, 7));
-	
-	//create a hard boundary so that objects don't escape the screen
-	var fixDef = new b2FixtureDef;
-	fixDef.density = 1.0;
-	fixDef.friction = 0.5;
-	fixDef.restitution = 0.3;
-	var bodyDef = new b2BodyDef;
-	bodyDef.type = b2Body.b2_staticBody;  //staticBody (never moves)
-	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(20, 0.1);
-	bodyDef.position.Set(0, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //top wall
-	bodyDef.position.Set(0, 400/30);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //bottom wall
-	fixDef.shape.SetAsBox(0.1, 400/30);
-	bodyDef.position.Set(0, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //left wall
-	bodyDef.position.Set(20, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //right
-	
-	
-	
-	//create some asteroids
-	//bodyDef.type = b2Body.b2_dynamicBody;
-	for(var i = 0; i < 10; ++i) 
-	{
-	    asteroidList.add(makeAsteroid(Math.random() * 10, Math.random() * 10));
-	}
-	
-	//setup debug draw
-	var debugDraw = new b2DebugDraw();
-		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
-		debugDraw.SetDrawScale(30.0);  //smaller scale "zooms out"
-		debugDraw.SetFillAlpha(0.5);
-		debugDraw.SetLineThickness(1.0);
-		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
-	world.SetDebugDraw(debugDraw);
+    
+	loadLevel(1);
 	
 	
 /***Three.js Setup***/
@@ -88,12 +49,11 @@ function init2() {
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	// attach the render-supplied DOM element
+	container.style.display = "none"; //do not display it (yet)
 	container.appendChild(renderer.domElement);
 	renderer.setClearColorHex( 0x000000, 1 );
 	renderer.autoClear = false;
 
-	//create scene
-	//scene = new THREE.Scene();
 	
 	//camera attributes
 	var	ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
@@ -124,6 +84,7 @@ function init2() {
 	axes.scale.set( 0.1, 0.1, 0.1 );
 	scene.add( axes );
 	
+	
 //three.js events  (from stemkoski viewport-dual example)
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
@@ -150,7 +111,8 @@ function init2() {
 				//forward thrust
 				if(firstWKey)
 				{
-					forwardInterval = setInterval('thrustPlayer(1, 1)', intervalSpeed);
+					//thrustplayer(direction, amount)
+					forwardInterval = setInterval('thrustPlayer(1, playerThrustForce)', intervalSpeed);
 				}
 				firstWKey = false;
 				break;
@@ -158,7 +120,7 @@ function init2() {
 				//reverse thrust
 				if(firstSKey)
 				{
-					reverseInterval = setInterval('thrustPlayer(0, 1)', intervalSpeed);
+					reverseInterval = setInterval('thrustPlayer(0, playerThrustForce)', intervalSpeed);
 				}
 				firstSKey = false;
 				break;
@@ -245,15 +207,9 @@ function init2() {
 	var statsDiv = document.getElementById('statsDiv');
 	statsDiv.appendChild(stats.domElement);
 	
-	//enter game loop to start the game
-	animate();
-	
-	//update
-	// function update() {	
-		// world.Step(1 / 60, 10, 10);  //if using getAnimationFrame fix to account for variable framerate
-		// world.DrawDebugData();
-		// world.ClearForces();
-	// };
+	//enable start button which calls startGame() and thus, animate();
+	//do not add any code below this button enable line (won't always get run)
+	document.getElementById("btnStart").disabled = false; 
 	
 	
 }
