@@ -63,7 +63,7 @@ function makeAsteroidBody(x, y, asteroid) {
     AsteroidBodyDef.position.Set(x, y);
     var body = world.CreateBody(AsteroidBodyDef);
     var AsteroidFixDef = new b2FixtureDef;
-    AsteroidFixDef.shape = new b2CircleShape(0.5);
+    AsteroidFixDef.shape = new b2CircleShape(0.8);
     AsteroidFixDef.density = 1.0;
     AsteroidFixDef.friction = 0.5;
     AsteroidFixDef.restitution = 0.1;
@@ -110,9 +110,9 @@ function makePlayerBody(player) {
 	//bodyDef.fixedRotation = true;  //body can collide but no rotation is imparted upon it
     var body = world.CreateBody(bodyDef);  //add this b2Body to the world and save a reference to it in playerShip
     var fixDef = new b2FixtureDef; //create a fixture (something to collide with)
-    fixDef.shape = new b2PolygonShape;  //make that fixture a polygon
-    fixDef.shape.SetAsBox(0.3, 1);  //makes a box, takes parameters( halfWidth, halfHeight ), this means the box will be 0.6 wide and 2 meters high
-    fixDef.density = 1.0; //how dense is our player ship
+    fixDef.shape = new b2CircleShape(1.5);  //make that fixture a polygon
+    //fixDef.shape.SetAsBox(0.3, 1);  //makes a box, takes parameters( halfWidth, halfHeight ), this means the box will be 0.6 wide and 2 meters high
+    fixDef.density = 0.2; //how dense is our player ship
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
 	fixDef.userData = 0;
@@ -134,8 +134,8 @@ function makeBulletBody(owner, bullet) {
 	
 	var bodyDef = new b2BodyDef; 
     bodyDef.type = b2Body.b2_dynamicBody;  
-    bodyDef.position.x = x + thrustX;  //add thrustX,Y to offset bullet a little ahead of owner
-    bodyDef.position.y = y + thrustY;
+    bodyDef.position.x = x + (thrustX * 1.8);  //add thrustX,Y to offset bullet a little ahead of owner
+    bodyDef.position.y = y + (thrustY * 1.8);
 	bodyDef.angle = angle;
     var body = world.CreateBody(bodyDef);  
     var fixDef = new b2FixtureDef; 
