@@ -72,7 +72,15 @@ function level1()
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
 	
-	
+	//simple background image
+	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space1.jpg' );
+	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture } );
+	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
+	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+	floor.rotation.x = d2r(90);
+	floor.position.z = 500.0;
+	floor.doubleSided = true;
+	scene.add(floor);
 	
 }
 

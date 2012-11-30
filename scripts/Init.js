@@ -51,8 +51,6 @@ function init2() {
 	renderer.setClearColorHex( 0x000000, 1 );
 	renderer.autoClear = false;
 
-	//create scene
-	//scene = new THREE.Scene();
 	
 	//camera attributes
 	var	ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
@@ -83,6 +81,7 @@ function init2() {
 	axes.scale.set( 0.1, 0.1, 0.1 );
 	scene.add( axes );
 	
+	
 //three.js events  (from stemkoski viewport-dual example)
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
@@ -109,7 +108,8 @@ function init2() {
 				//forward thrust
 				if(firstWKey)
 				{
-					forwardInterval = setInterval('thrustPlayer(1, 1)', intervalSpeed);
+					//thrustplayer(direction, amount)
+					forwardInterval = setInterval('thrustPlayer(1, playerThrustForce)', intervalSpeed);
 				}
 				firstWKey = false;
 				break;
@@ -117,7 +117,7 @@ function init2() {
 				//reverse thrust
 				if(firstSKey)
 				{
-					reverseInterval = setInterval('thrustPlayer(0, 1)', intervalSpeed);
+					reverseInterval = setInterval('thrustPlayer(0, playerThrustForce)', intervalSpeed);
 				}
 				firstSKey = false;
 				break;

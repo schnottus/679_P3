@@ -63,7 +63,7 @@ function makeAsteroidBody(x, y, asteroid) {
     AsteroidBodyDef.position.Set(x, y);
     var body = world.CreateBody(AsteroidBodyDef);
     var AsteroidFixDef = new b2FixtureDef;
-    AsteroidFixDef.shape = new b2CircleShape(0.8);
+    AsteroidFixDef.shape = new b2CircleShape(1.0);
     AsteroidFixDef.density = 1.0;
     AsteroidFixDef.friction = 0.5;
     AsteroidFixDef.restitution = 0.1;
