@@ -64,10 +64,8 @@ extend(Asteroid, { HP: 3});            //adds more variables and functions, just
 Asteroid.destroy = function (){
 	scene.remove(this.mesh);
 	var position = this.getPosition();
-	//console.log(position.x + " " + position.y);
 	var vel = this.body.GetLinearVelocity();
 	world.DestroyBody(this.body);
-	console.log(position.x + " " + position.y);
 	for(var i = 0; i < 3; ++i){
 		crystalList.add(makeCrystal(position.x, position.y));
 	}
@@ -98,7 +96,7 @@ extend(Enemy, { HP: 15, sensor: {} });
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
-extend(Player, { HP: 10 });
+extend(Player, { HP: 10, crystals : 0 });
 Player.destroy = function () {
     console.log("player was destroyed");
 }
