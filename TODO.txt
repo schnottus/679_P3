@@ -1,0 +1,19 @@
+Important things todo:
+
+Keybindings - Dongyoung
+HealthPoints/damage - Dongyoung
+UI -scott
+AI -Joey
+
+Station/portal stuff
+Pause state and buying stuff(station needs a sensor for this)
+	- things to buy (guns, upgrades, etc)
+
+Background stuff - Mik
+
+More types of enemies joey/Mik
+	Tank - big, strong
+	Soldier - regular unit (use the enemy we already made)
+	Scout - light small fast ship\
+
+shaders and fancy stuff (flashing lights for explosions, etc)
