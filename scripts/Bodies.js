@@ -139,7 +139,6 @@ function makePlayerBody(player) {
     var body = world.CreateBody(bodyDef);  //add this b2Body to the world and save a reference to it in playerShip
     var fixDef = new b2FixtureDef; //create a fixture (something to collide with)
     fixDef.shape = new b2CircleShape(1.5);  //make that fixture a polygon
-    //fixDef.shape.SetAsBox(0.3, 1);  //makes a box, takes parameters( halfWidth, halfHeight ), this means the box will be 0.6 wide and 2 meters high
     fixDef.density = 0.2; //how dense is our player ship
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
@@ -162,8 +161,6 @@ function makeBulletBody(owner, bullet) {
 	
 	var bodyDef = new b2BodyDef; 
     bodyDef.type = b2Body.b2_dynamicBody;  
-    bodyDef.position.x = owner.getPosX();
-    bodyDef.position.y = owner.getPosY();
     bodyDef.position.x = owner.getPosX();
     bodyDef.position.y = owner.getPosY();
 	bodyDef.angle = angle;
