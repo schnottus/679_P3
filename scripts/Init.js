@@ -28,6 +28,15 @@ function init() {
 	new THREE.JSONLoader().load('mesh/crystal_purple.js', function (geometry) {
 		geometries.crystal = geometry;
 	}, 'mesh/images');
+    new THREE.JSONLoader().load('mesh/soldier.js', function (geometry) {
+        geometries.soldier = geometry;
+    }, 'mesh/images');
+    new THREE.JSONLoader().load('mesh/scout.js', function (geometry) {
+        geometries.scout = geometry;
+    }, 'mesh/images');
+    new THREE.JSONLoader().load('mesh/tank.js', function (geometry) {
+        geometries.tank = geometry;
+    }, 'mesh/images');
 	//load all other models here too, and all things that dont require models
 	loadingLoop(); //checks if models are loaded before continuing (and animates a loading screen)
 }
@@ -237,10 +246,29 @@ function loadingLoop(){
 	var finishedLoading = false;
 	var frame = null;
 	function internalLoadLoop() {
-		if (geometries.asteroid != null && geometries.player != null && geometries.station != null && geometries.crystal != null){ //this simple check will be made more complex when more stuff is being loaded
-			finishedLoading = true;
-		}
-		 frame = requestAnimationFrame( internalLoadLoop );
+	    finishedLoading = true;
+	    if (geometries.asteroid == null) {
+	        finishedLoading = false;
+	    }
+	    if (geometries.player == null) {
+	        finishedLoading = false;
+	    }
+	    if (geometries.station == null) {
+	        finishedLoading = false;
+	    }
+	    if (geometries.crystal == null) {
+	        finishedLoading = false;
+	    }
+	    if (geometries.soldier == null) {
+	        finishedLoading = false;
+	    }
+	    if (geometries.scout == null) {
+	        finishedLoading = false;
+	    }
+	    if (geometries.tank == null) {
+	        finishedLoading = false;
+	    }
+		frame = requestAnimationFrame( internalLoadLoop );
 		//render loading screen here
 		 if (finishedLoading){ //this is how the loading loop exits
 			window.cancelAnimationFrame(frame);

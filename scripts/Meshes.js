@@ -8,8 +8,19 @@ function makeCrystalMesh(crystal) {
 	scene.add(crystal.mesh);
 }
 
-function makeTankMesh() {
-    return mesh;
+function makeSoldierMesh(soldier) {
+    soldier.mesh = new THREE.Mesh(geometries.soldier, new THREE.MeshFaceMaterial());
+    scene.add(soldier.mesh);
+}
+
+function makeScoutMesh(scout) {
+    scout.mesh = new THREE.Mesh(geometries.scout, new THREE.MeshFaceMaterial());
+    scene.add(scout.mesh);
+}
+
+function makeTankMesh(tank) {
+    tank.mesh = new THREE.Mesh(geometries.tank, new THREE.MeshFaceMaterial());
+    scene.add(tank.mesh);
 }
 
 function makePlayerMesh(player) {

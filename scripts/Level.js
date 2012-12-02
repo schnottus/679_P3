@@ -64,7 +64,9 @@ function level1()
 	playerShip = makePlayer();
 	homeStation = makeStation(10, height / 2);
 
-    enemyList.add(makeEnemy(0, 7, 7));
+	enemyList.add(makeEnemy(0, 13, 14));
+	enemyList.add(makeEnemy(1, 15, 17));
+    enemyList.add(makeEnemy(2, 17, 13));
 	
 	//add asteroids
 	for(var i = 0; i < 50; ++i) 

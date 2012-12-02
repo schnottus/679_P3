@@ -82,7 +82,7 @@ function updateWorld()
 	temp = enemyList.head;
 	while(temp != null){
 		temp.stored.updateMesh();
-		temp.stored.material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+		//temp.stored.material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
 		temp = temp.next;
 	}
     //for (var i = 0; i < enemyList.length; i++){

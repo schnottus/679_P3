@@ -99,6 +99,14 @@ Enemy.destroy = function () {
     enemyList.remove(this.node);
 }
 
+var Soldier = Object.create(Enemy); //tank is an example enemy type
+extend(Enemy, { sensor: {} });
+Soldier.maxHP = 10; 
+
+var Scout = Object.create(Enemy); //tank is an example enemy type
+extend(Enemy, { sensor: {} });
+Scout.maxHP = 5; 
+
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, { sensor: {} });
@@ -146,9 +154,9 @@ Station.destroy = function () {
 function makeAsteroid(x, y) {
     var asteroid;
     asteroid = Object.create(Asteroid);
-	asteroid.currentHP = asteroid.maxHP;
 	asteroid.body = makeAsteroidBody(x, y, asteroid);
 	makeAsteroidMesh(asteroid);
+    asteroid.currentHP = asteroid.maxHP;
 	asteroid.ID = Namer.NewAsteroidID();
     return asteroid;
 }
@@ -177,13 +185,21 @@ function makeEnemy(type, x, y) {
 	
     switch (type) {
         case 0:
+            enemy = Object.create(Soldier);
+            enemy.body = makeSoldierBody(x, y, enemy); //actually make Box2d body here eg) makeTankBody();
+            makeSoldierMesh(enemy);
+            break;
+        case 1:
+            enemy = Object.create(Scout);
+            enemy.body = makeScoutBody(x, y, enemy); //actually make Box2d body here eg) makeTankBody();
+            makeScoutMesh(enemy);
+            break;
+        case 2:
             enemy = Object.create(Tank);
             enemy.body = makeTankBody(x, y, enemy); //actually make Box2d body here eg) makeTankBody();
-			enemy.material = material;
-            //enemy.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
-            //    color: 0xff0000
-            //}));
-			enemy.mesh = new THREE.Mesh( new THREE.SphereGeometry( 20 / 19, 200, 200 ), material );
+			makeTankMesh(enemy);
+            //enemy.material = material;
+			//enemy.mesh = new THREE.Mesh( new THREE.SphereGeometry( 20 / 19, 200, 200 ), material );
             scene.add(enemy.mesh);
     }
 	enemy.currentHP = enemy.maxHP;

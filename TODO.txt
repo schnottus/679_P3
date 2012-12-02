@@ -13,9 +13,4 @@ Pause state and buying stuff(station needs a sensor for this)
 
 Background stuff - Mik
 
-More types of enemies joey/Mik
-	Tank - big, strong
-	Soldier - regular unit (use the enemy we already made)
-	Scout - light small fast ship\
-
 shaders and fancy stuff (flashing lights for explosions, etc)
