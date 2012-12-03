@@ -24,30 +24,30 @@ listener.BeginContact = function (contact) {
     //right now I assigned 0's for bodies and 1's for sensors, and 2's for bullets
     //for now the bullets just announce that they hit something
 
-    if (fixtureA.GetUserData() == undefined || fixtureB().GetUserData() == undefined) {
+    if (fixtureA.GetUserData() == undefined || fixtureB.GetUserData() == undefined) {
         console.log("collision includes something that has no ID");
     }
-    else if (fixtureA().GetUserData() == 1) {
-        fixtureA().GetBody().userData.sensor[fixtureB().GetBody().userData.ID] = fixtureB().GetBody();
+    else if (fixtureA.GetUserData() == 1) {
+        fixtureA.GetBody().userData.sensor[fixtureB.GetBody().userData.ID] = fixtureB.GetBody();
     }
-    else if (fixtureB().GetUserData() == 1) {
-        fetFixtureB().GetBody().userData.sensor[fixtureA().GetBody().userData.ID] = fixtureA().GetBody();
+    else if (fixtureB.GetUserData() == 1) {
+        fixtureB.GetBody().userData.sensor[fixtureA.GetBody().userData.ID] = fixtureA.GetBody();
     }
-    else if (contact.GetFixtureA().GetUserData() == 2) {
-        fixtureA().GetBody().userData.damage(1);
-        fixtureB().GetBody().userData.damage(1);
+    else if (fixtureA.GetUserData() == 2) {
+        fixtureA.GetBody().userData.damage(1);
+        fixtureB.GetBody().userData.damage(1);
     }
-    else if (fixtureB().GetUserData() == 2) {
-        fixtureA().GetBody().userData.damage(1);
-        fixtureB().GetBody().userData.damage(1);
+    else if (fixtureB.GetUserData() == 2) {
+        fixtureA.GetBody().userData.damage(1);
+        fixtureB.GetBody().userData.damage(1);
     }
-    else if ((fixtureA().GetUserData() == 3 && fixtureB().GetUserData() == 4)) {
-        fixtureB().GetBody().GetUserData().crystals++;
-        destroyList.push(contact.GetFixtureA().GetBody().userData);
+    else if ((fixtureA.GetUserData() == 3 && fixtureB.GetUserData() == 4)) {
+        fixtureB.GetBody().GetUserData.crystals++;
+        destroyList.push(fixtureA.GetBody().userData);
     }
-    else if (contact.GetFixtureA().GetUserData() == 4 && fixtureB().GetUserData() == 3) {
-        fixtureA().GetBody().GetUserData().crystals++;
-        destroyList.push(contact.GetFixtureB().GetBody().userData);
+    else if (fixtureA.GetUserData() == 4 && fixtureB.GetUserData() == 3) {
+        fixtureA.GetBody().GetUserData.crystals++;
+        destroyList.push(fixtureB.GetBody().userData);
     }
 }
 listener.EndContact = function(contact) {
@@ -248,7 +248,7 @@ function makeStationBody(station) {
     fixDef.density = 1.0; //how dense is our player ship
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
-	fixDef.userData = 3;
+	fixDef.userData = 5;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	body.userData = station;
     return body;

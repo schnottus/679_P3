@@ -219,9 +219,9 @@ function init2() {
 				firstShotPress = true;
 				//if(!(player.firstShotFired))
 				
-					alert(player.firstShotFired);
+					//alert(playerShip.firstShotFired);
 					bulletList.add(makeBullet( playerShip, 0, 10, 10));
-					player.firstShotFired = false;
+					playerShip.firstShotFired = false;
 				
 				break;
 			default:
