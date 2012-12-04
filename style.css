@@ -21,6 +21,61 @@ body  p {
 	overflow: hidden;
 }
 
+#pauseContainer {
+	position:absolute;
+	left: 0;
+	top: 0;
+	
+}
+
+.hudElement {
+	color: #1FFFFF;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#btnPause {
+	position:absolute;
+	top: 3;
+	left: 3;
+	width: 80px;
+	height: 40px;
+	background: transparent;
+	border: transparent;
+	
+}
+
+#hudContainer {
+	height: 100px;
+	width: 500px;
+	position: absolute;
+	bottom:0;
+	left: 50%;
+	margin-left: -250px;
+}
+
+#playerHealth {
+	position: absolute;
+	bottom: 55;
+	left: 50%;
+	margin-left: -70px;
+	
+}
+
+#playerResources {
+	position: absolute;
+	bottom:10;
+	left: 50%;
+	margin-left: -180px;
+}
+
+#numEnemies {
+	position: absolute;
+	bottom:10;
+	left: 50%;
+	margin-left: 25px;
+}
+
 #debugDraw {
 	position:absolute;
 	height:400px;

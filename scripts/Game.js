@@ -190,3 +190,8 @@ function startGame()
 	//start game loop
 	animate();
 }
+
+function pauseGame()
+{
+	alert("pause attempted");
+}

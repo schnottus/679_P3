@@ -34,6 +34,17 @@
 			<canvas id="canvas" width="600" height="400"></canvas>
 		</div>
 		<div id="statsDiv"></div>
+		<div id="pauseContainer">
+			<img id="pauseImage" src="resources/pause.png"/>
+			<button id="btnPause" type="button" onclick="pauseGame();" class="hudElement" disabled="disabled">Pause</button>
+		</div>
+		<div id="hudContainer">
+			<img id="hudImage" src="resources/hud.png"/>
+			<div id="playerHealth" class="hudElement">Health: ???</div>
+			<div id="playerResources" class="hudElement">Resources: ???</div>
+			<div id="numEnemies" class="hudElement">Enemies: ???</div>
+		</div>
+			
 	</div>
 	<div id="startMenu" class="menuPage" style="display: block;">
 		<h1>Space Fighter</h1>
