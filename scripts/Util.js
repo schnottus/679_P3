@@ -11,3 +11,23 @@ function d2r( deg )
 {
 	return(deg * (Math.PI / 180));
 }
+
+function dotProduct(a,b) {
+	return a.x*b.x + a.y*b.y
+ }
+ 
+ function vectorSubtraction(a, b){
+		var temp = {
+		x : a.x-b.x,
+		y : a.y-b.y
+	}
+	return temp;
+ }
+ 
+  function vectorAddition(a, b){
+		var temp = {
+		x : a.x+b.x,
+		y : a.y+b.y
+	}
+	return temp;
+ }

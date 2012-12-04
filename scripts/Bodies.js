@@ -25,7 +25,7 @@ listener.BeginContact = function (contact) {
     //for now the bullets just announce that they hit something
 
     if (fixtureA.GetUserData() == undefined || fixtureB.GetUserData() == undefined) {
-        console.log("collision includes something that has no ID");
+        //console.log("collision includes something that has no ID");
     }
     else if (fixtureA.GetUserData() == 1) {
         fixtureA.GetBody().userData.sensor[fixtureB.GetBody().userData.ID] = fixtureB.GetBody();
@@ -210,13 +210,9 @@ function makePlayerBody(player) {
 }
 
 //parameters: owner - the b2Body that fired the bullet
-function makeBulletBody(owner, bullet) {
-
-	//var x = owner.getPosX();
-	//var y = owner.getPosY();
+function makeBulletBody(owner, bullet, AI, speed) {
 	var angle = owner.body.GetAngle();
-	var thrustX = Math.cos( angle );
-	var thrustY = Math.sin( angle );
+	var vector = {};
 	
 	var bodyDef = new b2BodyDef; 
     bodyDef.type = b2Body.b2_dynamicBody;  
@@ -228,10 +224,25 @@ function makeBulletBody(owner, bullet) {
     fixDef.shape = new b2CircleShape(0.1);
     fixDef.density = 1.0; 
 	fixDef.userData = 2;
-	fixDef.filter.categoryBits = mask.PLAYER_BULLETS;
-	fixDef.filter.maskBits = mask.PLAYER_TARGETS;
+	
+	if (AI){
+		vector = autoAimVector(owner.body, playerShip.body, speed);
+		//vector.x = playerShip.body.GetPosition().x - owner.body.GetPosition().x;
+		//vector.y = playerShip.body.GetPosition().y - owner.body.GetPosition().y;
+		fixDef.filter.categoryBits = mask.ENEMY_BULLETS;
+		fixDef.filter.maskBits = mask.ENEMY_TARGETS;
+	}
+	else{
+		vector.x = Math.cos(angle) * speed;
+		vector.y = Math.sin(angle) * speed;
+		fixDef.filter.categoryBits = mask.PLAYER_BULLETS;
+		fixDef.filter.maskBits = mask.PLAYER_TARGETS;
+	}
+	
+	vector = vectorAddition(vector, owner.body.GetLinearVelocity());
+	
     body.CreateFixture(fixDef); 
-	body.ApplyImpulse(new b2Vec2(thrustX,thrustY), body.GetWorldCenter());
+	body.ApplyImpulse(new b2Vec2(vector.x*body.GetMass(),vector.y*body.GetMass()), body.GetWorldCenter());
 	body.userData = bullet;
     return body;
 }
@@ -241,6 +252,7 @@ function makeStationBody(station) {
     bodyDef.type = b2Body.b2_staticBody;  //set bodyDef to dynamic since this ship will move, we could do static if it doesn't move, or kinematic if it has a predefined movement
     bodyDef.position.x = 10;  //add a starting position to the body
     bodyDef.position.y = 10;
+	bodyDef.angle =  d2r(-45);
 	//bodyDef.fixedRotation = true;  //body can collide but no rotation is imparted upon it
     var body = world.CreateBody(bodyDef);  //add this b2Body to the world and save a reference to it in playerShip
     var fixDef = new b2FixtureDef; //create a fixture (something to collide with)
@@ -249,6 +261,10 @@ function makeStationBody(station) {
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
 	fixDef.userData = 5;
+    body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
+	fixDef.shape = fixDef.shape = new b2PolygonShape;
+	fixDef.shape.SetAsBox(6, .75);
+	fixDef.userData = 6;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	body.userData = station;
     return body;

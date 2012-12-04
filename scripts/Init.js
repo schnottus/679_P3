@@ -106,13 +106,12 @@ function init2() {
 	var rightInterval;
 	var forwardInterval;
 	var reverseInterval;
-	var shootInterval;
 	var intervalSpeed = 50;  //milliseconds between each call
 	var firstWKey = true;
 	var firstAKey = true;
 	var firstSKey = true;
 	var firstDKey = true;
-	var firstShotPress = true;
+	//var firstShotPress = true;
 	
 	//Add event listeners for our controls
 	document.addEventListener("keydown", function(e) {
@@ -167,13 +166,13 @@ function init2() {
 			break;
 			case 32: //space bar
 				//fire (used temporarily - change to mouse?)
-				if(firstShotPress)
+				if(canShoot)
 				{
-					shootInterval = setInterval('playerShoot(1)', 100);  //100ms between bullets
+					canShoot = false;
+					shootDisabler = false;
+					playerShoot(1);
+					shootInterval = setInterval('playerShoot(1)', 500);  //100ms between bullets
 				} 
-				firstShotPress = false;
-				
-				
 				
 				//asteroidList.empty();
 				
@@ -215,13 +214,12 @@ function init2() {
 				dampPlayerRotation = true;
 				break;
 			case 32: //space bar
-				clearInterval(shootInterval);
-				firstShotPress = true;
+				shootDisabler = true;
+				//firstShotPress = true;
 				//if(!(player.firstShotFired))
 				
 					//alert(playerShip.firstShotFired);
-					bulletList.add(makeBullet( playerShip, 0, 10, 10));
-					playerShip.firstShotFired = false;
+					//playerShip.firstShotFired = false;
 				
 				break;
 			default:

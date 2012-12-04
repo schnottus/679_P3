@@ -156,6 +156,7 @@ function makeAsteroid(x, y) {
     asteroid = Object.create(Asteroid);
 	asteroid.body = makeAsteroidBody(x, y, asteroid);
 	makeAsteroidMesh(asteroid);
+	asteroid.updateMesh();
     asteroid.currentHP = asteroid.maxHP;
 	asteroid.ID = Namer.NewAsteroidID();
     return asteroid;
@@ -166,6 +167,7 @@ function makeCrystal(x, y) {
     crystal = Object.create(Crystal);
 	crystal.body = makeCrystalBody(x, y, crystal);
 	makeCrystalMesh(crystal);
+	crystal.updateMesh();
 	crystal.ID = Namer.NewCrystalID();
     return crystal;
 }
@@ -202,6 +204,7 @@ function makeEnemy(type, x, y) {
 			//enemy.mesh = new THREE.Mesh( new THREE.SphereGeometry( 20 / 19, 200, 200 ), material );
             scene.add(enemy.mesh);
     }
+	enemy.updateMesh();
 	enemy.currentHP = enemy.maxHP;
 	enemy.ID = Namer.NewEnemyID();
     return enemy
@@ -216,24 +219,25 @@ function makePlayer() {
 // 		}));
 	makePlayerMesh(player);
     scene.add(player.mesh);
+	player.updateMesh();
 	player.ID = Namer.NewPlayerID();
     return player;
 }
 
 //owner (b2Body who fired it), t = the type of bullet
-function makeBullet( owner, t )
+function makeBullet( owner, AI, speed )
 {
 
 	var bullet;
 	bullet = Object.create(Bullet);
 	bullet.owner = owner;
-	bullet.type = t;
 	bullet.start = Date.now(); 
-	bullet.body = makeBulletBody(owner, bullet); 
+	bullet.body = makeBulletBody(owner, bullet, AI, speed); 
 	bullet.mesh = new THREE.Mesh(new THREE.SphereGeometry(.1,6,6), new THREE.MeshLambertMaterial({
             color: 0xff88ff
 		}));  //change to sprite?
 	scene.add(bullet.mesh);
+	bullet.updateMesh();
 	bullet.ID = Namer.NewBulletID();
 	return bullet;
 }
@@ -247,6 +251,7 @@ function makeStation() {
 // 		}));
 	makeStationMesh(station);
     scene.add(station.mesh);
+	station.updateMesh();
 	station.ID = Namer.NewStationID();
     return station;
 }

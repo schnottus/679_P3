@@ -9,8 +9,8 @@ function animate()
 {
 	stats.begin();
 	requestAnimationFrame( animate ); //I've read it should be placed immediately before render(), not sure why though
-	update(); //update game state
 	render(); //draw game
+	update(); //update game state
 	stats.end();
 }
 

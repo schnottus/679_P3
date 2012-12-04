@@ -62,3 +62,6 @@
 	var playerThrustForce = 1.3; //a mulitiplier on forward thrust
 	var dampPlayerRotation = true;
 	var playerRotationDampValue = 0.88;  //between 0 and 1, larger == less dampening
+	var canShoot = true;
+	var shootInterval;
+	var shootDisabler = false;

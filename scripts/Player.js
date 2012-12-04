@@ -36,6 +36,12 @@ function thrustPlayer(d, a)
 //param: type - type of bullet
 function playerShoot( type )
 {
-	bulletList.add(makeBullet( playerShip, 0, 10, 10));
-	playerShip.firstShotFired = true;
+	if(shootDisabler){
+		clearInterval(shootInterval);
+		canShoot = true;
+	}
+	else{
+		bulletList.add(makeBullet( playerShip, 0, 32));   
+		bulletList.add(makeBullet( enemyList.head.stored, 1, 32));
+	}
 }
