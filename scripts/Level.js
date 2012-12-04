@@ -100,7 +100,7 @@ function level1()
                          Math.random(),
                          100.0 );
     sprite2.position.set(300,
-                         500,
+                         100,
                          350.0 );
     
         
