@@ -2,16 +2,14 @@ Important things todo:
 
 AI - Joey
 
-fix resource collection - 
-	Collecting resources (crystals) when you collide with them in the game does not seem to add them to the player at this point.  
-	The crystal count has been added to the hud and tested to work so you will be able to see if collection is working.
-
 list destroyer (finished - needs testing) - Scott
 create menu to load new level - Scott
 
-Add warp gate model with sensor to call function for next level -
+Add warp gate model with sensor to call function for next level -Joey (I should get this done later this morning)
 
-home station sensor that opens purchase menu -
+Body accuracy(enemy bodies and the warp gate sensor need to be updated to match their models, which may require making enemy.runAI() do nothing for a bit so you can tweek the enemy objects without them trying to run away from you)-
+
+home station sensor that opens purchase menu (there is a check for if you are on the sensor, just needs a global boolean value added to it and needs to be tied into pause code I think?)-
 
 purchase menu with things to buy (guns, upgrades, etc) - 
 	Strafe upgrade is done - to enable/disable you set playerShip.strafeEnabled to true or false
@@ -28,7 +26,8 @@ Add max speed to player ship -
 	see comment in updatePlayer function in game.js, use playerShip.maxSpeed property
 
 Add player death when health reaches 0 - 
-	see comment inm updatePlayer function in game.js
+	see comment in updatePlayer function in game.js
+	(already checked for in prototyping, just need to write a 	playerDeath() function that is called when player dies, 	the call is commented out for now but is in the Player 	object in prototyping.js)
 
 create radar/mini map - 
 
@@ -36,4 +35,6 @@ Make asteroid resources more random (some drop no resources, some more) -
 
 shaders and fancy stuff (flashing lights for explosions, etc) -
 
-soft boundary (remove hard walls and gently push items back into game area) - 
+soft boundary (remove hard walls and gently push items back into game area) -
+
+particle effects - Dongyoung

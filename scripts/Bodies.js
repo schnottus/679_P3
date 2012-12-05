@@ -46,11 +46,11 @@ listener.BeginContact = function (contact) {
         fixtureB.GetBody().userData.damage(1);
     }
     else if ((fixtureA.GetUserData() == 3 && fixtureB.GetUserData() == 4)) {
-        fixtureB.GetBody().GetUserData.crystals++;
+        fixtureB.GetBody().userData.crystals++;
         destroyList.push(fixtureA.GetBody().userData);
     }
     else if (fixtureA.GetUserData() == 4 && fixtureB.GetUserData() == 3) {
-        fixtureA.GetBody().GetUserData.crystals++;
+        fixtureA.GetBody().userData.crystals++;
         destroyList.push(fixtureB.GetBody().userData);
     }
     else if (fixtureA.GetUserData() == 6 || fixtureB.GetUserData() == 6) {

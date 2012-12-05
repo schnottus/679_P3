@@ -147,6 +147,7 @@ extend(Player, { 	currentHP: 10,
 				});
 Player.maxHP = 10;
 Player.destroy = function () {
+    //playerDeath();
     console.log("player was destroyed");
 }
 
