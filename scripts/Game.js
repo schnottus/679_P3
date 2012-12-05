@@ -31,6 +31,7 @@ function update()
 	updateBullets();
 	//enforce rotation and velocity limits, check health
 	updatePlayer();
+	updateEnemies();
 }
 
 //gl render scene
@@ -82,8 +83,8 @@ function updateWorld()
 		temp.stored.updateMesh();
 		temp = temp.next;
 	}
-	
-	temp = enemyList.head;
+
+    temp = enemyList.head;
 	while(temp != null){
 		temp.stored.updateMesh();
 		//temp.stored.material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
@@ -172,7 +173,15 @@ function updateBullets()
 	//check for collisions (apply damage if collided and then delete)
 	
 	*/
-	
+
+}
+
+function updateEnemies() {
+    temp = enemyList.head;
+    while (temp != null) {
+        temp.stored.runAI();
+        temp = temp.next;
+    }
 }
 
 //check here if game won and other important events

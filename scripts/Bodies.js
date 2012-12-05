@@ -5,11 +5,12 @@ var mask = {
     STATION :           0x0008,
     PLAYER_BULLETS :    0x0010,
     ENEMY_BULLETS :     0x0020,
+    ENEMY_SENSOR:       0x0040,
 
     NON_BULLETS :       0x000f,
     ENEMY_TARGETS :     0x001a,
     PLAYER_TARGETS :    0x002d,
-    ALL :      		    0x003f
+    ALL :      		    0x007f
 };  
 
 var listener = new Box2D.Dynamics.b2ContactListener;
@@ -28,10 +29,12 @@ listener.BeginContact = function (contact) {
         //console.log("collision includes something that has no ID");
     }
     else if (fixtureA.GetUserData() == 1) {
-        fixtureA.GetBody().userData.sensor[fixtureB.GetBody().userData.ID] = fixtureB.GetBody();
+        fixtureA.GetBody().userData.sensorList.add(fixtureB.GetBody());
+        fixtureA.GetBody().userData.sensorDir[fixtureB.GetBody().userData.ID] = fixtureA.GetBody().userData.sensorList.end;
     }
     else if (fixtureB.GetUserData() == 1) {
-        fixtureB.GetBody().userData.sensor[fixtureA.GetBody().userData.ID] = fixtureA.GetBody();
+        fixtureB.GetBody().userData.sensorList.add(fixtureA.GetBody());
+        fixtureB.GetBody().userData.sensorDir[fixtureA.GetBody().userData.ID] = fixtureB.GetBody().userData.sensorList.end;
     }
     else if (fixtureA.GetUserData() == 2) {
         fixtureA.GetBody().userData.damage(1);
@@ -50,13 +53,23 @@ listener.BeginContact = function (contact) {
         destroyList.push(fixtureB.GetBody().userData);
     }
 }
-listener.EndContact = function(contact) {
-	if( contact.GetFixtureA().GetUserData() == 1){
-		delete contact.GetFixtureA().GetBody().userData.sensor[(contact.GetFixtureB().GetBody().userData.ID)];
-	}
-	if(contact.GetFixtureB().GetUserData() == 1){
-		delete contact.GetFixtureB().GetBody().userData.sensor[(contact.GetFixtureA().GetBody().userData.ID)];
-	}
+listener.EndContact = function (contact) {
+
+    if (contact.GetFixtureA().GetUserData() == 1) {
+        var temp = contact.GetFixtureA().GetBody().userData;
+        var dir = temp.sensorDir;
+        var key = contact.GetFixtureB().GetBody().userData.ID;
+        temp.sensorList.remove(dir[key]);
+        delete dir[key];
+    }
+    if (contact.GetFixtureB().GetUserData() == 1) {
+        var temp = contact.GetFixtureB().GetBody().userData;
+        var dir = temp.sensorDir;
+        var key = contact.GetFixtureA().GetBody().userData.ID;
+        temp.sensorList.remove(dir[key]);
+        delete dir[key];
+    }
+
 }
 listener.PostSolve = function(contact, impulse) {
 	
@@ -130,6 +143,8 @@ function makeSoldierBody(x, y, soldier) {
     fixDef.shape = new b2CircleShape(2);
     fixDef.isSensor = true;
     fixDef.userData = 1;
+    fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
+    fixDef.filter.maskBits = mask.NON_BULLETS;
     body.CreateFixture(fixDef);
     body.userData = soldier;
     return body;
@@ -156,6 +171,8 @@ function makeScoutBody(x, y, scout) {
     var fixDef = new b2FixtureDef;
     fixDef.shape = new b2CircleShape(2);
     fixDef.isSensor = true;
+    fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
+    fixDef.filter.maskBits = mask.NON_BULLETS;
     fixDef.userData = 1;
     body.CreateFixture(fixDef);
     body.userData = scout;
@@ -183,6 +200,8 @@ function makeTankBody(x, y, tank) {
     var fixDef = new b2FixtureDef;
 	fixDef.shape = new b2CircleShape(2);
 	fixDef.isSensor = true;
+	fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
+	fixDef.filter.maskBits = mask.NON_BULLETS;
 	fixDef.userData = 1;
     body.CreateFixture(fixDef);
 	body.userData = tank;

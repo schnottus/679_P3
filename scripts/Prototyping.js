@@ -92,7 +92,27 @@ Crystal.destroy = function (){
 
 //Enemy mold (inherits Entity)
 var Enemy = Object.create(Entity);
-extend(Enemy, {});
+extend(Enemy, { speed : null,
+				sensorDir : null,
+                sensorList : null,
+                runAI: function(){
+                    var myPosition = this.getPosition();
+                    var temp = this.sensorList.head;
+					var sumVec = { x: 0, y : 0};
+                    while(temp != null){
+						var tempVec = temp.stored.GetPosition();
+						tempVec = vectorSubtraction(myPosition, tempVec);
+						weightVector(tempVec);
+						vectorAdditionAssignment(sumVec, tempVec);
+						temp = temp.next;
+                    }
+					normalizeVector(sumVec);
+					sumVec.x *= this.speed;
+					sumVec.y *= this.speed;
+					console.log(sumVec.x + " " + sumVec.y);
+					this.body.ApplyImpulse(new b2Vec2(sumVec.x,sumVec.y), this.body.GetWorldCenter());
+                }
+});
 Enemy.destroy = function () {
     scene.remove(this.mesh);
     world.DestroyBody(this.body);
@@ -100,23 +120,24 @@ Enemy.destroy = function () {
 }
 
 var Soldier = Object.create(Enemy); //tank is an example enemy type
-extend(Enemy, { sensor: {} });
-Soldier.maxHP = 10; 
+extend(Enemy, {});
+Soldier.maxHP = 10;
+Soldier.speed = 1; 
 
 var Scout = Object.create(Enemy); //tank is an example enemy type
-extend(Enemy, { sensor: {} });
+extend(Enemy, {});
 Scout.maxHP = 5; 
+Scout.speed = 0; 
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
-extend(Enemy, { sensor: {} });
-Tank.maxHP = 15; 
+extend(Enemy, {});
+Tank.speed = 0; 
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
 extend(Player, { 	HP: 10, 
 					crystals : 0,
-					firstShotFired: false
 				});
 Player.maxHP = 10;
 Player.destroy = function () {
@@ -174,16 +195,16 @@ function makeCrystal(x, y) {
 
 function makeEnemy(type, x, y) {
     var enemy;
-	var material = new THREE.ShaderMaterial( {
-		uniforms: { 
-			tExplosion: { type: "t", value: 0, texture: THREE.ImageUtils.loadTexture( 'textures/explosion.png' ) },
-			time: { type: "f", value: 0.0 },
-			weight: { type: "f", value: 10.0 / 19 }
-		},
-		vertexShader: document.getElementById( 'vertexShader' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+	//var material = new THREE.ShaderMaterial( {
+	//	uniforms: { 
+	//		tExplosion: { type: "t", value: 0, texture: THREE.ImageUtils.loadTexture( 'textures/explosion.png' ) },
+	//		time: { type: "f", value: 0.0 },
+	//		weight: { type: "f", value: 10.0 / 19 }
+	//	},
+	//	vertexShader: document.getElementById( 'vertexShader' ).textContent,
+	//	fragmentShader: document.getElementById( 'fragmentShader' ).textContent
 		
-	} );
+	//} );
 	
     switch (type) {
         case 0:
@@ -204,6 +225,8 @@ function makeEnemy(type, x, y) {
 			//enemy.mesh = new THREE.Mesh( new THREE.SphereGeometry( 20 / 19, 200, 200 ), material );
             scene.add(enemy.mesh);
     }
+    enemy.sensorDir = {};
+    enemy.sensorList = newDLL();
 	enemy.updateMesh();
 	enemy.currentHP = enemy.maxHP;
 	enemy.ID = Namer.NewEnemyID();
