@@ -108,8 +108,10 @@ extend(Enemy, { speed : null,
                     var myPosition = this.getPosition();
 					var sumVec = { x: 0, y : 0};
                     var temp = this.sensorList.head;
+					var targetVec;
                     if(temp == null){
                         freeFloating(this, sumVec);
+						targetVec = vectorSubtraction(playerShip.getPosition(), this.getPosition());
                     }
                     else{
                         while(temp != null){
@@ -120,10 +122,29 @@ extend(Enemy, { speed : null,
 						    temp = temp.next;
                         }
                         normalizeVector(sumVec);
+						sumVec.x *= this.speed/100;
+						sumVec.y *= this.speed/100;
+						targetVec = sumVec;
+						temp = 1;						
                     }
-					sumVec.x *= this.speed;
-					sumVec.y *= this.speed;
-					this.body.ApplyImpulse(new b2Vec2(sumVec.x,sumVec.y), this.body.GetWorldCenter());
+					var desiredAngle = (Math.atan2(targetVec.y, targetVec.x));
+					var nextAngle = this.body.GetAngle() + this.body.GetAngularVelocity() / 10.0;
+					var totalRotation = (desiredAngle - nextAngle);
+					while ( totalRotation < -Math.PI ) totalRotation += 2*Math.PI;
+					while ( totalRotation >  Math.PI ) totalRotation -= 2*Math.PI;
+					var desiredAngularVelocity = totalRotation * 10.0;
+					var torque = this.body.GetInertia() * desiredAngularVelocity / (1/10.0);
+					this.body.ApplyTorque( torque );
+					
+					if (temp == null){
+						this.body.ApplyImpulse(new b2Vec2(sumVec.x,sumVec.y), this.body.GetPosition());
+					}
+					else{
+						var currentAngle = this.body.GetAngle();
+						var thrustX = Math.cos( currentAngle );
+						var thrustY = Math.sin( currentAngle );
+						this.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), this.body.GetPosition());
+					}
                 }
 });
 Enemy.clean = function () {
