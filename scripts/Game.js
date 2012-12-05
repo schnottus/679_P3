@@ -32,6 +32,14 @@ function update()
 	//enforce rotation and velocity limits, check health
 	updatePlayer();
 	updateEnemies();
+	
+	//only update hud every 10th frame (dom manipulation is expensive)
+	if( hudFrames >= 10)
+	{
+		hudFrames = 0;
+		updateHUD();
+	}
+	hudFrames++;
 }
 
 //gl render scene
@@ -129,9 +137,15 @@ function updatePlayer()
 	
 	//limit linear velocity
 		//todo
+		//if playerShip velocity > maxVelocity
+			//velocity = maxVelocity
 		
 	//check health
 		//todo
+		//if 0
+			//kill player (death animation?, notification?)
+			//reset position to home base
+			//reset health
 		
 	
 		
@@ -143,7 +157,7 @@ function updateBullets()
 	var temp = bulletList.head;
     while(temp != null){
 		temp.stored.updateMesh();
-		if( ((Date.now() - temp.stored.start) / 1000 ) > 1 )  //after 4 seconds alive 
+		if( ((Date.now() - temp.stored.start) / 1000 ) > 1 )  //after 1 seconds alive 
 		{
 			temp.stored.destroy();
 		}
@@ -182,6 +196,18 @@ function updateEnemies() {
         temp.stored.runAI();
         temp = temp.next;
     }
+}
+
+function updateHUD()
+{
+	var health = document.getElementById("playerHealth");
+	health.innerHTML = "Health: " + playerShip.currentHP;
+	
+	var health = document.getElementById("playerResources");
+	health.innerHTML = "Resources: " + playerShip.crystals;
+	
+	var health = document.getElementById("numWorld");
+	health.innerHTML = "World: " + currentWorld;
 }
 
 //check here if game won and other important events

@@ -14,23 +14,36 @@ function rotatePlayer(d, a)
 	}	
 }
 
-//apply thrust amount a in direction d (1 for forward, 0 for reverse)
+//apply thrust amount a in direction d (0 for reverse, 1 for forward, 2 for left, 3 for right)
 function thrustPlayer(d, a)
 {
 	var angle = playerShip.body.GetAngle();
+	//calculate forward coordinate for foward/reverse(forward is positive)
 	var thrustX = Math.cos( angle ) * a;
 	var thrustY = Math.sin( angle ) * a;
-
-	if(d == 1)  //thrust forward
+	//calculate coordinate for strafe thrust (right is positive)
+	angle += d2r(90);
+	var strafeX = Math.cos( angle ) * a;
+	var strafeY = Math.sin( angle ) * a;
+	
+	switch(d)
 	{
-		playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
-	}else if(d == 0)  //thrust backward
-	{
-		playerShip.body.ApplyImpulse(new b2Vec2(-thrustX,-thrustY), playerShip.body.GetWorldCenter());
-	}else
-	{
-		//throw error
+		case 0:	//reverse thrust
+			playerShip.body.ApplyImpulse(new b2Vec2(-thrustX,-thrustY), playerShip.body.GetWorldCenter());
+		break;
+		case 1:	//forward thrust
+			playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
+		break;
+		case 2:	//left thrust
+			playerShip.body.ApplyImpulse(new b2Vec2(-strafeX,-strafeY), playerShip.body.GetWorldCenter());
+		break;
+		case 3:	//right thrust
+			playerShip.body.ApplyImpulse(new b2Vec2(strafeX,strafeY), playerShip.body.GetWorldCenter());
+		break;
+		default:
+		alert("Invalid parameter in thrustPlayer(a, d)");
 	}
+	
 }
 
 //param: type - type of bullet

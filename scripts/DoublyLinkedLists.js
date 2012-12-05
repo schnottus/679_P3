@@ -42,11 +42,16 @@ var DLL = {
 		}
 	}, 
 	empty : function (){
-		/*while(this.head != null)
+		if(this.head != null) //if not already empty
 		{
+			while(this.head.next != null)
+			{
+				this.head.next.stored.destroy(); //all our objects in lists remove their node when destroyed
+			}
 			this.head.stored.destroy();
-			this.remove(this.head);
-		}*/                                                                                                                       
+			this.head = null;
+			this.end = null;
+		}
 	}
 }
 function newDLL() {

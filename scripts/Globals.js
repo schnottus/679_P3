@@ -33,6 +33,12 @@
 	var crystalList = newDLL();
 	var destroyList = new Array();
 	var homeStation;
+	
+	//level boundaries (delete when soft boundaries are done)
+	var leftWall;
+	var rightWall;
+	var topWall;
+	var bottomWall;
 
 //three.js vars
 	var scene = new THREE.Scene();
@@ -59,6 +65,7 @@
 	var MAX_PLAYER_ROTATION_VELOCITY = 6;  //in radians per second
 	var playerRotateForce = 50;  //force applied when rotating, larger = faster turning
 	var playerThrustForce = 1.3; //a mulitiplier on forward thrust
+	var playerStrafeForce = 1.3; //a multiplier on side thrust
 	var dampPlayerRotation = true;
 	var playerRotationDampValue = 0.88;  //between 0 and 1, larger == less dampening
 	var canShoot = true;
@@ -67,3 +74,5 @@
 	
 //game state
 	var gamePaused = false;
+	var hudFrames = 0;  //frames since last hud update
+	var currentWorld = 1;  //which level the player is in

@@ -43,8 +43,8 @@ function init() {
 
 function init2() {
 	
-    
-	loadLevel(1);
+    playerShip = makePlayer();
+	loadLevel(currentWorld);
 	
 	
 /***Three.js Setup***/
@@ -54,7 +54,7 @@ function init2() {
 	
 	// get the DOM element to attach to
 	container = document.getElementById('container');
-	// start the renderer
+	// start the renderera
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	// attach the render-supplied DOM element
@@ -106,11 +106,15 @@ function init2() {
 	var rightInterval;
 	var forwardInterval;
 	var reverseInterval;
+	var strafeLInterval;
+	var strafeRInterval;
 	var intervalSpeed = 50;  //milliseconds between each call
 	var firstWKey = true;
 	var firstAKey = true;
 	var firstSKey = true;
 	var firstDKey = true;
+	var firstQKey = true;
+	var firstEKey = true;
 	//var firstShotPress = true;
 	
 	//Add event listeners for our controls
@@ -152,6 +156,35 @@ function init2() {
 				firstDKey = false;
 				dampPlayerRotation = false;
 				break;
+			case 81: //q
+				//strafe left
+				if(firstQKey && playerShip.strafeEnabled)
+				{
+					strafeLInterval = setInterval('thrustPlayer(2, playerStrafeForce)', intervalSpeed);
+				}
+				firstQKey = false;
+				break;
+			case 69: //e
+				//strafe right
+				if(firstEKey && playerShip.strafeEnabled)
+				{
+					strafeRInterval = setInterval('thrustPlayer(3, playerStrafeForce)', intervalSpeed);
+				}
+				firstEKey = false;
+				break;
+			case 49: //1
+				//temporarily used to switch levels
+				destroyLevel();
+				loadLevel(1);
+				break;
+			case 50: //2
+				destroyLevel();
+				loadLevel(2);
+				break;
+			case 51: //3
+				destroyLevel();
+				loadLevel(3);
+				break;
 			case 40: //down arrow
 				var angle = playerShip.body.GetAngle();
 				var thrustX = Math.cos( angle ); 
@@ -173,8 +206,6 @@ function init2() {
 					playerShoot(1);
 					shootInterval = setInterval('playerShoot(1)', 200);  //100ms between bullets
 				} 
-				
-				//asteroidList.empty();
 				
 				break;
 			case 84: //t
@@ -212,6 +243,16 @@ function init2() {
 				clearInterval(rightInterval);
 				firstDKey = true;
 				dampPlayerRotation = true;
+				break;
+			case 81: //q
+				//end strafe left
+				clearInterval(strafeLInterval);
+				firstQKey = true;
+				break;
+			case 69: //e
+				//end strafe right
+				clearInterval(strafeRInterval);
+				firstEKey = true;
 				break;
 			case 32: //space bar
 				shootDisabler = true;

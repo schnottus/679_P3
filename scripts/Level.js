@@ -4,21 +4,29 @@
 * Date: 9 Nov 2012
 *******************/
 
+
+
 //all level setters, getters, creation, etc
 function loadLevel( level )
 {
-
+	
+	//update current level var
+	currentWorld = level;
+	
+	//load new level
 	switch(level)
 		{
 			case 1: 
 				level1();
 				break;
 			case 2: 
-
 				level2();
 				break;
-			
+			case 3:
+				level3();
+				break;
 			default:
+			alert("Invalid level number - defaulted to 1");
 			level1();
 		}
 }
@@ -40,14 +48,18 @@ function level1()
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(width, 0.1);
 	bodyDef.position.Set(0, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //top wall
+	topWall = world.CreateBody(bodyDef);
+	topWall.CreateFixture(fixDef); //top wall
 	bodyDef.position.Set(0, height);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //bottom wall
+	bottomWall = world.CreateBody(bodyDef);
+	bottomWall.CreateFixture(fixDef); //bottom wall
 	fixDef.shape.SetAsBox(0.1, height);
 	bodyDef.position.Set(0, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //left wall
+	leftWall = world.CreateBody(bodyDef);
+	leftWall.CreateFixture(fixDef); //left wall
 	bodyDef.position.Set(width, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //right
+	rightWall = world.CreateBody(bodyDef);
+	rightWall.CreateFixture(fixDef); //right
 
 	//debug draw div is 600x400, set draw scale using width
 	
@@ -61,7 +73,6 @@ function level1()
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
 	
-	playerShip = makePlayer();
 	homeStation = makeStation(10, height / 2);
 
 	enemyList.add(makeEnemy(0, 13, 14));
@@ -116,8 +127,8 @@ function level1()
 
 function level2()
 {
-	var width = 60;
-	var height = 40;
+	var width = 120;
+	var height = 80;
 
 	//create a hard boundary so that objects don't escape the screen
 
@@ -130,14 +141,18 @@ function level2()
 	fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(width, 0.1);
 	bodyDef.position.Set(0, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //top wall
+	topWall = world.CreateBody(bodyDef);
+	topWall.CreateFixture(fixDef); //top wall
 	bodyDef.position.Set(0, height);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //bottom wall
+	bottomWall = world.CreateBody(bodyDef);
+	bottomWall.CreateFixture(fixDef); //bottom wall
 	fixDef.shape.SetAsBox(0.1, height);
 	bodyDef.position.Set(0, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //left wall
+	leftWall = world.CreateBody(bodyDef);
+	leftWall.CreateFixture(fixDef); //left wall
 	bodyDef.position.Set(width, 0);
-	world.CreateBody(bodyDef).CreateFixture(fixDef); //right
+	rightWall = world.CreateBody(bodyDef);
+	rightWall.CreateFixture(fixDef); //right
 
 	//debug draw div is 600x400, set draw scale using width
 	
@@ -151,7 +166,6 @@ function level2()
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
 	
-	playerShip = makePlayer();
 	homeStation = makeStation(10, height / 2);
 
     enemyList.add(makeEnemy(0, 7, 7));
@@ -171,4 +185,77 @@ function level2()
 	floor.position.z = 500.0;
 	floor.doubleSided = true;
 	scene.add(floor);
+}
+ 
+function level3() 
+{
+	var width = 150;
+	var height = 100;
+
+	//create a hard boundary so that objects don't escape the screen
+
+	var fixDef = new b2FixtureDef;
+	fixDef.density = 1.0;
+	fixDef.friction = 0.5;
+	fixDef.restitution = 0.3;
+	var bodyDef = new b2BodyDef;
+	bodyDef.type = b2Body.b2_staticBody;  //staticBody (never moves)
+	fixDef.shape = new b2PolygonShape;
+	fixDef.shape.SetAsBox(width, 0.1);
+	bodyDef.position.Set(0, 0);
+	topWall = world.CreateBody(bodyDef);
+	topWall.CreateFixture(fixDef); //top wall
+	bodyDef.position.Set(0, height);
+	bottomWall = world.CreateBody(bodyDef);
+	bottomWall.CreateFixture(fixDef); //bottom wall
+	fixDef.shape.SetAsBox(0.1, height);
+	bodyDef.position.Set(0, 0);
+	leftWall = world.CreateBody(bodyDef);
+	leftWall.CreateFixture(fixDef); //left wall
+	bodyDef.position.Set(width, 0);
+	rightWall = world.CreateBody(bodyDef);
+	rightWall.CreateFixture(fixDef); //right
+
+	//debug draw div is 600x400, set draw scale using width
+	
+	//setup debug draw
+	var debugDraw = new b2DebugDraw();
+		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
+		//debug draw div is 600x400, calculate draw scale and fill to width
+		debugDraw.SetDrawScale(600.0 / width);  //smaller scale "zooms out"
+		debugDraw.SetFillAlpha(0.5);
+		debugDraw.SetLineThickness(1.0);
+		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+	world.SetDebugDraw(debugDraw);
+	
+	homeStation = makeStation(10, height / 2);
+
+    enemyList.add(makeEnemy(0, 7, 7));
+	
+	//add asteroids
+	for(var i = 0; i < 60; ++i) 
+	{
+	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
+	}
+	
+	
+}
+
+function destroyLevel()
+{
+	//delete current level
+	asteroidList.empty();    
+	enemyList.empty();
+	crystalList.empty();
+	bulletList.empty();
+	homeStation.destroy();
+	//empty destroy list?
+	//delete warp gate
+	//delete background sprites
+	
+	//empty box2d world of bodies (remaining hard boundaries)
+	world.DestroyBody(leftWall);
+	world.DestroyBody(rightWall);
+	world.DestroyBody(topWall);
+	world.DestroyBody(bottomWall);
 }

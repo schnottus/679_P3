@@ -1,16 +1,39 @@
 Important things todo:
 
-Keybindings - Dongyoung (shooting is fixed, still need to set ship max speed)
-HealthPoints/damage - Dongyoung (Joey got health working for everthing)
-UI -scott, levels, warpgate, pausing
-AI, list destroyer -Joey
+AI - Joey
 
+fix resource collection - 
+	Collecting resources (crystals) when you collide with them in the game does not seem to add them to the player at this point.  
+	The crystal count has been added to the hud and tested to work so you will be able to see if collection is working.
 
+list destroyer (finished - needs testing) - Scott
+create menu to load new level - Scott
 
-Station/portal stuff
-Pause state and buying stuff(station needs a sensor for this)
-	- things to buy (guns, upgrades, etc)
+Add warp gate model with sensor to call function for next level -
 
-Background stuff - Mik
+home station sensor that opens purchase menu -
 
-shaders and fancy stuff (flashing lights for explosions, etc)
+purchase menu with things to buy (guns, upgrades, etc) - 
+	Strafe upgrade is done - to enable/disable you set playerShip.strafeEnabled to true or false
+
+add upgrades -
+	(maxSpeed increase, health, weapon types, etc)
+	
+Level 1 background - Mik
+Level 2 background -
+Level 3 background -
+Load Screen image - 
+
+Add max speed to player ship -
+	see comment in updatePlayer function in game.js, use playerShip.maxSpeed property
+
+Add player death when health reaches 0 - 
+	see comment inm updatePlayer function in game.js
+
+create radar/mini map - 
+
+Make asteroid resources more random (some drop no resources, some more) - 
+
+shaders and fancy stuff (flashing lights for explosions, etc) -
+
+soft boundary (remove hard walls and gently push items back into game area) - 

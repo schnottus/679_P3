@@ -140,8 +140,10 @@ Tank.speed = 1;
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
-extend(Player, { 	HP: 10, 
-					crystals : 0,
+extend(Player, { 	currentHP: 10, 
+					crystals: 0,
+					maxSpeed: 1,
+					strafeEnabled: true,
 				});
 Player.maxHP = 10;
 Player.destroy = function () {
@@ -161,12 +163,14 @@ Bullet.destroy = function () {
 //Station mold (inherits Entity)
 var Station = Object.create(Entity);
 extend(Station, { });
-//We don't need Destory function for Station
+
 Station.damage = function (amount){
 
 }
 Station.destroy = function () {
     //console.log("Station was destroyed");
+	scene.remove (this.mesh);
+	world.DestroyBody(this.body);
 }
 
 //--------------------------------------------------------------------
@@ -251,7 +255,7 @@ function makePlayer() {
     return player;
 }
 
-//owner (b2Body who fired it), t = the type of bullet
+//params: owner (b2Body who fired it), AI, speed
 function makeBullet( owner, AI, speed )
 {
 
