@@ -177,7 +177,7 @@ function updateBullets()
 }
 
 function updateEnemies() {
-    temp = enemyList.head;
+    var temp = enemyList.head;
     while (temp != null) {
         temp.stored.runAI();
         temp = temp.next;

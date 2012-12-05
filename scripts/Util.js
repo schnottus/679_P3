@@ -51,5 +51,4 @@ function weightVector(vec){
 	length *= length;
 	vec.x /= length;
 	vec.y /= length;
-	return temp;
 }

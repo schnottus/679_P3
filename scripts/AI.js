@@ -35,3 +35,12 @@ function autoAimVector(shooterBody, shootAtBody, bulletSpeed){
 	relativePosition.y /= t;
 	return relativePosition;
 }
+
+function freeFloating(thing, sumVec) {
+    var vec = thing.body.GetLinearVelocity();
+    var length = Math.sqrt(vec.x * vec.x + vec.y * vec.y);
+    if (length >= thing.speed/thing.body.GetMass()) {
+        sumVec.x = -vec.x / length;
+        sumVec.y = -vec.y / length;
+    }
+}

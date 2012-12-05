@@ -97,16 +97,21 @@ extend(Enemy, { speed : null,
                 sensorList : null,
                 runAI: function(){
                     var myPosition = this.getPosition();
-                    var temp = this.sensorList.head;
 					var sumVec = { x: 0, y : 0};
-                    while(temp != null){
-						var tempVec = temp.stored.GetPosition();
-						tempVec = vectorSubtraction(myPosition, tempVec);
-						weightVector(tempVec);
-						vectorAdditionAssignment(sumVec, tempVec);
-						temp = temp.next;
+                    var temp = this.sensorList.head;
+                    if(temp == null){
+                        freeFloating(this, sumVec);
                     }
-					normalizeVector(sumVec);
+                    else{
+                        while(temp != null){
+						    var tempVec = temp.stored.GetPosition();
+						    tempVec = vectorSubtraction(myPosition, tempVec);
+						    weightVector(tempVec);
+						    vectorAdditionAssignment(sumVec, tempVec);
+						    temp = temp.next;
+                        }
+                        normalizeVector(sumVec);
+                    }
 					sumVec.x *= this.speed;
 					sumVec.y *= this.speed;
 					this.body.ApplyImpulse(new b2Vec2(sumVec.x,sumVec.y), this.body.GetWorldCenter());
@@ -126,12 +131,12 @@ Soldier.speed = 1;
 var Scout = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Scout.maxHP = 5; 
-Scout.speed = 0; 
+Scout.speed = 1; 
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
-Tank.speed = 0; 
+Tank.speed = 1; 
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);

@@ -6,11 +6,12 @@ var mask = {
     PLAYER_BULLETS :    0x0010,
     ENEMY_BULLETS :     0x0020,
     ENEMY_SENSOR:       0x0040,
+    STATION_SENSOR:     0x0080,
 
     NON_BULLETS :       0x000f,
     ENEMY_TARGETS :     0x001a,
     PLAYER_TARGETS :    0x002d,
-    ALL :      		    0x007f
+    ALL :      		    0x00ff
 };  
 
 var listener = new Box2D.Dynamics.b2ContactListener;
@@ -61,6 +62,11 @@ listener.EndContact = function (contact) {
         var temp = contact.GetFixtureA().GetBody().userData;
         var dir = temp.sensorDir;
         var key = contact.GetFixtureB().GetBody().userData.ID;
+
+        //console.log(key);
+        //console.log(dir[key].stored.userData.ID);
+
+
         temp.sensorList.remove(dir[key]);
         delete dir[key];
     }
@@ -68,6 +74,10 @@ listener.EndContact = function (contact) {
         var temp = contact.GetFixtureB().GetBody().userData;
         var dir = temp.sensorDir;
         var key = contact.GetFixtureA().GetBody().userData.ID;
+
+        //console.log(key);
+        //console.log(dir[key].stored.userData.ID);
+
         temp.sensorList.remove(dir[key]);
         delete dir[key];
     }
@@ -142,7 +152,7 @@ function makeSoldierBody(x, y, soldier) {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 
     var fixDef = new b2FixtureDef;
-    fixDef.shape = new b2CircleShape(2);
+    fixDef.shape = new b2CircleShape(4);
     fixDef.isSensor = true;
     fixDef.userData = 1;
     fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
@@ -171,7 +181,7 @@ function makeScoutBody(x, y, scout) {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 
     var fixDef = new b2FixtureDef;
-    fixDef.shape = new b2CircleShape(2);
+    fixDef.shape = new b2CircleShape(4);
     fixDef.isSensor = true;
     fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
     fixDef.filter.maskBits = mask.NON_BULLETS;
@@ -200,7 +210,7 @@ function makeTankBody(x, y, tank) {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	
     var fixDef = new b2FixtureDef;
-	fixDef.shape = new b2CircleShape(2);
+	fixDef.shape = new b2CircleShape(4);
 	fixDef.isSensor = true;
 	fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
 	fixDef.filter.maskBits = mask.NON_BULLETS;
@@ -277,7 +287,7 @@ function makeStationBody(station) {
 	//bodyDef.fixedRotation = true;  //body can collide but no rotation is imparted upon it
     var body = world.CreateBody(bodyDef);  //add this b2Body to the world and save a reference to it in playerShip
     var fixDef = new b2FixtureDef; //create a fixture (something to collide with)
-	fixDef.shape = new b2CircleShape(4); //make that fixture a polygon
+    fixDef.shape = new b2CircleShape(4); //make that fixture a polygon
     fixDef.density = 1.0; //how dense is our player ship
     fixDef.friction = 0.5; //how much friction does its surface have
     fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
@@ -285,6 +295,9 @@ function makeStationBody(station) {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	fixDef.shape = fixDef.shape = new b2PolygonShape;
 	fixDef.shape.SetAsBox(6, .75);
+	fixDef.isSensor = true;
+	fixDef.filter.categoryBits = mask.STATION_SENSOR;
+	fixDef.filter.maskBits = mask.PLAYER_SHIP;
 	fixDef.userData = 6;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	body.userData = station;
