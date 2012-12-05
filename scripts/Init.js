@@ -171,7 +171,7 @@ function init2() {
 					canShoot = false;
 					shootDisabler = false;
 					playerShoot(1);
-					shootInterval = setInterval('playerShoot(1)', 500);  //100ms between bullets
+					shootInterval = setInterval('playerShoot(1)', 200);  //100ms between bullets
 				} 
 				
 				//asteroidList.empty();

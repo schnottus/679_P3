@@ -7,10 +7,14 @@
 //game loop
 function animate() 
 {
+
 	stats.begin();
 	requestAnimationFrame( animate ); //I've read it should be placed immediately before render(), not sure why though
-	render(); //draw game
-	update(); //update game state
+	if(!gamePaused)
+	{
+		render(); //draw game
+		update(); //update game state
+	}
 	stats.end();
 }
 
@@ -193,5 +197,15 @@ function startGame()
 
 function pauseGame()
 {
-	alert("pause attempted");
+	(gamePaused) ? gamePaused = false : gamePaused = true;
+	var alertContainer = document.getElementById("alerts");
+	if(gamePaused)
+	{
+		alerts.innerHTML = 'Game Paused';
+	}else
+	{
+		alerts.innerHTML = ''; 
+		document.getElementById('btnPause').blur(); //remove focus from button so hitting space or enter doesnt pause/unpause game
+	}
+		
 }

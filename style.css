@@ -76,6 +76,16 @@ body  p {
 	margin-left: 25px;
 }
 
+#alerts {
+	position: absolute;
+	top: 40;
+	width: 100%;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 30px;
+	font-weight: bold;
+}
+
 #debugDraw {
 	position:absolute;
 	height:400px;
@@ -98,6 +108,7 @@ body  p {
 	z-index:1;
 }
 
+/*** Start page elements ***/
 div.menuPage {
 	width: 100%;
 	height: 100%;
@@ -117,7 +128,6 @@ div.menuPage h3 {
 	font-family: Arial;
 }
 
-/*** Start menu ***/
 div#startMenu  div.instructions {
 	margin: 10px 60px;
 }

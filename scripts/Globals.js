@@ -20,13 +20,12 @@
 		b2CircleShape = Box2D.Collision.Shapes.b2CircleShape,
 		b2DebugDraw = Box2D.Dynamics.b2DebugDraw,
 		b2MouseJointDef =  Box2D.Dynamics.Joints.b2MouseJointDef;
-	//box2d world (contains all objects and has global properties such as gravity)
+	//box2d world (contains all box2d objects and has global properties such as gravity)
 	var world = new b2World(
-				new b2Vec2(0, 0),    //gravity
+				new b2Vec2(0, 0),    //no gravity
 				true                 //allow sleep
 			);
 	
-	//change when we Joseph inserts prototyping/object managment
 	var playerShip;
 	var asteroidList = newDLL();
 	var enemyList = newDLL();
@@ -65,3 +64,6 @@
 	var canShoot = true;
 	var shootInterval;
 	var shootDisabler = false;
+	
+//game state
+	var gamePaused = false;
