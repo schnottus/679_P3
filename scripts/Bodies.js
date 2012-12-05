@@ -53,6 +53,9 @@ listener.BeginContact = function (contact) {
         fixtureA.GetBody().GetUserData.crystals++;
         destroyList.push(fixtureB.GetBody().userData);
     }
+    else if (fixtureA.GetUserData() == 6 || fixtureB.GetUserData() == 6) {
+        console.log("player is docked");
+    }
 }
 listener.EndContact = function (contact) {
     if (contact.GetFixtureA().GetUserData() == undefined || contact.GetFixtureB().GetUserData() == undefined) {
@@ -80,6 +83,9 @@ listener.EndContact = function (contact) {
 
         temp.sensorList.remove(dir[key]);
         delete dir[key];
+    }
+    else if (contact.GetFixtureA().GetUserData() == 6 || contact.GetFixtureB().GetUserData() == 6) {
+        console.log("player is no longer docked");
     }
 
 }
