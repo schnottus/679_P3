@@ -54,15 +54,17 @@ listener.BeginContact = function (contact) {
     }
 }
 listener.EndContact = function (contact) {
-
-    if (contact.GetFixtureA().GetUserData() == 1) {
+    if (contact.GetFixtureA().GetUserData() == undefined || contact.GetFixtureB().GetUserData() == undefined) {
+        //console.log("collision includes something that has no ID");
+    }
+    else if (contact.GetFixtureA().GetUserData() == 1) {
         var temp = contact.GetFixtureA().GetBody().userData;
         var dir = temp.sensorDir;
         var key = contact.GetFixtureB().GetBody().userData.ID;
         temp.sensorList.remove(dir[key]);
         delete dir[key];
     }
-    if (contact.GetFixtureB().GetUserData() == 1) {
+    else if (contact.GetFixtureB().GetUserData() == 1) {
         var temp = contact.GetFixtureB().GetBody().userData;
         var dir = temp.sensorDir;
         var key = contact.GetFixtureA().GetBody().userData.ID;

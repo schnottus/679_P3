@@ -109,7 +109,6 @@ extend(Enemy, { speed : null,
 					normalizeVector(sumVec);
 					sumVec.x *= this.speed;
 					sumVec.y *= this.speed;
-					console.log(sumVec.x + " " + sumVec.y);
 					this.body.ApplyImpulse(new b2Vec2(sumVec.x,sumVec.y), this.body.GetWorldCenter());
                 }
 });
