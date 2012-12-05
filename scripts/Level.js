@@ -85,44 +85,7 @@ function level1()
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
 	
-	//simple background image (changed to a tileable + less noise backgrd, easier for expansion of plane)
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space2.jpg' ); 
-	floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.wrapS = THREE.RepeatWrapping;
-	floorTexture.repeat.set(5, 5);
-	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture } );
-	var floorGeometry = new THREE.PlaneGeometry(width * 20, height * 20, 1, 1);
-	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-	floor.rotation.x = d2r(90);    
-	floor.position.z = 400.0;
-	floor.doubleSided = true;
-	scene.add(floor);
-	
-	//testing sprites
-	var mapA = THREE.ImageUtils.loadTexture( "resources/blue_nebula.png" );
-	var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
-	
-    var group = new THREE.Object3D();
-
-    var sprite = new THREE.Sprite( { map: mapA, useScreenCoordinates: false} );
-    var sprite2 = new THREE.Sprite( { map: mapB, useScreenCoordinates: false} );
-
-    sprite.position.set( Math.random(),
-                         Math.random(),
-                         100.0 );
-    sprite2.position.set(300,
-                         100,
-                         350.0 );
-    
-        
-    //sprite.position.normalize();
-    //sprite.position.multiplyScalar( 100 );
-
-    group.add( sprite );
-    group.add( sprite2 );
-
-    scene.add( group );
-	
+	background1(width, height);
 }
 
 function level2()
@@ -252,6 +215,7 @@ function destroyLevel()
 	//empty destroy list?
 	//delete warp gate
 	//delete background sprites
+	scene.remove(spriteGroup);
 	
 	//empty box2d world of bodies (remaining hard boundaries)
 	world.DestroyBody(leftWall);
