@@ -9,7 +9,7 @@ Add warp gate model with sensor to call function for next level -Joey (I should 
 
 Body accuracy(enemy bodies and the warp gate sensor need to be updated to match their models, which may require making enemy.runAI() do nothing for a bit so you can tweek the enemy objects without them trying to run away from you)-
 
-home station sensor that opens purchase menu (there is a check for if you are on the sensor, just needs a global boolean value added to it and needs to be tied into pause code I think?)-
+home station sensor that opens purchase menu (there is a check for if you are on the sensor, just needs a global boolean value added to it and needs to be tied into pause code I think?)- Mik
 
 purchase menu with things to buy (guns, upgrades, etc) - 
 	Strafe upgrade is done - to enable/disable you set playerShip.strafeEnabled to true or false
@@ -18,9 +18,9 @@ add upgrades -
 	(maxSpeed increase, health, weapon types, etc)
 	
 Level 1 background - Mik
-Level 2 background -
-Level 3 background -
-Load Screen image - 
+Level 2 background - Mik
+Level 3 background - Mik
+Load Screen image - Mik
 
 Add max speed to player ship -
 	see comment in updatePlayer function in game.js, use playerShip.maxSpeed property
