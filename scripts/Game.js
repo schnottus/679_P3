@@ -40,6 +40,8 @@ function update()
 		updateHUD();
 	}
 	hudFrames++;
+	
+	updateBackground();
 }
 
 //gl render scene

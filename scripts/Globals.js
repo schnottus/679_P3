@@ -77,3 +77,6 @@
 	var gamePaused = false;
 	var hudFrames = 0;  //frames since last hud update
 	var currentWorld = 1;  //which level the player is in
+
+//level background sprites
+    var spriteGroup;
