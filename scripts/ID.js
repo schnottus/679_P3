@@ -47,7 +47,11 @@ var Namer = {
 	NewStationID : function(){
 		return "S";
 	},
-
+	NewWarpGateID : function(){
+		return "W";
+	},
+	
+	
 	reset : function(){
 		this.AsteroidIDCount = 0,
 		this.EnemyIDCount = 0,

@@ -62,28 +62,37 @@ var Entity = {
 		}
 	},
     destroy: function () {
-        console.log("something was destroyed");
-    }
+        this.clean();
+    },
+	clean: function () {
+		console.log("something was removed")
+	}
 };
 
 //Asteroid mold (inherits Entity)
 var Asteroid = Object.create(Entity);   //adds inheritance
-extend(Asteroid, { });            //adds more variables and functions, just like how entity is declared with variables and functions
+extend(Asteroid, 	{ });
 Asteroid.maxHP = 3;
-Asteroid.destroy = function (){
-	scene.remove(this.mesh);
+
+Asteroid.destroy = function(){
 	var position = this.getPosition();
-	var vel = this.body.GetLinearVelocity();
+	var velocity = this.body.GetLinearVelocity();
 	world.DestroyBody(this.body);
 	for(var i = 0; i < 3; ++i){
-		crystalList.add(makeCrystal(position.x, position.y));
+		crystalList.add(makeCrystal(position, velocity));
 	}
+	this.clean();
+}
+
+Asteroid.clean = function (){
+	scene.remove(this.mesh);
+	world.DestroyBody(this.body);
 	asteroidList.remove(this.node);
 }
 
 var Crystal = Object.create(Entity);   //adds inheritance
 extend(Crystal, {});            //adds more variables and functions, just like how entity is declared with variables and functions
-Crystal.destroy = function (){
+Crystal.clean = function (){
 	scene.remove(this.mesh);
 	world.DestroyBody(this.body);
 	Namer.recycledCrystalIDs.push(this.ID);
@@ -117,7 +126,7 @@ extend(Enemy, { speed : null,
 					this.body.ApplyImpulse(new b2Vec2(sumVec.x,sumVec.y), this.body.GetWorldCenter());
                 }
 });
-Enemy.destroy = function () {
+Enemy.clean = function () {
     scene.remove(this.mesh);
     world.DestroyBody(this.body);
     enemyList.remove(this.node);
@@ -136,6 +145,7 @@ Scout.speed = 1;
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
+Tank.maxHP = 15; 
 Tank.speed = 1; 
 
 //Player mold (inherits Entity)
@@ -154,7 +164,7 @@ Player.destroy = function () {
 //Bullet mold (inherits Entity)
 var Bullet = Object.create(Entity);
 extend(Bullet, { owner: null, type: 0, start: null, deleteFlag : 0} );
-Bullet.destroy = function () {
+Bullet.clean = function () {
     scene.remove(this.mesh);
     world.DestroyBody(this.body);
 	Namer.recycledBulletIDs.push(this.ID);
@@ -164,12 +174,21 @@ Bullet.destroy = function () {
 //Station mold (inherits Entity)
 var Station = Object.create(Entity);
 extend(Station, { });
-
 Station.damage = function (amount){
 
 }
-Station.destroy = function () {
+Station.clean = function () {
     //console.log("Station was destroyed");
+	scene.remove (this.mesh);
+	world.DestroyBody(this.body);
+}
+
+var WarpGate = Object.create(Entity);
+extend(WarpGate, { });
+WarpGate.damage = function (amount){
+
+}
+WarpGate.clean = function () {
 	scene.remove (this.mesh);
 	world.DestroyBody(this.body);
 }
@@ -192,10 +211,10 @@ function makeAsteroid(x, y) {
     return asteroid;
 }
 
-function makeCrystal(x, y) {
+function makeCrystal(position, velocity) {
     var crystal;
     crystal = Object.create(Crystal);
-	crystal.body = makeCrystalBody(x, y, crystal);
+	crystal.body = makeCrystalBody(position, velocity, crystal);
 	makeCrystalMesh(crystal);
 	crystal.updateMesh();
 	crystal.ID = Namer.NewCrystalID();
@@ -274,10 +293,10 @@ function makeBullet( owner, AI, speed )
 	return bullet;
 }
 
-function makeStation() {
+function makeStation(x, y) {
     var station;
     station = Object.create(Station);
-    station.body = makeStationBody(station);
+    station.body = makeStationBody(station, x, y);
     // player.mesh = new THREE.Mesh(new THREE.SphereGeometry(.5,10,10), new THREE.MeshLambertMaterial({
 //             color: 0xff8800
 // 		}));
@@ -286,4 +305,15 @@ function makeStation() {
 	station.updateMesh();
 	station.ID = Namer.NewStationID();
     return station;
+}
+
+function makeWarpGate(x, y) {
+    var warpGate;
+    warpGate = Object.create(WarpGate);
+    warpGate.body = makeWarpGateBody(warpGate, x, y);
+	makeWarpGateMesh(warpGate);
+    scene.add(warpGate.mesh);
+	warpGate.updateMesh();
+	warpGate.ID = Namer.NewWarpGateID();
+    return warpGate;
 }

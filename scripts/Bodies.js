@@ -56,6 +56,9 @@ listener.BeginContact = function (contact) {
     else if (fixtureA.GetUserData() == 6 || fixtureB.GetUserData() == 6) {
         console.log("player is docked");
     }
+	else if (fixtureA.GetUserData() == 7 || fixtureB.GetUserData() == 7) {
+        console.log("player is at the gate");
+    }
 }
 listener.EndContact = function (contact) {
     if (contact.GetFixtureA().GetUserData() == undefined || contact.GetFixtureB().GetUserData() == undefined) {
@@ -86,6 +89,9 @@ listener.EndContact = function (contact) {
     }
     else if (contact.GetFixtureA().GetUserData() == 6 || contact.GetFixtureB().GetUserData() == 6) {
         console.log("player is no longer docked");
+    }
+	else if (contact.GetFixtureA().GetUserData() == 7 || contact.GetFixtureB().GetUserData() == 7) {
+        console.log("player is has left the gate");
     }
 
 }
@@ -118,7 +124,9 @@ function makeAsteroidBody(x, y, asteroid) {
     return body;
 }
 
-function makeCrystalBody(x, y, crystal) {
+function makeCrystalBody(position, velocity, crystal) {
+	var x = position.x;
+	var y = position.y;
 	x += Math.random();
 	y += Math.random();
     var bodyDef = new b2BodyDef;
@@ -135,7 +143,8 @@ function makeCrystalBody(x, y, crystal) {
 	fixDef.filter.maskBits = mask.NON_BULLETS;
     body.CreateFixture(fixDef);
 	body.userData = crystal;
-	randomImpulse(body, .5);
+	body.ApplyImpulse(new b2Vec2(velocity.x*body.GetMass(), velocity.y*body.GetMass()), body.GetWorldCenter());
+	randomImpulse(body, .3);
     return body;
 }
 
@@ -284,11 +293,11 @@ function makeBulletBody(owner, bullet, AI, speed) {
     return body;
 }
 
-function makeStationBody(station) {
+function makeStationBody(station, x, y) {
     var bodyDef = new b2BodyDef; //create a body Definition
     bodyDef.type = b2Body.b2_staticBody;  //set bodyDef to dynamic since this ship will move, we could do static if it doesn't move, or kinematic if it has a predefined movement
-    bodyDef.position.x = 10;  //add a starting position to the body
-    bodyDef.position.y = 10;
+    bodyDef.position.x = x;  //add a starting position to the body
+    bodyDef.position.y = y;
 	bodyDef.angle =  d2r(-45);
 	//bodyDef.fixedRotation = true;  //body can collide but no rotation is imparted upon it
     var body = world.CreateBody(bodyDef);  //add this b2Body to the world and save a reference to it in playerShip
@@ -307,6 +316,28 @@ function makeStationBody(station) {
 	fixDef.userData = 6;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	body.userData = station;
+    return body;
+}
+
+function makeWarpGateBody(warpGate, x, y) {
+    var bodyDef = new b2BodyDef; //create a body Definition
+    bodyDef.type = b2Body.b2_staticBody;  //set bodyDef to dynamic since this ship will move, we could do static if it doesn't move, or kinematic if it has a predefined movement
+    bodyDef.position.x = x;  //add a starting position to the body
+    bodyDef.position.y = y;
+	//bodyDef.angle =  d2r(-45);
+	//bodyDef.fixedRotation = true;  //body can collide but no rotation is imparted upon it
+    var body = world.CreateBody(bodyDef);
+    var fixDef = new b2FixtureDef;
+    fixDef.shape = new b2CircleShape(2); //make that fixture a polygon
+    fixDef.density = 1.0; //how dense is our player ship
+    fixDef.friction = 0.5; //how much friction does its surface have
+    fixDef.restitution = 0.3; //how much will it bounce when it hits things (from 0 to 1 -> 0 being no bounce)
+	fixDef.userData = 7;
+	fixDef.isSensor = true;
+	fixDef.filter.categoryBits = mask.STATION_SENSOR;
+	fixDef.filter.maskBits = mask.PLAYER_SHIP;
+    body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
+	body.userData = warpGate;
     return body;
 }
 

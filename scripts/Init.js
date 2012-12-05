@@ -25,6 +25,9 @@ function init() {
 	new THREE.JSONLoader().load('mesh/station.js', function (geometry) {
 		geometries.station = geometry;
 	}, 'mesh/images');
+	new THREE.JSONLoader().load('mesh/portal.js', function (geometry) {
+        geometries.warpGate = geometry;
+    }, 'mesh/images');
 	new THREE.JSONLoader().load('mesh/crystal_purple.js', function (geometry) {
 		geometries.crystal = geometry;
 	}, 'mesh/images');
@@ -293,6 +296,9 @@ function loadingLoop(){
 	        finishedLoading = false;
 	    }
 	    if (geometries.station == null) {
+	        finishedLoading = false;
+	    }
+		if (geometries.warpGate == null) {
 	        finishedLoading = false;
 	    }
 	    if (geometries.crystal == null) {

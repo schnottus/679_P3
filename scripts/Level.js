@@ -74,6 +74,7 @@ function level1()
 	world.SetDebugDraw(debugDraw);
 	
 	homeStation = makeStation(10, height / 2);
+	portal = makeWarpGate(width - 10, height / 2);
 
 	enemyList.add(makeEnemy(0, 13, 14));
 	enemyList.add(makeEnemy(1, 15, 17));

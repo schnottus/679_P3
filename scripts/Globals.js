@@ -33,6 +33,7 @@
 	var crystalList = newDLL();
 	var destroyList = new Array();
 	var homeStation;
+	var portal;
 	
 	//level boundaries (delete when soft boundaries are done)
 	var leftWall;
