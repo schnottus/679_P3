@@ -220,14 +220,6 @@ function init2() {
 				break;
 			default:
 		}
-		//for exiting purchase menu
-		if(playerDocked){
-		    if(e.keyCode == 13){
-		        gamePaused = false;
-		        playerDocked = false;
-		        purchaseMenu();
-		    }
-		}
 				
     }, true);
 	
@@ -278,6 +270,8 @@ function init2() {
 			default:
 		}
     }, true);
+    
+    
 	
 // framerate stats
 	stats = new Stats();
