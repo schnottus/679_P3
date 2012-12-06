@@ -36,4 +36,4 @@ Make asteroid resources more random (some drop no resources, some more) -
 
 shaders and fancy stuff (flashing lights for explosions, etc) -
 
-soft boundary (remove hard walls and gently push items back into game area) - 
+soft boundary (remove hard walls and gently push items back into game area) - aw

@@ -127,6 +127,10 @@ function level1()
 
 function level2()
 {
+	
+	playerShip.body.xPos = 10;
+	playerShip.body.yPos = 10;
+	
 	var width = 120;
 	var height = 80;
 
