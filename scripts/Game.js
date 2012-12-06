@@ -40,6 +40,8 @@ function update()
 		updateHUD();
 	}
 	hudFrames++;
+	
+	updateBackground();
 }
 
 //gl render scene
@@ -135,12 +137,13 @@ function updatePlayer()
 		playerShip.body.SetAngularVelocity( playerRotationDampValue * rotationSpeed );
 	}
 	
-	//limit linear velocity
+	//limit linear velocity (-Joey This could be added to the player controls that apply impulses so that impulses never produce velocities greater than max velocity)
 		//todo
 		//if playerShip velocity > maxVelocity
 			//velocity = maxVelocity
 		
-	//check health
+	//check health (-Joey this is already checked in prototyping code, because every entity has a .destroy(),
+    //                it just needs a playerDeath() function to be written and then it is only checked when the player is damaged)
 		//todo
 		//if 0
 			//kill player (death animation?, notification?)
@@ -243,4 +246,14 @@ function pauseGame()
 		document.getElementById('btnPause').blur(); //remove focus from button so hitting space or enter doesnt pause/unpause game
 	}
 		
+}
+
+function purchaseMenu(){
+    var purchaseMenuContainer = document.getElementById("purchaseMenuContainer");
+    if(playerDocked){ 
+        purchaseMenuContainer.style.display="inline";
+    }
+    else{
+        purchaseMenuContainer.style.display="none";
+    }
 }

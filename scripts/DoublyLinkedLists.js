@@ -44,11 +44,12 @@ var DLL = {
 	empty : function (){
 		if(this.head != null) //if not already empty
 		{
-			while(this.head.next != null)
+			var temp = this.head
+			while(temp != null)
 			{
-				this.head.next.stored.destroy(); //all our objects in lists remove their node when destroyed
+				temp.stored.clean(); //all our objects in lists remove their node when destroyed
+				temp = temp.next;
 			}
-			this.head.stored.destroy();
 			this.head = null;
 			this.end = null;
 		}

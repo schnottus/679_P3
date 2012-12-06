@@ -33,6 +33,7 @@
 	var crystalList = newDLL();
 	var destroyList = new Array();
 	var homeStation;
+	var portal;
 	
 	//level boundaries (delete when soft boundaries are done)
 	var leftWall;
@@ -76,3 +77,8 @@
 	var gamePaused = false;
 	var hudFrames = 0;  //frames since last hud update
 	var currentWorld = 1;  //which level the player is in
+	
+	var playerDocked = false; //pause the game and display purchase menu if true
+
+//level background sprites
+    var spriteGroup;

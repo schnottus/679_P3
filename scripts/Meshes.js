@@ -32,3 +32,9 @@ function makeStationMesh(station) {
     station.mesh = new THREE.Mesh(geometries.station, new THREE.MeshFaceMaterial());
 	scene.add(station.mesh);
 }
+
+function makeWarpGateMesh(warpGate) {
+	warpGate.mesh = new THREE.Mesh(geometries.warpGate, new THREE.MeshFaceMaterial());
+	warpGate.mesh.position.z -= 10;
+	scene.add(warpGate.mesh);
+}

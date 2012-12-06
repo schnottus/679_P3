@@ -25,6 +25,9 @@ function init() {
 	new THREE.JSONLoader().load('mesh/station.js', function (geometry) {
 		geometries.station = geometry;
 	}, 'mesh/images');
+	new THREE.JSONLoader().load('mesh/portal.js', function (geometry) {
+        geometries.warpGate = geometry;
+    }, 'mesh/images');
 	new THREE.JSONLoader().load('mesh/crystal_purple.js', function (geometry) {
 		geometries.crystal = geometry;
 	}, 'mesh/images');
@@ -217,6 +220,15 @@ function init2() {
 				break;
 			default:
 		}
+		//for exiting purchase menu
+		if(playerDocked){
+		    if(e.keyCode == 13){
+		        gamePaused = false;
+		        playerDocked = false;
+		        purchaseMenu();
+		    }
+		}
+				
     }, true);
 	
 	document.addEventListener("keyup", function(e) {
@@ -293,6 +305,9 @@ function loadingLoop(){
 	        finishedLoading = false;
 	    }
 	    if (geometries.station == null) {
+	        finishedLoading = false;
+	    }
+		if (geometries.warpGate == null) {
 	        finishedLoading = false;
 	    }
 	    if (geometries.crystal == null) {

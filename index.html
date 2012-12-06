@@ -23,6 +23,7 @@
 	<script src="scripts/Init.js"></script>
 	<script src="scripts/Util.js"></script>
     <script src="scripts/Level.js"></script>
+    <script src="scripts/Background.js"></script>
 	<script src="scripts/Game.js"></script>
 	<link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -38,6 +39,23 @@
 			<img id="pauseImage" src="resources/pause.png"/>
 			<button id="btnPause" type="button" onclick="pauseGame();" class="hudElement" >Pause</button>
 		</div>
+		<div id="purchaseMenuContainer">
+		    <div id="purchaseMenu">
+		        <h3>Upgrades</h3>
+		            <!--temporary-->
+		            <p>
+		            <ol>
+		                <li>Strafing ability        - 10 crystals</li>
+		                <li>Speed increase          - 20 crystals</li>
+		                <li>Weapon damage increase  - 30 crystals</li>
+		                <li>Weapon type (missiles, scatter gun) - 40 crystals</li>
+		            </ol>
+		            </p>
+		        <p>
+		        Press Enter to resume game
+		        </p>
+		    </div>
+		</div>
 		<div id="alerts"></div>
 		<div id="hudContainer">
 			<img id="hudImage" src="resources/hud.png"/>
@@ -50,21 +68,22 @@
 	<div id="startMenu" class="menuPage" style="display: block;">
 		<h1>Space Fighter</h1>
 		<img id="loadImage" src="resources/loadImage.png"/>
-		<div class="instructions">
-			<h3>Instructions</h3>
-			<div>
-				<p>Collect resources and defeat enemies. //add more instructions later</p>
-			</div>
-		</div>
-		<div class="controls">
-			<h3>Controls</h3>
-			<div>
-				<p>Use the W-set to move forward/backward and rotate. </br>
-					Use space to shoot.</br>
-					"t" disables debug draw overlay</br>
-					Use mouse to shoot (not implemented yet)</p>
-			</div>
-		</div>
+		<div class = "center">
+            <div class="instructions">
+                <h3>Instructions</h3>
+                <div>
+                    <p>Collect resources and defeat enemies. //add more instructions later</p>
+                </div>
+            </div>
+            <div class="controls">
+                <h3>Controls</h3>
+                <div>
+                    <p>Use the W-set to move forward/backward and rotate. </br>
+                        Use space to shoot.</br>
+                        "t" disables debug draw overlay</br>
+                        Use mouse to shoot (not implemented yet)</p>
+                </div>
+            </div>
 		<div class="startBtnWrapper">
 			<button id="btnStart" type="button" onclick="startGame();" disabled="disabled">Start</button>
 		</div>
