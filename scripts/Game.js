@@ -247,3 +247,13 @@ function pauseGame()
 	}
 		
 }
+
+function purchaseMenu(){
+    var purchaseMenuContainer = document.getElementById("purchaseMenuContainer");
+    if(playerDocked){ 
+        purchaseMenuContainer.style.display="inline";
+    }
+    else{
+        purchaseMenuContainer.style.display="none";
+    }
+}

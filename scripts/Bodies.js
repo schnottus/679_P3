@@ -55,6 +55,9 @@ listener.BeginContact = function (contact) {
     }
     else if (fixtureA.GetUserData() == 6 || fixtureB.GetUserData() == 6) {
         console.log("player is docked");
+        gamePaused = true;
+        playerDocked = true; 
+        purchaseMenu();
     }
 	else if (fixtureA.GetUserData() == 7 || fixtureB.GetUserData() == 7) {
         console.log("player is at the gate");

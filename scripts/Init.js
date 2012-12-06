@@ -220,6 +220,15 @@ function init2() {
 				break;
 			default:
 		}
+		//for exiting purchase menu
+		if(playerDocked){
+		    if(e.keyCode == 13){
+		        gamePaused = false;
+		        playerDocked = false;
+		        purchaseMenu();
+		    }
+		}
+				
     }, true);
 	
 	document.addEventListener("keyup", function(e) {

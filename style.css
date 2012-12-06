@@ -1,6 +1,6 @@
 /******************
 * File: style.css
-* Author: Scott Larson
+* Author: Scott Larson, Mik Xin
 * Date: 9 November 2012
 *******************/
 
@@ -84,6 +84,27 @@ body  p {
 	color: #FFFFFF;
 	font-size: 30px;
 	font-weight: bold;
+}
+
+#purchaseMenuContainer{
+    position:absolute;
+    text-align:center;
+    width: 100%;
+    z-index:2;
+    display: none;
+}
+
+#purchaseMenu{
+    width: 600px;
+    height: 600px;
+    /* background-color: #eee; */
+    background-image: url("resources/purchaseMenu.png");
+    /* opacity: 0.5; */
+    margin: 50px auto;
+}
+
+#purchaseMenu h3{
+    padding-top: 10px;
 }
 
 #debugDraw {
