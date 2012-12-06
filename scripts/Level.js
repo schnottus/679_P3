@@ -81,11 +81,12 @@ function level1()
     enemyList.add(makeEnemy(2, 17, 13));
 	
 	//add asteroids
-	for(var i = 0; i < 50; ++i) 
+	for(var i = 0; i < 30; ++i) 
 	{
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
 	
+	//load background image and sprites
 	background1(width, height);
 }
 
@@ -140,15 +141,8 @@ function level2()
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
 	
-	//simple background image
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space1.jpg' );
-	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture } );
-	var floorGeometry = new THREE.PlaneGeometry(height , width, 1, 1);
-	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-	floor.rotation.x = d2r(90);
-	floor.position.z = 500.0;
-	floor.doubleSided = true;
-	scene.add(floor);
+	//load background image and sprites
+	background2(width, height);
 }
  
 function level3() 
@@ -202,7 +196,8 @@ function level3()
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
 	
-	
+	//load background image and sprites
+	background3(width, height);
 }
 
 function destroyLevel()

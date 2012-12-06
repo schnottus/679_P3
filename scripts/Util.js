@@ -48,7 +48,7 @@ function normalizeVector(vec){
  
 function weightVector(vec){
 	var length = Math.sqrt(vec.x * vec.x + vec.y * vec. y);
-	length *= length;
+	length *= length * length;
 	vec.x /= length;
 	vec.y /= length;
 }
