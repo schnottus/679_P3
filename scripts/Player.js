@@ -43,7 +43,14 @@ function thrustPlayer(d, a)
 		default:
 		alert("Invalid parameter in thrustPlayer(a, d)");
 	}
-	
+	var velocity = playerShip.body.GetLinearVelocity();
+	var length = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
+	if (length > playerShip.speed){
+		length /= playerShip.speed;
+		velocity.x /= length;
+		velocity.y /= length;
+		playerShip.body.SetLinearVelocity(velocity);
+	}
 }
 
 //param: type - type of bullet

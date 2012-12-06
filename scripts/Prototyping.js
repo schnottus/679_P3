@@ -118,7 +118,6 @@ extend(Enemy, { speed : null,
                     }
                     if(dodge == 0){
 						targetVec = vectorSubtraction(playerShip.getPosition(), this.getPosition());
-                        temp = 1;
                     }
                     	
 					var desiredAngle = (Math.atan2(targetVec.y, targetVec.x));
@@ -126,7 +125,7 @@ extend(Enemy, { speed : null,
 					var totalRotation = (desiredAngle - nextAngle);
 					while ( totalRotation < -Math.PI ) totalRotation += 2*Math.PI;
 					while ( totalRotation >  Math.PI ) totalRotation -= 2*Math.PI;
-					var desiredAngularVelocity = totalRotation * 6;
+					var desiredAngularVelocity = totalRotation * 3;
 					var torque = this.body.GetInertia() * desiredAngularVelocity / (1/60.0);
 					this.body.ApplyTorque( torque );
 					
@@ -136,12 +135,41 @@ extend(Enemy, { speed : null,
                     //else{
                     //    normalizeVector(targetVec);
                     //}
-
+					normalizeVector(targetVec);
                     if (dodge != 0 && totalRotation < Math.PI/16 && totalRotation > -Math.PI/16){
-						targetVec.x *= 2;
-						targetVec.y *= 2;
+						targetVec.x *= .25;
+						targetVec.y *= .25;
                         this.body.ApplyImpulse(new b2Vec2(targetVec.x,targetVec.y), this.body.GetWorldCenter());
+						
+						var velocity = this.body.GetLinearVelocity();
+						var length = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
+						if (length > this.speed){
+							length /= this.speed;
+							velocity.x /= length;
+							velocity.y /= length;
+							this.body.SetLinearVelocity(velocity);
+						}
                     }
+					else if (dodge == 0 && totalRotation < Math.PI/16 && totalRotation > -Math.PI/16){
+						var difference = vectorSubtraction(this.body.GetPosition(), playerShip.body.GetPosition());
+						var distance = Math.sqrt(difference.x*difference.x+difference.y*difference.y)
+						if (distance > 12 && distance < 16){
+							var func = Math.sqrt(distance - 12)
+							targetVec.x *= func;
+							targetVec.y *= func;
+							this.body.ApplyImpulse(new b2Vec2(targetVec.x,targetVec.y), this.body.GetWorldCenter());
+							
+							var velocity = this.body.GetLinearVelocity();
+							var length = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
+							if (length > this.speed){
+								length /= this.speed;
+								velocity.x /= length;
+								velocity.y /= length;
+								this.body.SetLinearVelocity(velocity);
+							}
+						}
+                    }
+					
 					//else{
 					//	var currentAngle = this.body.GetAngle();
 					//	var thrustX = Math.cos( currentAngle );
@@ -159,18 +187,18 @@ Enemy.clean = function () {
 var Soldier = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Soldier.maxHP = 10;
-Soldier.speed = 50; 
+Soldier.speed = 3.5; 
 
 var Scout = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Scout.maxHP = 5; 
-Scout.speed = 50; 
+Scout.speed = 4; 
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Tank.maxHP = 15; 
-Tank.speed = 50; 
+Tank.speed = 3; 
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
@@ -181,6 +209,7 @@ extend(Player, { 	currentHP: 10,
 				});
 Player.maxHP = 10;
 Player.radius = 2;
+Player.speed = 4;
 Player.destroy = function () {
     //playerDeath();
     console.log("player was destroyed");

@@ -40,7 +40,7 @@ function vectorAddition(a, b){
 function normalizeVector(vec){
 	if (vec.x == 0 && vec.y == 0){}
 	else{
-	var length = Math.sqrt(vec.x * vec.x + vec.y * vec. y);
+	var length = Math.sqrt(vec.x * vec.x + vec.y * vec.y);
 	vec.x /= length;
 	vec.y /= length;
 	}
