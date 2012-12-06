@@ -4,11 +4,11 @@
 * Date: 5 Dec 2012
 *******************/
 
-function updateBackground( level )
+function updateBackground()
 {
 	
 	//update the corresponding background for each level
-	switch(level)
+	switch(currentWorld)
 		{
 			case 1: 
 				updateBackground1();
@@ -68,9 +68,13 @@ function updateBackground1(){
 
 function background2(width, height){
     //simple background image
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space1.jpg' );
+    //simple background image
+	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space2.jpg' ); 
+	floorTexture.wrapT = THREE.RepeatWrapping;
+    floorTexture.wrapS = THREE.RepeatWrapping;
+	floorTexture.repeat.set(6, 6);
 	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture } );
-	var floorGeometry = new THREE.PlaneGeometry(height , width, 1, 1);
+	var floorGeometry = new THREE.PlaneGeometry(height * 20 , width * 20, 1, 1); //height and width flipped? or on purpose?
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.rotation.x = d2r(90);
 	floor.position.z = 500.0;
@@ -79,4 +83,11 @@ function background2(width, height){
 }
 
 function updateBackground2(){
+}
+
+function background3(width, height){
+    
+}
+
+function updateBackground3(){
 }
