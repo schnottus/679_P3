@@ -110,6 +110,25 @@ body  p {
     color: #fff;
 }
 
+#levelMenuContainer{
+	position:absolute;
+	width: 100%;
+	z-index: 2;
+	display: none;
+}
+
+#levelMenu{
+	width: 600px;
+	height: 600px;
+	background-image: url("resources/purchaseMenu.png");
+	margin: 50px auto;
+}
+
+#levelMenu h3{
+	padding-top: 20px;
+	color: #fff;
+}
+
 #debugDraw {
 	position:absolute;
 	height:400px;

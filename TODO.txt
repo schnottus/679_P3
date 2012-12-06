@@ -2,7 +2,6 @@ Important things todo:
 
 AI - Joey
 
-list destroyer (finished - needs testing) - Scott
 create menu to load new level - Scott
 
 Add warp gate model with sensor to call function for next level -Joey (I should get this done later this morning)
