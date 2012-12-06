@@ -37,6 +37,7 @@ var Entity = {
 	node : null,
 	maxHP: 1,
 	currentHP: 1,
+    radius: 2,
     updateMesh: function () {
         var position = this.body.GetPosition();
         this.mesh.position.x = position.x;
@@ -106,45 +107,47 @@ extend(Enemy, { speed : null,
                 sensorList : null,
                 runAI: function(){
                     var myPosition = this.getPosition();
-					var sumVec = { x: 0, y : 0};
                     var temp = this.sensorList.head;
-					var targetVec;
-                    if(temp == null){
-                        freeFloating(this, sumVec);
-						targetVec = vectorSubtraction(playerShip.getPosition(), this.getPosition());
-                    }
-                    else{
+					var targetVec = { x: 0, y : 0};
+					var dodge = 0;
+                    if(temp != null){
                         while(temp != null){
-						    var tempVec = temp.stored.GetPosition();
-						    tempVec = vectorSubtraction(myPosition, tempVec);
-						    weightVector(tempVec);
-						    vectorAdditionAssignment(sumVec, tempVec);
+                            dodge += predictCollision(temp.stored.userData, this, targetVec);
 						    temp = temp.next;
                         }
-                        normalizeVector(sumVec);
-						sumVec.x *= this.speed/100;
-						sumVec.y *= this.speed/100;
-						targetVec = sumVec;
-						temp = 1;						
                     }
+                    if(dodge == 0){
+						targetVec = vectorSubtraction(playerShip.getPosition(), this.getPosition());
+                        temp = 1;
+                    }
+                    	
 					var desiredAngle = (Math.atan2(targetVec.y, targetVec.x));
-					var nextAngle = this.body.GetAngle() + this.body.GetAngularVelocity() / 10.0;
+					var nextAngle = this.body.GetAngle() + this.body.GetAngularVelocity() / 6.0;
 					var totalRotation = (desiredAngle - nextAngle);
 					while ( totalRotation < -Math.PI ) totalRotation += 2*Math.PI;
 					while ( totalRotation >  Math.PI ) totalRotation -= 2*Math.PI;
-					var desiredAngularVelocity = totalRotation * 10.0;
-					var torque = this.body.GetInertia() * desiredAngularVelocity / (1/10.0);
+					var desiredAngularVelocity = totalRotation * 6;
+					var torque = this.body.GetInertia() * desiredAngularVelocity / (1/60.0);
 					this.body.ApplyTorque( torque );
 					
-					if (temp == null){
-						this.body.ApplyImpulse(new b2Vec2(sumVec.x,sumVec.y), this.body.GetPosition());
-					}
-					else{
-						var currentAngle = this.body.GetAngle();
-						var thrustX = Math.cos( currentAngle );
-						var thrustY = Math.sin( currentAngle );
-						this.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), this.body.GetPosition());
-					}
+					//if (temp == 1){
+                        //afreeFloating(this, targetVec);
+					//}
+                    //else{
+                    //    normalizeVector(targetVec);
+                    //}
+
+                    if (dodge != 0 && totalRotation < Math.PI/16 && totalRotation > -Math.PI/16){
+						targetVec.x *= 2;
+						targetVec.y *= 2;
+                        this.body.ApplyImpulse(new b2Vec2(targetVec.x,targetVec.y), this.body.GetWorldCenter());
+                    }
+					//else{
+					//	var currentAngle = this.body.GetAngle();
+					//	var thrustX = Math.cos( currentAngle );
+					//	var thrustY = Math.sin( currentAngle );
+					//	this.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), this.body.GetPosition());
+					//}
                 }
 });
 Enemy.clean = function () {
@@ -156,18 +159,18 @@ Enemy.clean = function () {
 var Soldier = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Soldier.maxHP = 10;
-Soldier.speed = 1; 
+Soldier.speed = 50; 
 
 var Scout = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Scout.maxHP = 5; 
-Scout.speed = 1; 
+Scout.speed = 50; 
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Tank.maxHP = 15; 
-Tank.speed = 1; 
+Tank.speed = 50; 
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
@@ -177,6 +180,7 @@ extend(Player, { 	currentHP: 10,
 					strafeEnabled: true,
 				});
 Player.maxHP = 10;
+Player.radius = 2;
 Player.destroy = function () {
     //playerDeath();
     console.log("player was destroyed");
@@ -195,6 +199,7 @@ Bullet.clean = function () {
 //Station mold (inherits Entity)
 var Station = Object.create(Entity);
 extend(Station, { });
+Station.radius = 4;
 Station.damage = function (amount){
 
 }

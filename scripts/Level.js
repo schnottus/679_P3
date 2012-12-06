@@ -81,7 +81,7 @@ function level1()
     enemyList.add(makeEnemy(2, 17, 13));
 	
 	//add asteroids
-	for(var i = 0; i < 50; ++i) 
+	for(var i = 0; i < 30; ++i) 
 	{
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}

@@ -39,8 +39,30 @@ function autoAimVector(shooterBody, shootAtBody, bulletSpeed){
 function freeFloating(thing, sumVec) {
     var vec = thing.body.GetLinearVelocity();
     var length = Math.sqrt(vec.x * vec.x + vec.y * vec.y);
-    if (length >= thing.speed/thing.body.GetMass()) {
+    if (length >= thing.speed / thing.body.GetMass()) {
         sumVec.x = -vec.x / length;
         sumVec.y = -vec.y / length;
     }
+    else {
+        sumVec.x = 0;
+        sumVec.y = 0;
+    }
+}
+
+function predictCollision(A, B, sumVec){
+    var R = A.radius + B.radius;
+    R = R * R;
+    var V = vectorSubtraction(B.body.GetLinearVelocity(), A.body.GetLinearVelocity());
+    var P = vectorSubtraction(B.body.GetPosition(), A.body.GetPosition());
+    var a = V.x*V.x + V.y*V.y;
+    var b = 2*dotProduct(V,P);
+    var c = P.x*P.x + P.y*P.y - R;
+
+		weightVector(P);
+		vectorAdditionAssignment(sumVec, P);
+		
+	if (b * b >= 4 * a * c && (b < 0)) {
+		return 1;
+    }
+	else return 0;
 }

@@ -21,6 +21,7 @@
     <script src="scripts/Prototyping.js"></script>
 	<script src="scripts/Player.js"></script>
 	<script src="scripts/Init.js"></script>
+	<script src="scripts/Upgrades.js"></script>
 	<script src="scripts/Util.js"></script>
     <script src="scripts/Level.js"></script>
     <script src="scripts/Background.js"></script>
@@ -42,18 +43,24 @@
 		<div id="purchaseMenuContainer">
 		    <div id="purchaseMenu">
 		        <h3>Upgrades</h3>
-		            <!--temporary-->
-		            <p>
-		            <ol>
-		                <li>Strafing ability        - 10 crystals</li>
-		                <li>Speed increase          - 20 crystals</li>
-		                <li>Weapon damage increase  - 30 crystals</li>
-		                <li>Weapon type (missiles, scatter gun) - 40 crystals</li>
-		            </ol>
-		            </p>
-		        <p>
-		        Press Enter to resume game
-		        </p>
+		            <button id = "strafe" class = "purchase" type="button" onclick="strafe();">
+		                <p>Strafing ability - 10 crystals</p>
+		            </button>
+		            <button id = "speed" class = "purchase" type="button" onclick="speed();">
+		                <p>Speed increase  - 20 crystals</p>
+		            </button>
+		            <button id = "damage" class = "purchase" type="button" onclick="damage();">
+		                <p>Weapon damage increase  - 30 crystals</p>
+		            </button>
+		            <button id = "missiles" class = "purchase" type="button" onclick="missiles();">
+		                <p>Weapon: missiles - 40 crystals</p>
+		            </button> 
+		            <button id = "gun" class = "purchase" type="button" onclick="gun();">
+		                <p>Weapon: scatter gun - 40 crystals</p>
+		            </button> 
+		        <button id = "resume" class = "purchase" type="button" onclick="resume();">
+		            <p>Resume game</p>
+		        </button>
 		    </div>
 		</div>
 		<div id="levelMenuContainer">

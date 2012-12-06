@@ -170,7 +170,7 @@ function makeSoldierBody(x, y, soldier) {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 
     var fixDef = new b2FixtureDef;
-    fixDef.shape = new b2CircleShape(4);
+    fixDef.shape = new b2CircleShape(5);
     fixDef.isSensor = true;
     fixDef.userData = 1;
     fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
@@ -199,7 +199,7 @@ function makeScoutBody(x, y, scout) {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 
     var fixDef = new b2FixtureDef;
-    fixDef.shape = new b2CircleShape(4);
+    fixDef.shape = new b2CircleShape(5);
     fixDef.isSensor = true;
     fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
     fixDef.filter.maskBits = mask.NON_BULLETS;
@@ -228,7 +228,7 @@ function makeTankBody(x, y, tank) {
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	
     var fixDef = new b2FixtureDef;
-	fixDef.shape = new b2CircleShape(4);
+	fixDef.shape = new b2CircleShape(5);
 	fixDef.isSensor = true;
 	fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
 	fixDef.filter.maskBits = mask.NON_BULLETS;

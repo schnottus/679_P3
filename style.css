@@ -110,6 +110,26 @@ body  p {
     color: #fff;
 }
 
+.purchase{
+    height: 50px;
+    width: 80%;
+    background-color: #300340;
+    opacity: 0.7;
+    border: solid #fff 1px;
+    margin:10px auto;
+    font-size: 100%;
+}
+
+.purchase p{
+/*     padding-top: 10px; */
+    font-size: 100%;
+}
+
+.purchase:hover{
+    background-color: #000;
+    cursor: pointer;
+}
+
 #levelMenuContainer{
 	position:absolute;
 	width: 100%;

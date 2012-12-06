@@ -68,6 +68,7 @@ function updateBackground1(){
 
 function background2(width, height){
     //simple background image
+    //simple background image
 	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space2.jpg' ); 
 	floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.wrapS = THREE.RepeatWrapping;
