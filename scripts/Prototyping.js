@@ -177,7 +177,7 @@ var Player = Object.create(Entity);
 extend(Player, { 	currentHP: 10, 
 					crystals: 0,
 					maxSpeed: 1,
-					strafeEnabled: true,
+					strafeEnabled: false,
 				});
 Player.maxHP = 10;
 Player.radius = 2;
