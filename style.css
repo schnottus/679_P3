@@ -116,7 +116,7 @@ body  p {
     background-color: #300340;
     opacity: 0.7;
     border: solid #fff 1px;
-    margin:10px auto;
+    margin:5px auto;
     font-size: 100%;
 }
 
@@ -125,9 +125,33 @@ body  p {
     font-size: 100%;
 }
 
+/*the resume button*/
+#resume{
+    background-color: #FFE100;
+    width: 25%;   
+    height: 30px;
+}
+
+#resume p{
+    color: #000;
+}
+
+#resume:hover{
+    background-color: #FF9100;
+}
+
 .purchase:hover{
     background-color: #000;
     cursor: pointer;
+}
+
+#purchaseInfo{
+    height: 50px;
+    width: 80%;
+    color: #FAA998;
+    font-size: 110%;
+    text-align: center;
+    margin: 10px auto;
 }
 
 #levelMenuContainer{
