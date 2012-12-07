@@ -34,6 +34,8 @@ function loadLevel( level )
 function level1()
 {
 
+	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
+
 	var width = 60;
 	var height = 40;
 
@@ -94,8 +96,7 @@ function level1()
 function level2()
 {
 	
-	playerShip.body.xPos = 10;
-	playerShip.body.yPos = 10;
+	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
 	
 	var width = 120;
 	var height = 80;
@@ -154,6 +155,9 @@ function level2()
  
 function level3() 
 {
+
+	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
+	
 	var width = 150;
 	var height = 100;
 
