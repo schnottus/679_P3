@@ -215,7 +215,7 @@ Tank.fireRate = 1000;
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
-extend(Player, { 	currentHP: 10, 
+extend(Player, { 	currentHP: 20, 
 					crystals: 30,
 					maxSpeed: 1,
 					strafeEnabled: false, //boolean for every upgrade for easier sidebar update (except health)
@@ -226,7 +226,7 @@ extend(Player, { 	currentHP: 10,
 				});
 Player.maxHP = 100;
 Player.radius = 2;
-Player.speed = 4;
+Player.speed = 8;
 Player.destroy = function () {
     //playerDeath();
     console.log("player was destroyed");

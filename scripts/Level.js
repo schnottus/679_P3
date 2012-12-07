@@ -75,6 +75,7 @@ function level1()
 	
 	homeStation = makeStation(10, height / 2);
 	portal = makeWarpGate(width - 10, height / 2);
+	portal.mesh.position.z = 2;
 
 	enemyList.add(makeEnemy(0, 13, 14));
 	enemyList.add(makeEnemy(1, 15, 17));
@@ -126,7 +127,7 @@ function level2()
 	//debug draw div is 600x400, set draw scale using width
 	
 	//setup debug draw
-	var debugDraw = new b2DebugDraw();
+	var debugDraw = new b2DebugDraw();3
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
 		//debug draw div is 600x400, calculate draw scale and fill to width
 		debugDraw.SetDrawScale(600.0 / width);  //smaller scale "zooms out"
@@ -136,7 +137,9 @@ function level2()
 	world.SetDebugDraw(debugDraw);
 	
 	homeStation = makeStation(10, height / 2);
-
+	portal = makeWarpGate(width - 10, height / 2);
+	portal.mesh.position.z = 2;
+	
     enemyList.add(makeEnemy(0, 7, 7));
 	
 	//add asteroids
@@ -191,7 +194,9 @@ function level3()
 	world.SetDebugDraw(debugDraw);
 	
 	homeStation = makeStation(10, height / 2);
-
+	portal = makeWarpGate(width - 10, height / 2);
+	portal.mesh.position.z = 2;
+	
     enemyList.add(makeEnemy(0, 7, 7));
 	
 	//add asteroids
@@ -211,9 +216,9 @@ function destroyLevel()
 	enemyList.empty();
 	crystalList.empty();
 	bulletList.empty();
-	homeStation.destroy();
+	homeStation.clean();
 	//empty destroy list?
-	//delete warp gate
+	portal.clean();
 	//delete background sprites
 	scene.remove(spriteGroup);
 	

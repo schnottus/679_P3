@@ -2,8 +2,6 @@ Important things todo:
 
 AI - Joey
 
-create menu to load new level - Scott
-
 Add warp gate model with sensor to call function for next level -Joey (I should get this done later this morning)
 
 Body accuracy(enemy bodies and the warp gate sensor need to be updated to match their models, which may require making enemy.runAI() do nothing for a bit so you can tweek the enemy objects without them trying to run away from you)-
