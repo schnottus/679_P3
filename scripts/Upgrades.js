@@ -52,7 +52,7 @@ function missiles(){
     }
     else{
         showInfo("Missiles acquired");
-        playerShip.crystals -= 30;
+        playerShip.crystals -= 40;
         playerShip.missilesEnabled = true;
         updateHUD();
         updateSidebar();
@@ -66,7 +66,7 @@ function gun(){
     }
     else{
         showInfo("Scatter gun acquired");
-        playerShip.crystals -= 30;
+        playerShip.crystals -= 40;
         playerShip.gunEnabled = true;
         updateHUD();
         updateSidebar();
@@ -80,7 +80,7 @@ function xtraHealth(){
     }
     else{
         showInfo("Health increased by 20");
-        playerShip.crystals -= 30;
+        playerShip.crystals -= 20;
         playerShip.currentHP += 20;
         updateHUD();
         updateSidebar();
