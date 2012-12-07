@@ -323,4 +323,9 @@ div#startMenu button#btnStart {
 #win{
     display: none;
 }
+
+.important{
+    color: #FA91C7;
+    font-style:italic;
+}
 /*** end Start menu ***/

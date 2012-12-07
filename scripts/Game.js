@@ -271,11 +271,17 @@ function playerDeath()
 }
 
 function winScreen(){
-    var divContainer = document.getElementById("container");
-	divContainer.style.display = "none";
-	
-	var deathScreen = document.getElementById("winScreen");
-	deathScreen.style.display = "block";
+    if(playerShip.crystals < 200){
+        showInfo("Not enough resources");
+    }
+    else{
+        var divContainer = document.getElementById("container");
+        divContainer.style.display = "none";
+        
+        var deathScreen = document.getElementById("winScreen");
+        deathScreen.style.display = "block";
+    }
+    
 }
 
 function startGame()
@@ -320,18 +326,31 @@ function purchaseMenu()
 
 function levelMenu()
 {
-    // hide current world button
+    // hide current world button and unhide other worlds buttons
     var hide;
     var show;
     switch(currentWorld){
         case 1: hide = document.getElementById("world1");
                 hide.style.display = "none";
+                show = document.getElementById("world2");
+                show.style.display = "block";
+                show = document.getElementById("world3");
+                show.style.display = "block";
                 break;
         case 2: hide = document.getElementById("world2");
                 hide.style.display = "none";
+                show = document.getElementById("world1");
+                show.style.display = "block";
+                show = document.getElementById("world3");
+                show.style.display = "block";
                 break;
         case 3: hide = document.getElementById("world3");
                 hide.style.display = "none";
+                show = document.getElementById("world1");
+                show.style.display = "block";
+                show = document.getElementById("world2");
+                show.style.display = "block";
+                
                 //and display "winning" button for last level...
                 show = document.getElementById("win");
                 show.style.display = "block";

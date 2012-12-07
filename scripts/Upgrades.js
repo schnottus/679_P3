@@ -101,6 +101,14 @@ function changeLevel(level)
         showInfo2("Not enough resources");
     }
     else{
+        switch(level){
+            case 1: playerShip.crystals -= 80; break;
+            case 2: playerShip.crystals -= 100; break;
+            case 3: playerShip.crystals -= 200; break;
+        }
+        
+        updateHUD();
+        updateSidebar();
         destroyLevel(); //reset player position in destroy level?
         loadLevel(level)
         resume();
