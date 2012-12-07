@@ -1,12 +1,16 @@
 Important things todo:
 
-Move strafe to A,D on keyboard - 
-Left click mouse to shoot - 
-Disable Right click on mouse - 
+Move strafe to A,D on keyboard - Scott
+Left click mouse to shoot - Scott
+Disable Right click on mouse - Scott
+
+Enable three.js antialiasing -
+
+Add motiviation for continuing (story/feedback) - 
+
+three.js particle system thrust (not creating/destroying objects) - 
 
 AI - Joey
-
-Add warp gate model with sensor to call function for next level -Joey (I should get this done later this morning)
 
 Body accuracy(enemy bodies and the warp gate sensor need to be updated to match their models, which may require making enemy.runAI() do nothing for a bit so you can tweek the enemy objects without them trying to run away from you)-
 
@@ -21,8 +25,6 @@ Level 2 background - Mik
 Level 3 background - Mik
 Load Screen image - Mik
 
-Add max speed to player ship -
-	see comment in updatePlayer function in game.js, use playerShip.maxSpeed property
 
 Add player death when health reaches 0 - 
 	see comment in updatePlayer function in game.js
@@ -35,3 +37,4 @@ Make asteroid resources more random (some drop no resources, some more) -
 shaders and fancy stuff (flashing lights for explosions, etc) -
 
 soft boundary (remove hard walls and gently push items back into game area) - aw
+wwww
