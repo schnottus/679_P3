@@ -240,6 +240,15 @@ function updateGameState()
 	
 }
 
+function playerDeath()
+{
+    var divContainer = document.getElementById("container");
+	divContainer.style.display = "none";
+	
+	var deathScreen = document.getElementById("deathScreen");
+	deathScreen.style.display = "block";
+}
+
 function startGame()
 {
 	//stop displaying start menu
