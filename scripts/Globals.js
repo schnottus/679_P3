@@ -31,6 +31,7 @@
 	var enemyList = newDLL();
 	var bulletList = newDLL();
 	var crystalList = newDLL();
+	var jetParticleList = newDLL();
 	var destroyList = new Array();
 	var homeStation;
 	var portal;

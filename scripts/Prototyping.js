@@ -185,6 +185,15 @@ Enemy.clean = function () {
     enemyList.remove(this.node);
 }
 
+var JetParticle = Object.create(Entity);   //adds inheritance
+extend(JetParticle, {start: null});            //adds more variables and functions, just like how entity is declared with variables and functions
+JetParticle.clean = function (){
+	scene.remove(this.mesh);
+	world.DestroyBody(this.body);
+	Namer.recycledJetIDs.push(this.ID);
+	jetParticleList.remove(this.node);
+}
+
 var Soldier = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Soldier.maxHP = 10;
@@ -282,6 +291,20 @@ function makeCrystal(position, velocity) {
 	crystal.updateMesh();
 	crystal.ID = Namer.NewCrystalID();
     return crystal;
+}
+
+function makeJetParticle() {
+    var jetParticle;
+    jetParticle = Object.create(JetParticle);
+	jetParticle.start = Date.now();
+	jetParticle.body = makeJetParticleBody(jetParticle);
+	jetParticle.mesh = new THREE.Mesh(new THREE.SphereGeometry(.1,6,6), new THREE.MeshLambertMaterial({
+            color: 0xff1111
+		}));  //change to sprite?
+	scene.add(jetParticle.mesh);
+	jetParticle.updateMesh();
+	jetParticle.ID = Namer.NewJetParticleID();
+    return jetParticle;
 }
 
 function makeEnemy(type, x, y) {

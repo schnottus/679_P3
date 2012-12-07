@@ -324,6 +324,36 @@ function makeStationBody(station, x, y) {
 	body.userData = station;
     return body;
 }
+function makeJetParticleBody(jetParticle) {
+	var angle = playerShip.body.GetAngle();
+	var vector = {};
+	
+	vector.x = Math.cos(angle) * -1;
+	vector.y = Math.sin(angle) * -1;
+	
+	var bodyDef = new b2BodyDef; 
+    bodyDef.type = b2Body.b2_dynamicBody;  
+    bodyDef.position.x = playerShip.getPosX() + (vector.x * 1.3);
+    bodyDef.position.y = playerShip.getPosY() + (vector.y * 1.3);
+	bodyDef.angle = angle;
+    var body = world.CreateBody(bodyDef);  
+    var fixDef = new b2FixtureDef; 
+    fixDef.shape = new b2CircleShape(0.1);
+    fixDef.density = 1.0; 
+	fixDef.isSensor = true;
+	fixDef.userData = 8;
+	
+	vector.x += Math.random();
+	vector.y += Math.random();
+	
+	fixDef.filter.categoryBits = mask.NON_BULLETS;
+	fixDef.filter.maskBits = mask.NON_BULLETS;
+
+    body.CreateFixture(fixDef); 
+	body.ApplyImpulse(new b2Vec2(vector.x*body.GetMass(),vector.y*body.GetMass()), body.GetWorldCenter());
+	body.userData = jetParticle;
+    return body;
+}
 
 function makeWarpGateBody(warpGate, x, y) {
     var bodyDef = new b2BodyDef; //create a body Definition

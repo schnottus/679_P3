@@ -3,6 +3,8 @@ var Namer = {
 	EnemyIDCount : 0,
 	BulletIDCount : 0,
 	CrystalIDCount : 0,
+	JetParticleIDCount : 0,
+	recycledJetIDs : new Array(),
 	recycledBulletIDs : new Array(),
 	recycledCrystalIDs : new Array(),
 		
@@ -20,6 +22,17 @@ var Namer = {
 		}
 		else{
 			return this.recycledCrystalIDs.pop();
+		}
+	},
+	
+	NewJetParticleID : function(){
+		if (this.recycledJetIDs.length == 0){
+			var ID = "B" + this.JetParticleIDCount.toString(16);
+			this.JetParticleIDCount ++;
+			return ID;
+		}
+		else{
+			return this.recycledJetIDs.pop();
 		}
 	},
 	

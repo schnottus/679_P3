@@ -32,6 +32,7 @@ function update()
 	//enforce rotation and velocity limits, check health
 	updatePlayer();
 	updateEnemies();
+	updateJetParticles();
 	
 	//only update hud every 10th frame (dom manipulation is expensive)
 	if( hudFrames >= 10)
@@ -89,6 +90,12 @@ function updateWorld()
 	//}
 	
 	temp = crystalList.head;
+    while(temp != null){
+		temp.stored.updateMesh();
+		temp = temp.next;
+	}
+	
+	temp = jetParticleList.head;
     while(temp != null){
 		temp.stored.updateMesh();
 		temp = temp.next;
@@ -152,6 +159,20 @@ function updatePlayer()
 		
 	
 		
+}
+
+function updateJetParticles()
+{
+
+	var temp = jetParticleList.head;
+    while(temp != null){
+		temp.stored.updateMesh();
+		if( ((Date.now() - temp.stored.start) / 600 ) > 1 )  //after 1 seconds alive 
+		{
+			temp.stored.destroy();
+		}
+		temp = temp.next;
+	}
 }
 
 function updateBullets()
