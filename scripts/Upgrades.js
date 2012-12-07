@@ -73,6 +73,20 @@ function gun(){
     }
 }
 
+function xtraHealth(){
+    //if not enough crystals
+    if(playerShip.crystals < 20){
+        showInfo("Not enough resources");
+    }
+    else{
+        showInfo("Health increased by 20");
+        playerShip.crystals -= 30;
+        playerShip.currentHP += 20;
+        updateHUD();
+        updateSidebar();
+    }
+}
+
 function changeLevel(level)
 {
     if(level == 1 && playerShip.crystals < 80){

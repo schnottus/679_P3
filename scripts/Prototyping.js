@@ -207,9 +207,9 @@ Tank.fireRate = 1000;
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
 extend(Player, { 	currentHP: 10, 
-					crystals: 0,
+					crystals: 30,
 					maxSpeed: 1,
-					strafeEnabled: false, //boolean for every upgrade for easier sidebar update
+					strafeEnabled: false, //boolean for every upgrade for easier sidebar update (except health)
 					speedIncrease: false,
 					weaponDamage: false,
 					missilesEnabled: false,
