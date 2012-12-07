@@ -271,13 +271,30 @@ function init2() {
 		}
     }, true);
     
-    
+//mouse movement
+	document.onmousemove = getMousePosition;
 	
 // framerate stats
 	stats = new Stats();
 	stats.setMode(0); // 0: fps, 1: ms
 	var statsDiv = document.getElementById('statsDiv');
 	statsDiv.appendChild(stats.domElement);
+	
+	
+//hackery to take care of asyncronous image loading
+	/*var allImagesLoaded = false;
+	while(!allImagesLoaded)
+	{
+		var hudImg = new Image();   // Create new img element
+		hudImg.onload = function(){
+		// execute drawImage statements here
+		};
+		hudImg.src = '/resources/hudImage.png';
+	
+		//pause button image
+		
+	}*/
+	
 	
 	//enable start button which calls startGame() and thus, animate();
 	//do not add any code below this button enable line (won't always get run)
@@ -324,4 +341,11 @@ function loadingLoop(){
 		}
 	}
 	internalLoadLoop();
+}
+
+function getMousePosition(e)
+{
+	mouseX = e.clientX;
+	mouseY = e.clientY;
+	//alert("X: " + mouseX + "  Y: " + mouseY );
 }

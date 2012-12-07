@@ -138,6 +138,10 @@ function updatePlayer()
 		}
 		
 	}
+	
+	
+	playerShip.body.SetAngle( angleTwoPoints( (window.innerWidth / 2), (window.innerHeight / 2), mouseX, mouseY));
+	
 	//damp angular velocity if player not turning
 	if ( dampPlayerRotation )
 	{

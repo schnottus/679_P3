@@ -12,6 +12,19 @@ function d2r( deg )
 	return(deg * (Math.PI / 180));
 }
 
+//angle between 2 points in radians
+function angleTwoPoints( x1, y1, x2, y2 )
+{
+	var deltaX = x2 - x1;
+	var deltaY = y2 - y1;
+	
+	var angle = Math.atan(deltaY / deltaX);
+	
+	if(deltaX < 0 ) angle += Math.PI;
+	
+	return angle;
+}
+
 function dotProduct(a,b) {
 	return a.x*b.x + a.y*b.y
  }

@@ -73,6 +73,8 @@
 	var canShoot = true;
 	var shootInterval;
 	var shootDisabler = false;
+	var mouseX;
+	var mouseY;
 	
 //game state
 	var gamePaused = false;
