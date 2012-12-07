@@ -203,9 +203,13 @@ Tank.speed = 3;
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
 extend(Player, { 	currentHP: 10, 
-					crystals: 0,
+					crystals: 200,
 					maxSpeed: 1,
-					strafeEnabled: false,
+					strafeEnabled: false, //boolean for every upgrade for easier sidebar update
+					speedIncrease: false,
+					weaponDamage: false,
+					missilesEnabled: false,
+					gunEnabled: false
 				});
 Player.maxHP = 10;
 Player.radius = 2;

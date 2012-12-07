@@ -217,6 +217,7 @@ function destroyLevel()
 	//delete background sprites
 	scene.remove(spriteGroup);
 	
+	
 	//empty box2d world of remaining hard boundaries
 	world.DestroyBody(leftWall);
 	world.DestroyBody(rightWall);

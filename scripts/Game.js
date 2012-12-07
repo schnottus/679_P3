@@ -213,6 +213,27 @@ function updateHUD()
 	health.innerHTML = "World: " + currentWorld;
 }
 
+//update 'sidebar' showing what upgrades player has - call this when reload a new game
+function updateSidebar(){
+    //linearly a bad idea? since upgrades not that many?
+    updateUpgradeInfo("strafeIcon", playerShip.strafeEnabled);
+    updateUpgradeInfo("speedIcon", playerShip.speedIncrease);
+    updateUpgradeInfo("damageIcon", playerShip.weaponDamage);
+    updateUpgradeInfo("missilesIcon", playerShip.missilesEnabled);
+    updateUpgradeInfo("gunIcon", playerShip.gunEnabled);
+    
+}
+
+//used by updateSidebar()
+function updateUpgradeInfo(element, enable)
+{
+    var upgradedItem = document.getElementById(element);
+    if(enable)
+        upgradedItem.style.display = "block";
+    else
+        upgradedItem.style.display = "none";
+}
+
 //check here if game won and other important events
 function updateGameState()
 {
