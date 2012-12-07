@@ -105,6 +105,7 @@ var Enemy = Object.create(Entity);
 extend(Enemy, { speed : null,
 				sensorDir : null,
                 sensorList : null,
+                lastShoot: 0,
                 runAI: function(){
                     var myPosition = this.getPosition();
                     var temp = this.sensorList.head;
@@ -153,29 +154,29 @@ extend(Enemy, { speed : null,
 					else if (dodge == 0 && totalRotation < Math.PI/16 && totalRotation > -Math.PI/16){
 						var difference = vectorSubtraction(this.body.GetPosition(), playerShip.body.GetPosition());
 						var distance = Math.sqrt(difference.x*difference.x+difference.y*difference.y)
-						if (distance > 12 && distance < 16){
-							var func = Math.sqrt(distance - 12)
-							targetVec.x *= func;
-							targetVec.y *= func;
-							this.body.ApplyImpulse(new b2Vec2(targetVec.x,targetVec.y), this.body.GetWorldCenter());
+                        if(distance < 16){
+						    if (distance > 12){
+							    var func = Math.sqrt(distance - 12)
+							    targetVec.x *= func;
+							    targetVec.y *= func;
+							    this.body.ApplyImpulse(new b2Vec2(targetVec.x,targetVec.y), this.body.GetWorldCenter());
 							
-							var velocity = this.body.GetLinearVelocity();
-							var length = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
-							if (length > this.speed){
-								length /= this.speed;
-								velocity.x /= length;
-								velocity.y /= length;
-								this.body.SetLinearVelocity(velocity);
-							}
-						}
+							    var velocity = this.body.GetLinearVelocity();
+							    var length = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
+							    if (length > this.speed){
+								    length /= this.speed;
+								    velocity.x /= length;
+								    velocity.y /= length;
+								    this.body.SetLinearVelocity(velocity);
+							    }
+						    }
+                            var time = new Date().getTime();
+					        if(time - this.lastShoot > this.fireRate){
+					            bulletList.add(makeBullet(this, 1, 32));
+					            this.lastShoot = time;
+                            }
+                        }
                     }
-					
-					//else{
-					//	var currentAngle = this.body.GetAngle();
-					//	var thrustX = Math.cos( currentAngle );
-					//	var thrustY = Math.sin( currentAngle );
-					//	this.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), this.body.GetPosition());
-					//}
                 }
 });
 Enemy.clean = function () {
@@ -187,18 +188,21 @@ Enemy.clean = function () {
 var Soldier = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Soldier.maxHP = 10;
-Soldier.speed = 3.5; 
+Soldier.speed = 3.5;
+Soldier.fireRate = 800;
 
 var Scout = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Scout.maxHP = 5; 
-Scout.speed = 4; 
+Scout.speed = 4;
+Scout.fireRate = 1400; 
 
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
 Tank.maxHP = 15; 
-Tank.speed = 3; 
+Tank.speed = 3;
+Tank.fireRate = 1000; 
 
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
@@ -211,7 +215,7 @@ extend(Player, { 	currentHP: 10,
 					missilesEnabled: false,
 					gunEnabled: false
 				});
-Player.maxHP = 10;
+Player.maxHP = 100;
 Player.radius = 2;
 Player.speed = 4;
 Player.destroy = function () {

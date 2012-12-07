@@ -61,7 +61,6 @@ function playerShoot( type )
 		canShoot = true;
 	}
 	else{
-		bulletList.add(makeBullet( playerShip, 0, 32));   
-		bulletList.add(makeBullet( enemyList.head.stored, 1, 32));
+		bulletList.add(makeBullet( playerShip, 0, 32));
 	}
 }
