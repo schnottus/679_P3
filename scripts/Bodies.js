@@ -61,6 +61,9 @@ listener.BeginContact = function (contact) {
     }
 	else if (fixtureA.GetUserData() == 7 || fixtureB.GetUserData() == 7) {
         console.log("player is at the gate");
+        gamePaused = true;
+        atGate = true; 
+        levelMenu();
     }
 }
 listener.EndContact = function (contact) {

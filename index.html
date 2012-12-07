@@ -40,6 +40,7 @@
 			<img id="pauseImage" src="resources/pause.png"/>
 			<button id="btnPause" type="button" onclick="pauseGame();" class="hudElement" >Pause</button>
 		</div>
+		<!--sidebar-->
 		<div id="upgradeInfo">
 		    <div id = "strafeIcon" class = "upgradedItem">
 		        <p>Strafe</br><span class = "controls">Q, E</span></p>
@@ -77,7 +78,7 @@
 		            </button> 
 		            <div id="purchaseInfo">
 		            </div>
-		            <button id = "resume" class = "purchase" type="button" onclick="resume();">
+		            <button class = "resume purchase" type="button" onclick="resume();">
 		                <p>Resume game</p>
 		            </button>
 		    </div>
@@ -85,12 +86,21 @@
 		<div id="levelMenuContainer">
 		    <div id="levelMenu">
 		        <h3>World Transporter</h3>
-		            <div id="world1"></div>
-					<div id="world2"></div>
-					<div id="world3"></div>
-		        <p>
-		        Press Enter to resume game
-		        </p>
+		        <p class = "description">Teleport to another World or stay in this World to collect more resources</p>
+					<button id = "world1" class = "purchase" type="button" onclick="changeLevel(1);">
+		                <p>World 1 - 80 crystals</p>
+		            </button>
+		            <button id = "world2" class = "purchase" type="button" onclick="changeLevel(2);">
+		                <p>World 2 - 100 crystals</p>
+		            </button>
+		            <button id = "world3" class = "purchase" type="button" onclick="changeLevel(3);">
+		                <p>World 3 - 200 crystals</p>
+		            </button>
+		            <div id="levelInfo">
+		            </div>
+		            <button class = "resume purchase" type="button" onclick="resume();">
+		                <p>Resume game</p>
+		            </button>
 		    </div>
 		</div>
 		<div id="alerts"></div>

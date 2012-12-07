@@ -99,9 +99,7 @@ body  p {
 #purchaseMenu{
     width: 600px;
     height: 600px;
-    /* background-color: #eee; */
     background-image: url("resources/purchaseMenu.png");
-    /* opacity: 0.5; */
     margin: 50px auto;
 }
 
@@ -125,27 +123,28 @@ body  p {
     font-size: 100%;
 }
 
-/*the resume button*/
-#resume{
-    background-color: #FFE100;
-    width: 25%;   
-    height: 30px;
-}
-
-#resume p{
-    color: #000;
-}
-
-#resume:hover{
-    background-color: #FF9100;
-}
-
 .purchase:hover{
     background-color: #000;
     cursor: pointer;
 }
 
-#purchaseInfo{
+/*the resume button*/
+.resume{
+    background-color: #FFE100;
+    width: 25%;   
+    height: 30px;
+}
+
+.resume p{
+    color: #000;
+}
+
+.resume:hover{
+    background-color: #FF9100;
+    cursor: pointer;
+}
+
+#purchaseInfo, #levelInfo{
     height: 50px;
     width: 80%;
     color: #FAA998;
@@ -176,6 +175,7 @@ body  p {
 
 #levelMenuContainer{
 	position:absolute;
+	text-align:center;
 	width: 100%;
 	z-index: 2;
 	display: none;
@@ -191,6 +191,11 @@ body  p {
 #levelMenu h3{
 	padding-top: 20px;
 	color: #fff;
+}
+
+.description{
+    width: 70%;
+    margin: 20px auto;
 }
 
 #debugDraw {

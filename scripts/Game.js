@@ -269,12 +269,38 @@ function pauseGame()
 		
 }
 
-function purchaseMenu(){
+function purchaseMenu()
+{
     var purchaseMenuContainer = document.getElementById("purchaseMenuContainer");
     if(playerDocked){ 
         purchaseMenuContainer.style.display="inline";
     }
     else{
         purchaseMenuContainer.style.display="none";
+    }
+}
+
+function levelMenu()
+{
+    // hide current world button
+    var hide;
+    switch(currentWorld){
+        case 1: hide = document.getElementById("world1");
+                hide.style.display = "none";
+                break;
+        case 2: hide = document.getElementById("world2");
+                hide.style.display = "none";
+                break;
+        case 3: hide = document.getElementById("world3");
+                hide.style.display = "none";
+                break;
+    }
+    
+    var levelMenuContainer = document.getElementById("levelMenuContainer");
+    if(atGate){ 
+        levelMenuContainer.style.display="inline";
+    }
+    else{
+        levelMenuContainer.style.display="none";
     }
 }

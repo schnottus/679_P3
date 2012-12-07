@@ -73,18 +73,46 @@ function gun(){
     }
 }
 
+function changeLevel(level)
+{
+    if(level == 1 && playerShip.crystals < 80){
+        showInfo2("Not enough resources");
+    }
+    else if(level == 2 && playerShip.crystals < 100){
+        showInfo2("Not enough resources");
+    }
+    else if(level == 3 && playerShip.crystals < 200){
+        showInfo2("Not enough resources");
+    }
+    else{
+        destroyLevel(); //reset player position in destroy level?
+        loadLevel(level)
+        resume();
+        }
+}
+
 
 function resume(){
     if(playerDocked){	    
         gamePaused = false;
         playerDocked = false;
-        purchaseMenu();
-		    
+        purchaseMenu();		    
+	}
+	if(atGate){
+	    gamePaused = false;
+        atGate = false;
+        levelMenu();	
 	}
 }
 
 function showInfo(message){
     var info = document.getElementById("purchaseInfo");
+    info.innerHTML = message;
+    setTimeout(function(){info.innerHTML = ""},3000);
+}
+
+function showInfo2(message){
+    var info = document.getElementById("levelInfo");
     info.innerHTML = message;
     setTimeout(function(){info.innerHTML = ""},3000);
 }

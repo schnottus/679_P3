@@ -79,6 +79,7 @@
 	var currentWorld = 1;  //which level the player is in
 	
 	var playerDocked = false; //pause the game and display purchase menu if true
+	var atGate = false; 
 
 //level background sprites
     var spriteGroup;
