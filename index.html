@@ -99,6 +99,9 @@
 		            <button id = "world3" class = "purchase" type="button" onclick="changeLevel(3);">
 		                <p>World 3 - 200 crystals</p>
 		            </button>
+		            <button id = "win" class = "purchase" type="button" onclick="winScreen();">
+		                <p>End of War ! - 200 crystals</p>
+		            </button>
 		            <div id="levelInfo">
 		            </div>
 		            <button class = "resume purchase" type="button" onclick="resume();">
@@ -122,7 +125,13 @@
             <div class="instructions">
                 <h3>Instructions</h3>
                 <div>
-                    <p>Collect resources and defeat enemies. //add more instructions later</p>
+                    <p>Collect resources by destroying asteroids<br/>
+                        and buy upgrades to help you advance to next level. <br/>
+                        Upgrades can be purchased by docking at the ship's home base. <br/>
+                        Go to the warp gate when you get enough resources to teleport to higher level. <br/>
+                        Player wins after getting through level 3 gate. <br/>
+                        Stay alive by avoiding or attacking enemies.
+                    </p>
                 </div>
             </div>
             <div class="controls">
@@ -141,7 +150,14 @@
 	<!--deathscreen-->
     <div id = "deathScreen">
         <div>
-			<button id="btnReload" type="button" onclick="location.reload()">Restart</button>
+			<button class="btnReload" type="button" onclick="location.reload()">Restart</button>
+		</div>
+    </div>
+    
+    <!--winscreen-->
+    <div id = "winScreen">
+        <div>
+			<button class="btnReload" type="button" onclick="location.reload()">Play Again</button>
 		</div>
     </div>
 	

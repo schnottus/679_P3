@@ -270,6 +270,14 @@ function playerDeath()
 	deathScreen.style.display = "block";
 }
 
+function winScreen(){
+    var divContainer = document.getElementById("container");
+	divContainer.style.display = "none";
+	
+	var deathScreen = document.getElementById("winScreen");
+	deathScreen.style.display = "block";
+}
+
 function startGame()
 {
 	//stop displaying start menu
@@ -314,6 +322,7 @@ function levelMenu()
 {
     // hide current world button
     var hide;
+    var show;
     switch(currentWorld){
         case 1: hide = document.getElementById("world1");
                 hide.style.display = "none";
@@ -323,6 +332,9 @@ function levelMenu()
                 break;
         case 3: hide = document.getElementById("world3");
                 hide.style.display = "none";
+                //and display "winning" button for last level...
+                show = document.getElementById("win");
+                show.style.display = "block";
                 break;
     }
     
