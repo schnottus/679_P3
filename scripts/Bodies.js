@@ -38,12 +38,14 @@ listener.BeginContact = function (contact) {
         fixtureB.GetBody().userData.sensorDir[fixtureA.GetBody().userData.ID] = fixtureB.GetBody().userData.sensorList.end;
     }
     else if (fixtureA.GetUserData() == 2) {
-        fixtureA.GetBody().userData.damage(1);
-        fixtureB.GetBody().userData.damage(1);
+		var damage = fixtureA.GetBody().userData.power;
+        fixtureA.GetBody().userData.damage(damage);
+        fixtureB.GetBody().userData.damage(damage);
     }
     else if (fixtureB.GetUserData() == 2) {
-        fixtureA.GetBody().userData.damage(1);
-        fixtureB.GetBody().userData.damage(1);
+		var damage = fixtureB.GetBody().userData.power;
+        fixtureA.GetBody().userData.damage(damage);
+        fixtureB.GetBody().userData.damage(damage);
     }
     else if ((fixtureA.GetUserData() == 3 && fixtureB.GetUserData() == 4)) {
         fixtureB.GetBody().userData.crystals++;

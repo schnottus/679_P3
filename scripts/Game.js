@@ -239,7 +239,7 @@ function updateSidebar(){
     //linearly a bad idea? since upgrades not that many?
     updateUpgradeInfo("strafeIcon", playerShip.strafeEnabled);
     updateUpgradeInfo("speedIcon", playerShip.speedIncrease);
-    updateUpgradeInfo("damageIcon", playerShip.weaponDamage);
+    updateUpgradeInfo("damageIcon", playerShip.weaponDamageIncrease);
     updateUpgradeInfo("missilesIcon", playerShip.missilesEnabled);
     updateUpgradeInfo("gunIcon", playerShip.gunEnabled);
     

@@ -106,6 +106,7 @@ extend(Enemy, { speed : null,
 				sensorDir : null,
                 sensorList : null,
                 lastShoot: 0,
+				weaponDamage: 1,
                 runAI: function(){
                     var myPosition = this.getPosition();
                     var temp = this.sensorList.head;
@@ -218,9 +219,10 @@ var Player = Object.create(Entity);
 extend(Player, { 	currentHP: 20, 
 					crystals: 30,
 					maxSpeed: 1,
+					weaponDamage: 1,				
 					strafeEnabled: false, //boolean for every upgrade for easier sidebar update (except health)
 					speedIncrease: false,
-					weaponDamage: false,
+					weaponDamageIncrease: false,
 					missilesEnabled: false,
 					gunEnabled: false
 				});
@@ -234,7 +236,7 @@ Player.destroy = function () {
 
 //Bullet mold (inherits Entity)
 var Bullet = Object.create(Entity);
-extend(Bullet, { owner: null, type: 0, start: null, deleteFlag : 0} );
+extend(Bullet, { owner: null, power: null, type: 0, start: null, deleteFlag : 0} );
 Bullet.clean = function () {
     scene.remove(this.mesh);
     world.DestroyBody(this.body);
@@ -368,6 +370,7 @@ function makeBullet( owner, AI, speed )
 	var bullet;
 	bullet = Object.create(Bullet);
 	bullet.owner = owner;
+	bullet.power = owner.weaponDamage;
 	bullet.start = Date.now(); 
 	bullet.body = makeBulletBody(owner, bullet, AI, speed); 
 	bullet.mesh = new THREE.Mesh(new THREE.SphereGeometry(.1,6,6), new THREE.MeshLambertMaterial({

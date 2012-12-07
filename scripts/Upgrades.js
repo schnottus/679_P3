@@ -26,6 +26,7 @@ function speed(){
         showInfo("Speed increased");
         playerShip.crystals -= 20;
         playerShip.speedIncrease = true;
+		playerShip.speed += 1;
         updateHUD();
         updateSidebar();
     }
@@ -39,7 +40,8 @@ function damage(){
     else{
         showInfo("Weapon damage increased");
         playerShip.crystals -= 30;
-        playerShip.weaponDamage = true;
+		playerShip.weaponDamageIncrease = true;
+        playerShip.weaponDamage ++;
         updateHUD();
         updateSidebar();
     }
