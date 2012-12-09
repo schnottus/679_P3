@@ -234,7 +234,7 @@ function destroyLevel()
 	//empty destroy list?
 	portal.clean();
 	//delete background sprites
-	scene.remove(spriteGroup);
+	background.remove(spriteGroup);
 	
 	
 	//empty box2d world of remaining hard boundaries

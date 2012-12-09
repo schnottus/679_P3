@@ -33,9 +33,9 @@ function thrustPlayer(d, a)
 		break;
 		case 1:	//forward thrust
 			playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
-			for(var i = 0; i < 3; ++i){
-				jetParticleList.add(makeJetParticle());
-			}
+			//for(var i = 0; i < 3; ++i){
+			//	jetParticleList.add(makeJetParticle());
+			//}
 		break;
 		case 2:	//left thrust
 			playerShip.body.ApplyImpulse(new b2Vec2(-strafeX,-strafeY), playerShip.body.GetWorldCenter());

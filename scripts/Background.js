@@ -4,6 +4,8 @@
 * Date: 5 Dec 2012
 *******************/
 
+
+
 var blueNebula;
 var scale = 1;
 
@@ -39,7 +41,7 @@ function background1(width, height){
 	floor.rotation.x = d2r(90);    
 	floor.position.z = 400.0;
 	floor.doubleSided = true;
-	scene.add(floor);
+	background.add(floor);
 	
 	//sprites
 	var mapA = THREE.ImageUtils.loadTexture( "resources/blue_nebula.png" );
@@ -59,9 +61,9 @@ function background1(width, height){
         
     spriteGroup.add( blueNebula );
     spriteGroup.add( sprite2 );
-    spriteGroup.add( sprite3 );
+    spriteGroup.add(sprite3);
 
-    scene.add( spriteGroup );
+    background.add( spriteGroup );
     
 }
 
@@ -89,7 +91,7 @@ function background2(width, height){
 	floor.rotation.x = d2r(90);
 	floor.position.z = 500.0;
 	floor.doubleSided = true;
-	scene.add(floor);
+	background.add(floor);
 	
 	//sprites
 	var mapA = THREE.ImageUtils.loadTexture( "resources/red_nebula.png" );
@@ -111,7 +113,7 @@ function background2(width, height){
     spriteGroup.add( sprite2 );
     spriteGroup.add( sprite3 );
 
-    scene.add( spriteGroup );
+    background.add( spriteGroup );
 }
 
 function updateBackground2(){
@@ -129,7 +131,7 @@ function background3(width, height){
 	floor.rotation.x = d2r(90);
 	floor.position.z = 500.0;
 	floor.doubleSided = true;
-	scene.add(floor);
+	background.add(floor);
 	
 	//sprites
 	var mapA = THREE.ImageUtils.loadTexture( "resources/red_nebula.png" );
@@ -151,7 +153,7 @@ function background3(width, height){
     spriteGroup.add( sprite2 );
     spriteGroup.add( sprite3 );
 
-    scene.add( spriteGroup );
+    background.add( spriteGroup );
     
 }
 

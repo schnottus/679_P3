@@ -60,11 +60,12 @@ function init2() {
 	// start the renderera
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	renderer.autoClear = false;
 	// attach the render-supplied DOM element
 	container.style.display = "none"; //do not display it (yet)
 	container.appendChild(renderer.domElement);
 	renderer.setClearColorHex( 0x000000, 1 );
-	renderer.autoClear = false;
+
 
 	
 	//camera attributes
@@ -74,7 +75,6 @@ function init2() {
 	
 	//create camera
 	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-	scene.add(camera);
 	//rotate camera view to match box2d coordinate system ( x:0 and y:0 in upper left)
 	//with this rotation positive z axis is going away from the camera
 	//camera.rotation.x = d2r(180);
@@ -88,7 +88,7 @@ function init2() {
 	// create a light
 	var light = new THREE.PointLight(0xffffff);
 	light.position.set(100,-10,-150);
-	scene.add(light);	
+	scene.add(light);
 	
 	// create a set of coordinate axes to help orient developer
 	// change size by setting scale

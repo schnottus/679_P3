@@ -32,8 +32,9 @@ function update()
 	//enforce rotation and velocity limits, check health
 	updatePlayer();
 	updateEnemies();
-	updateJetParticles();
-	
+	//updateJetParticles();
+	updateParticles();
+
 	//only update hud every 10th frame (dom manipulation is expensive)
 	if( hudFrames >= 10)
 	{
@@ -55,8 +56,10 @@ function render()
 	
 	//setViewport( lowerLeftX, lowerLeftY, viewportWidth, viewportHeight )
 	renderer.setViewport( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
-	renderer.clear();
-	renderer.render( scene, camera );
+	renderer.clear();                     // clear buffers
+	renderer.render(background, camera);     // render scene 1
+	renderer.clear(false, true, false); // clear depth buffer
+	renderer.render(scene, camera);    // render scene 2
 
 }
 

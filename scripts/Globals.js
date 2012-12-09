@@ -44,6 +44,7 @@
 
 //three.js vars
 	var scene = new THREE.Scene();
+	var background = new THREE.Scene();
 	var geometries = {
 		asteroid : null,
 		player: null,
