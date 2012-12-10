@@ -1,4 +1,4 @@
-var particleCount = 500,
+var particleCount = 200,
 	    particles = new THREE.Geometry(),
 		pMaterial = new THREE.ParticleBasicMaterial({
             size: 1,
@@ -22,11 +22,11 @@ for (var p = 0; p < particleCount; p++) {
 				new THREE.Vector3(pX, pY, pZ)
 			;
 		    // create a velocity vector
-		    particle.velocity = new THREE.Vector3(
+		    particle.velocity = new THREE.Vector2(
 			0, 			// x
-			-Math.random(), // y
-			0); 			// z
+			-Math.random()); // y
 
+		    particle.death = -1;
 		    // add it to the geometry
 		    particles.vertices.push(particle);
 		}
@@ -38,36 +38,71 @@ pMaterial);
 particleSystem.dynamic = true;
 particleSystem.sortParticles = true;
 
+var particlesUsed = -1;
+var recycledParticles = new Array();
+
 // add it to the scene
 scene.add(particleSystem);
+
+
+//----------------------------------------------
+
+
+function PlaceMovingParticle(position, velocity, life) {
+    var temp = 20;
+    var vel = {
+        x:-.1 * velocity.x,
+        y:-.1 * velocity.y
+    }
+    while (temp--) {
+        var particle = getAvailableParticle();
+        particle.x = position.x + .1 * (.5 - Math.random());
+        particle.y = position.y + .1 * (.5 - Math.random());
+        particle.velocity.x = vel.x + .1 * (.5 - Math.random());
+        particle.velocity.y = vel.y + .1 * (.5 - Math.random());
+        particle.death = (new Date()).getTime() + life;
+    }
+}
+
+function getAvailableParticle() {
+    if (recycledParticles.length == 0) {
+        particlesUsed++;
+        return particles.vertices[particlesUsed];
+    }
+    else {
+        return recycledParticles.pop();
+    }
+}
+
+//----------------------------------------------
+
+
+
+
+
+
+
+
 
 function updateParticles() {
 
     // add some rotation to the system
-    particleSystem.rotation.z += 0.01;
-
+    //particleSystem.rotation.z += 0.01;
     var pCount = particleCount;
     while (pCount--) {
         // get the particle
         var particle = particles.vertices[pCount];
-        particle.x += particle.velocity.x;
-        particle.y += particle.velocity.y;
+        if (particle.death == -1) {
 
-        // check if we need to reset
-        if (particle.x < -30) {
-            particle.x = 30;
         }
-
-        if (particle.y < -30) {
-            particle.y = 30;
+        else if ((new Date()).getTime() < particle.death) {
+            particle.x += particle.velocity.x;
+            particle.y += particle.velocity.y;
         }
-
-        if (particle.x > 30) {
-            particle.x = -30;
-        }
-
-        if (particle.y > 30) {
-            particle.y = -30;
+        else {
+            particle.death = -1;
+            particle.x = -1000;
+            recycledParticles.push(particle);
         }
     }
 
