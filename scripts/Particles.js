@@ -1,4 +1,4 @@
-var particleCount = 200,
+var particleCount = 500,
 	    particles = new THREE.Geometry(),
 		pMaterial = new THREE.ParticleBasicMaterial({
             size: 1,
@@ -49,15 +49,19 @@ scene.add(particleSystem);
 
 
 function PlaceMovingParticle(position, velocity, life) {
-    var temp = 20;
+    var temp = 50;
+	var pos = {
+        x: position.x - velocity.x,
+        y: position.y - velocity.y
+    }
     var vel = {
         x:-.1 * velocity.x,
         y:-.1 * velocity.y
     }
     while (temp--) {
         var particle = getAvailableParticle();
-        particle.x = position.x + .1 * (.5 - Math.random());
-        particle.y = position.y + .1 * (.5 - Math.random());
+        particle.x = pos.x + .1 * (.5 - Math.random());
+        particle.y = pos.y + .1 * (.5 - Math.random());
         particle.velocity.x = vel.x + .1 * (.5 - Math.random());
         particle.velocity.y = vel.y + .1 * (.5 - Math.random());
         particle.death = (new Date()).getTime() + life;
