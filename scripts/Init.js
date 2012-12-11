@@ -120,6 +120,21 @@ function init2() {
 	var firstEKey = true;
 	//var firstShotPress = true;
 	
+	//left click firing
+	container.onmousedown=function(){
+			if(canShoot)
+				{
+					canShoot = false;
+					shootDisabler = false;
+					playerShoot(1);
+					shootInterval = setInterval('playerShoot(1)', 200);  //100ms between bullets
+				} 
+		};
+		
+	container.onmouseup=function(){
+			shootDisabler = true;
+		};
+	
 	//Add event listeners for our controls
 	document.addEventListener("keydown", function(e) {
 		switch(e.keyCode)
@@ -205,15 +220,7 @@ function init2() {
 				playerShip.body.ApplyImpulse(new b2Vec2(thrustX,thrustY), playerShip.body.GetWorldCenter());
 			break;
 			case 32: //space bar
-				//fire (used temporarily - change to mouse?)
-				if(canShoot)
-				{
-					canShoot = false;
-					shootDisabler = false;
-					playerShoot(1);
-					shootInterval = setInterval('playerShoot(1)', 200);  //100ms between bullets
-				} 
-				
+						
 				break;
 			case 84: //t
 				//toggle debug draw div
@@ -267,12 +274,6 @@ function init2() {
 				
 				break;
 			case 32: //space bar
-				shootDisabler = true;
-				//firstShotPress = true;
-				//if(!(player.firstShotFired))
-				
-					//alert(playerShip.firstShotFired);
-					//playerShip.firstShotFired = false;
 				
 				break;
 			default:
