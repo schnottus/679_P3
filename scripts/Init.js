@@ -142,38 +142,42 @@ function init2() {
 				firstSKey = false;
 				break;
 			case 65: //a
-				//rotate left
-				if(firstAKey)
-				{
-					leftInterval = setInterval('rotatePlayer(0,playerRotateForce)', intervalSpeed);
-				}
-				firstAKey = false;
-				dampPlayerRotation = false;
-				break;
-			case 68: //d
-				//rotate right
-				if(firstDKey)
-				{
-					rightInterval = setInterval('rotatePlayer(1,playerRotateForce)', intervalSpeed);
-				}
-				firstDKey = false;
-				dampPlayerRotation = false;
-				break;
-			case 81: //q
 				//strafe left
 				if(firstQKey && playerShip.strafeEnabled)
 				{
 					strafeLInterval = setInterval('thrustPlayer(2, playerStrafeForce)', intervalSpeed);
 				}
 				firstQKey = false;
+				
+				//rotate left
+				/*if(firstAKey)
+				{
+					leftInterval = setInterval('rotatePlayer(0,playerRotateForce)', intervalSpeed);
+				}
+				firstAKey = false;
+				dampPlayerRotation = false;*/
 				break;
-			case 69: //e
+			case 68: //d
 				//strafe right
 				if(firstEKey && playerShip.strafeEnabled)
 				{
 					strafeRInterval = setInterval('thrustPlayer(3, playerStrafeForce)', intervalSpeed);
 				}
 				firstEKey = false;
+				
+				//rotate right
+				/*if(firstDKey)
+				{
+					rightInterval = setInterval('rotatePlayer(1,playerRotateForce)', intervalSpeed);
+				}
+				firstDKey = false;
+				dampPlayerRotation = false;*/
+				break;
+			case 81: //q
+				
+				break;
+			case 69: //e
+			
 				break;
 			case 49: //1
 				//temporarily used to switch levels
@@ -237,26 +241,30 @@ function init2() {
 				firstSKey = true;
 				break;
 			case 65: //a
-				//end rotate left
-				clearInterval(leftInterval);
-				firstAKey = true;
-				dampPlayerRotation = true;
-				break;
-			case 68: //d
-				//end rotate right
-				clearInterval(rightInterval);
-				firstDKey = true;
-				dampPlayerRotation = true;
-				break;
-			case 81: //q
 				//end strafe left
 				clearInterval(strafeLInterval);
 				firstQKey = true;
+				
+				//end rotate left
+				/*clearInterval(leftInterval);
+				firstAKey = true;
+				dampPlayerRotation = true;*/
 				break;
-			case 69: //e
+			case 68: //d
 				//end strafe right
 				clearInterval(strafeRInterval);
 				firstEKey = true;
+				
+				//end rotate right
+				/*clearInterval(rightInterval);
+				firstDKey = true;
+				dampPlayerRotation = true;*/
+				break;
+			case 81: //q
+				
+				break;
+			case 69: //e
+				
 				break;
 			case 32: //space bar
 				shootDisabler = true;

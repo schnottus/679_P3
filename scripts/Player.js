@@ -1,6 +1,7 @@
 
+//unused - player rotation now follows mouse cursor
 //rotate a direction d (0 for left, 1 for right) and an amount of force a 
-function rotatePlayer(d, a)
+/*function rotatePlayer(d, a)
 { 
 	if(d == 0)
 	{	//rotate left
@@ -12,7 +13,7 @@ function rotatePlayer(d, a)
 	{
 		//throw error
 	}	
-}
+}*/
 
 //apply thrust amount a in direction d (0 for reverse, 1 for forward, 2 for left, 3 for right)
 function thrustPlayer(d, a)
