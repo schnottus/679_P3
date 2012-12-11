@@ -200,17 +200,17 @@ body  p {
 
 #debugDraw {
 	position:absolute;
-	height:400px;
-	width:600px;
+	height:200px;
+	width:300px;
 	bottom:0;
 	right:0;
 	z-index:1;
 }
 
 #canvas {
-	height:400px;
-	width:600px;
-	background-color:#3F3FFF;
+	height:200px;
+	width:300px;
+	background-color:#3F3F7F;
 }
 
 #statsDiv {

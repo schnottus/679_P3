@@ -69,7 +69,7 @@ function level1()
 	var debugDraw = new b2DebugDraw();
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
 		//debug draw div is 600x400, calculate draw scale and fill to width
-		debugDraw.SetDrawScale(600.0 / width);  //smaller scale "zooms out"
+		debugDraw.SetDrawScale(300.0 / width);  //smaller scale "zooms out"
 		debugDraw.SetFillAlpha(0.5);
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
@@ -131,7 +131,7 @@ function level2()
 	var debugDraw = new b2DebugDraw();3
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
 		//debug draw div is 600x400, calculate draw scale and fill to width
-		debugDraw.SetDrawScale(600.0 / width);  //smaller scale "zooms out"
+		debugDraw.SetDrawScale(300.0 / width);  //smaller scale "zooms out"
 		debugDraw.SetFillAlpha(0.5);
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
@@ -195,7 +195,7 @@ function level3()
 	var debugDraw = new b2DebugDraw();
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
 		//debug draw div is 600x400, calculate draw scale and fill to width
-		debugDraw.SetDrawScale(600.0 / width);  //smaller scale "zooms out"
+		debugDraw.SetDrawScale(300.0 / width);  //smaller scale "zooms out"
 		debugDraw.SetFillAlpha(0.5);
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
