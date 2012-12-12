@@ -229,6 +229,25 @@ function init2() {
 				element = document.getElementById("stats");
 				element.style.display = (element.style.display != 'none' ? 'none' : '' );
 				break;
+			case 90: //z
+			    //pop up menus when key is pressed
+			    if(atGate) 
+                    levelMenu();
+                if(playerDocked)
+                    purchaseMenu();
+                alerts.innerHTML = "";
+			    break;
+			case 82: //r
+			    if(atGate || playerDocked){
+                    gamePaused = false;
+                    alerts.innerHTML = "";
+                    resume();
+                        
+			        }
+			    // else if(!atGate || !playerDocked){
+// 			        
+// 			    }
+			    break;
 			default:
 		}
 				

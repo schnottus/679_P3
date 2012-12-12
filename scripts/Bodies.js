@@ -59,13 +59,17 @@ listener.BeginContact = function (contact) {
         console.log("player is docked");
         gamePaused = true;
         playerDocked = true; 
-        purchaseMenu();
+        //show instructions rather than straight away pop up menu
+        alerts.innerHTML = "Press 'Z' for purchase menu <br/> 'R' to resume game";
+        
+        //purchaseMenu();
     }
 	else if (fixtureA.GetUserData() == 7 || fixtureB.GetUserData() == 7) {
         console.log("player is at the gate");
         gamePaused = true;
         atGate = true; 
-        levelMenu();
+        alerts.innerHTML = "Press 'Z' for level menu <br/> 'R' to resume game";
+        //levelMenu();
     }
 }
 listener.EndContact = function (contact) {
