@@ -1,40 +1,27 @@
 Important things todo:
 
-Move strafe to A,D on keyboard - Scott
-Left click mouse to shoot - Scott
-Disable Right click on mouse - Scott
-
-Enable three.js antialiasing -
-
-Add motiviation for continuing (story/feedback) - 
-
-three.js particle system thrust (not creating/destroying objects) - 
+Enable three.js antialiasing 
 
 AI - Joey
 
 Body accuracy(enemy bodies and the warp gate sensor need to be updated to match their models, which may require making enemy.runAI() do nothing for a bit so you can tweek the enemy objects without them trying to run away from you)-
 
-purchase menu with things to buy (guns, upgrades, etc) - Mik
-	Strafe upgrade is done - to enable/disable you set playerShip.strafeEnabled to true or false
+add upgrades - 
 
-add upgrades -
-	(maxSpeed increase, health, weapon types, etc)
-	
-Level 1 background - Mik
-Level 2 background - Mik
-Level 3 background - Mik
-Load Screen image - Mik
+balance crystals available, # of enemies, upgrades price -
 
+soft boundary (remove hard walls and gently push items back into game area) - 
 
-Add player death when health reaches 0 - 
-	see comment in updatePlayer function in game.js
-	(already checked for in prototyping, just need to write a 	playerDeath() function that is called when player dies, 	the call is commented out for now but is in the Player 	object in prototyping.js)
-
-create radar/mini map - 
+create radar/mini map -
 
 Make asteroid resources more random (some drop no resources, some more) - 
 
 shaders and fancy stuff (flashing lights for explosions, etc) -
 
-soft boundary (remove hard walls and gently push items back into game area) - aw
-wwww
+Mik
+- add some static items to help judging distance
+- simple storyline (not a very creative creator of stories but will try if no one is doing it xD)
+- feedback for various events (maybe just alerts.innerHTML)
+
+*note*
+- remember to uncomment the player death...

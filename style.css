@@ -160,7 +160,6 @@ body  p {
     width: 100px;
     background-color: #B31CFF;
     opacity: 0.5;
-    color: #000;
 }
 
 .upgradedItem{
@@ -171,6 +170,16 @@ body  p {
 
 .controls{
     color: #FFCA1C;
+}
+
+#instruct{
+    position:absolute;
+    right:0px;
+    top:0px;
+    width: 150px;
+    background-color: #B31CFF;
+    opacity: 0.5;
+    padding: 5px;
 }
 
 #levelMenuContainer{
