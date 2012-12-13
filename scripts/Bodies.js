@@ -60,7 +60,7 @@ listener.BeginContact = function (contact) {
         gamePaused = true;
         playerDocked = true; 
         //show instructions rather than straight away pop up menu
-        alerts.innerHTML = "You are docked. <br/> Press Z for purchase menu <br/> R to resume game";
+        alerts.innerHTML = "Your ship is docked. <br/> Press Z for purchase menu <br/> R to resume game";
         
         //purchaseMenu();
     }

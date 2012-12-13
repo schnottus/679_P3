@@ -92,9 +92,9 @@ function init2() {
 	
 	// create a set of coordinate axes to help orient developer
 	// change size by setting scale
-	var axes = new THREE.AxisHelper();
-	axes.scale.set( 0.1, 0.1, 0.1 );
-	scene.add( axes );
+	//var axes = new THREE.AxisHelper();
+	//axes.scale.set( 0.1, 0.1, 0.1 );
+	//scene.add( axes );
 	
 	
 //three.js events  (from stemkoski viewport-dual example)
