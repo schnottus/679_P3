@@ -122,12 +122,15 @@ function init2() {
 	
 	//left click firing
 	container.onmousedown=function(){
-			if(canShoot)
+			if(playerShip.currentWeapon == 3)
+			{	//fire one missile
+				playerShoot(3);
+			}else if(canShoot) //regular gun and shotgun
 				{
 					canShoot = false;
 					shootDisabler = false;
-					playerShoot(1);
-					shootInterval = setInterval('playerShoot(1)', 200);  //100ms between bullets
+					playerShoot(playerShip.currentWeapon);
+					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 200);  //200ms between bullets
 				} 
 		};
 		
@@ -198,14 +201,17 @@ function init2() {
 				//temporarily used to switch levels
 				destroyLevel();
 				loadLevel(1);
+				playerShip.currentWeapon = 1;
 				break;
 			case 50: //2
 				destroyLevel();
 				loadLevel(2);
+				if(playerShip.gunEnabled) playerShip.currentWeapon = 2;
 				break;
 			case 51: //3
 				destroyLevel();
 				loadLevel(3);
+				if(playerShip.missilesEnabled) playerShip.currentWeapon = 3;
 				break;
 			case 40: //down arrow
 				var angle = playerShip.body.GetAngle();

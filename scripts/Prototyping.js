@@ -224,7 +224,8 @@ extend(Player, { 	currentHP: 20,
 					speedIncrease: false,
 					weaponDamageIncrease: false,
 					missilesEnabled: false,
-					gunEnabled: false
+					gunEnabled: false,
+					currentWeapon: 1
 				});
 Player.maxHP = 100;
 Player.radius = 2;
