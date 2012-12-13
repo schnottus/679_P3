@@ -49,7 +49,7 @@ function init2() {
     playerShip = makePlayer();
 	loadLevel(currentWorld);
 	
-	
+	bgElement = document.getElementById('bgSound');
 /***Three.js Setup***/
 //check to make sure webGL is available, if not populate message div with message
 	//TODO: modify standard message?

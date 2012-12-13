@@ -303,6 +303,8 @@ function startGame()
 	
 	//start game loop
 	animate();
+	
+	bgElement.play();
 }
 
 function pauseGame()
@@ -312,10 +314,12 @@ function pauseGame()
 	if(gamePaused)
 	{
 		alerts.innerHTML = 'Game Paused';
+		bgElement.pause();
 	}else
 	{
 		alerts.innerHTML = ''; 
 		document.getElementById('btnPause').blur(); //remove focus from button so hitting space or enter doesnt pause/unpause game
+		bgElement.play();
 	}
 		
 }

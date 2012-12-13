@@ -69,5 +69,10 @@ function playerShoot( type )
 	}
 	else{
 		bulletList.add(makeBullet( playerShip, 0, 32));
+		if(ShootSound === null)
+		{
+			ShootSound = new Sound( ['sound/shoot.wav'], 50, 1 );
+		}
+		ShootSound.play();
 	}
 }

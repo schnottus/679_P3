@@ -36,6 +36,10 @@
 	var homeStation;
 	var portal;
 	
+	// Sound vars
+	var bgElement = null;
+	var ShootSound = null;
+	
 	//level boundaries (delete when soft boundaries are done)
 	var leftWall;
 	var rightWall;
