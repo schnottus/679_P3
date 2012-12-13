@@ -60,7 +60,7 @@ listener.BeginContact = function (contact) {
         gamePaused = true;
         playerDocked = true; 
         //show instructions rather than straight away pop up menu
-        alerts.innerHTML = "Press 'Z' for purchase menu <br/> 'R' to resume game";
+        alerts.innerHTML = "You are docked. <br/> Press Z for purchase menu <br/> R to resume game";
         
         //purchaseMenu();
     }
@@ -68,7 +68,7 @@ listener.BeginContact = function (contact) {
         console.log("player is at the gate");
         gamePaused = true;
         atGate = true; 
-        alerts.innerHTML = "Press 'Z' for level menu <br/> 'R' to resume game";
+        alerts.innerHTML = "You reach the warp gate <br/> Press Z for level menu <br/> R to resume game";
         //levelMenu();
     }
 }

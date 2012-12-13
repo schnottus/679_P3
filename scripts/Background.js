@@ -47,12 +47,22 @@ function background1(width, height){
 	var mapA = THREE.ImageUtils.loadTexture( "resources/blue_nebula.png" );
 	var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
 	var mapC = THREE.ImageUtils.loadTexture( "resources/or_nebula.png" );
+	var mapD = THREE.ImageUtils.loadTexture( "resources/glow_star.png" );
 	
     spriteGroup = new THREE.Object3D();
 
     blueNebula = new THREE.Sprite( { map: mapA, useScreenCoordinates: false} );
     var sprite2 = new THREE.Sprite( { map: mapB, useScreenCoordinates: false} );
     var sprite3 = new THREE.Sprite( { map: mapC, useScreenCoordinates: false} );
+    
+    var sprite4;
+    for(var i = 0; i < 60; i++){
+        sprite4 = new THREE.Sprite( { map: mapD, useScreenCoordinates: false} );
+        sprite4.position.set(Math.random() * width * 2 - width/2, Math.random() * height * 2, 30.0 );
+        sprite4.scale.set( 0.025, 0.025, 1.0 );
+        sprite4.color.setHSV( 0.9 * Math.random(), 0.5 * Math.random(), 1 );
+        spriteGroup.add( sprite4 );
+    }
 
     blueNebula.position.set( 0,10, 350.0 );
     sprite2.position.set(300,100,350.0 );
@@ -98,11 +108,22 @@ function background2(width, height){
 	var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
 	var mapC = THREE.ImageUtils.loadTexture( "resources/plasma.png" );
 	
+	var mapD = THREE.ImageUtils.loadTexture( "resources/glow_star.png" );
+	
     spriteGroup = new THREE.Object3D();
 
     var sprite = new THREE.Sprite( { map: mapA, useScreenCoordinates: false} );
     var sprite2 = new THREE.Sprite( { map: mapB, useScreenCoordinates: false} );
     var sprite3 = new THREE.Sprite( { map: mapC, useScreenCoordinates: false} );
+    
+    var sprite4;
+    for(var i = 0; i < 150; i++){
+        sprite4 = new THREE.Sprite( { map: mapD, useScreenCoordinates: false} );
+        sprite4.position.set(Math.random() * width * 2 - width/2, Math.random() * height * 2, 30.0 );
+        sprite4.scale.set( 0.025, 0.025, 1.0 );
+        sprite4.color.setHSV( 0.9 * Math.random(), 0.5 * Math.random(), 1 );
+        spriteGroup.add( sprite4 );
+    }
 
     sprite.position.set( 0,10, 300.0 );
     sprite2.position.set(300,100,350.0 );
@@ -112,6 +133,7 @@ function background2(width, height){
     spriteGroup.add( sprite );
     spriteGroup.add( sprite2 );
     spriteGroup.add( sprite3 );
+
 
     background.add( spriteGroup );
 }
@@ -137,12 +159,23 @@ function background3(width, height){
 	var mapA = THREE.ImageUtils.loadTexture( "resources/red_nebula.png" );
 	var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
 	var mapC = THREE.ImageUtils.loadTexture( "resources/or_nebula.png" );
+	var mapD = THREE.ImageUtils.loadTexture( "resources/glow_star.png" );
 	
     spriteGroup = new THREE.Object3D();
 
     var sprite = new THREE.Sprite( { map: mapA, useScreenCoordinates: false} );
     var sprite2 = new THREE.Sprite( { map: mapB, useScreenCoordinates: false} );
     var sprite3 = new THREE.Sprite( { map: mapC, useScreenCoordinates: false} );
+    
+    var sprite4;
+    for(var i = 0; i < 200; i++){
+        sprite4 = new THREE.Sprite( { map: mapD, useScreenCoordinates: false} );
+        sprite4.position.set(Math.random() * width * 2 - width/2, Math.random() * height * 2, 30.0 );
+        sprite4.scale.set( 0.025, 0.025, 1.0 );
+        sprite4.color.setHSV( 0.9 * Math.random(), 0.5 * Math.random(), 1 );
+        spriteGroup.add( sprite4 );
+    }
+
 
     sprite.position.set( -50,10, 300.0 );
     sprite2.position.set(300,100,350.0 );
