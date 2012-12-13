@@ -60,19 +60,46 @@ function thrustPlayer(d, a)
 	}
 }
 
+
 //param: type - type of bullet
 function playerShoot( type )
 {
-	if(shootDisabler){
-		clearInterval(shootInterval);
-		canShoot = true;
-	}
-	else{
-		bulletList.add(makeBullet( playerShip, 0, 32));
-		if(ShootSound === null)
-		{
-			ShootSound = new Sound( ['sound/shoot.wav'], 50, 1 );
-		}
-		ShootSound.play();
+	switch(type)
+	{
+		case 1: //regular gun
+			if(shootDisabler){
+				clearInterval(shootInterval);
+				canShoot = true;
+			}
+			else{ 
+				bulletList.add(makeBullet( playerShip, 0, 32));
+				if(ShootSound === null)
+				{
+					ShootSound = new Sound( ['sound/shoot.wav'], 50, 1 );
+				}
+				ShootSound.play();
+			}
+			break;
+		case 2: //scatter gun
+			if(shootDisabler){
+				clearInterval(shootInterval);
+				canShoot = true;
+			}
+			else{ 
+				//update makebullet to allow for different directions
+				bulletList.add(makeBullet( playerShip, 0, 32));
+				if(ShootSound === null)
+				{
+					ShootSound = new Sound( ['sound/shoot.wav'], 50, 1 );
+				}
+				ShootSound.play();
+			}
+			break;
+		case 3: //missile
+			//code to fire one missile here
+			alert("attempted to fire missile - code not done");
+			break;
+		default:
+		
 	}
 }
