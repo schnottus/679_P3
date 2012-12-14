@@ -69,7 +69,7 @@
 				directionalLight.position.set( 100, 70, 50 ).normalize();
 				scene.add( directionalLight );
 				
-              new THREE.JSONLoader().load('mesh/ship2.js', function(geometry){
+              new THREE.JSONLoader().load('mesh/ship.js', function(geometry){
               var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial());
              scene.add( mesh );
           }, 'mesh/images');
