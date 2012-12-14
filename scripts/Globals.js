@@ -39,6 +39,10 @@
 	// Sound vars
 	var bgElement = null;
 	var ShootSound = null;
+	var aExplosionSound = null;
+	var eExplosionSound = null;
+	var crystalSound = null;
+	var cSound = null;
 	
 	//level boundaries (delete when soft boundaries are done)
 	//var leftWall;
@@ -89,6 +93,8 @@
 	var gamePaused = false;
 	var hudFrames = 0;  //frames since last hud update
 	var currentWorld = 1;  //which level the player is in
+	var worldWidth = 0; //so soft boundary knows size of the current world
+	var worldHeight = 0;
 	
 	var playerDocked = false; //pause the game and display purchase menu if true
 	var atGate = false; 

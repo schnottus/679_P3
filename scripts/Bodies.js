@@ -223,6 +223,7 @@ function makeCrystalBody(position, velocity, crystal) {
     body.CreateFixture(fixDef);
 	body.userData = crystal;
 	body.ApplyImpulse(new b2Vec2(velocity.x*body.GetMass(), velocity.y*body.GetMass()), body.GetWorldCenter());
+	body.SetLinearDamping(0.2);
 	randomImpulse(body, .3);
 	if( position.x < 0 || position.x > width || position.y < 0 || position.y > height){
 		outOfBoundsList.add(body);

@@ -40,12 +40,17 @@ function update()
 	}
 
 	//only update hud every 10th frame (dom manipulation is expensive)
+	//check player boundary every 10th frame (current search is costly)
 	if( hudFrames >= 10)
 	{
 		hudFrames = 0;
 		updateHUD();
+		
+		
 	}
 	hudFrames++;
+	
+	//checkWorldBoundary();
 	
 	updateBackground();
 }
@@ -120,6 +125,9 @@ function updateWorld()
 	//}
     playerShip.updateMesh();
 	homeStation.updateMesh();
+	
+	
+	
 };
 
 //move camera to follow player
@@ -133,7 +141,7 @@ function updateCamera()
 function updatePlayer()
 {
 	//limit angular velocity
-	var rotationSpeed = playerShip.body.GetAngularVelocity();
+	/*var rotationSpeed = playerShip.body.GetAngularVelocity();
 	if( Math.abs(rotationSpeed) > MAX_PLAYER_ROTATION_VELOCITY )
 	{
 		
@@ -144,16 +152,16 @@ function updatePlayer()
 			playerShip.body.SetAngularVelocity(MAX_PLAYER_ROTATION_VELOCITY);
 		}
 		
-	}
+	}*/
 	
 	
 	playerShip.body.SetAngle( angleTwoPoints( (window.innerWidth / 2), (window.innerHeight / 2), mouseX, mouseY));
 	
 	//damp angular velocity if player not turning
-	if ( dampPlayerRotation )
+	/*if ( dampPlayerRotation )
 	{
 		playerShip.body.SetAngularVelocity( playerRotationDampValue * rotationSpeed );
-	}
+	}*/
 	
 	//limit linear velocity (-Joey This could be added to the player controls that apply impulses so that impulses never produce velocities greater than max velocity)
 		//todo
@@ -415,3 +423,72 @@ function levelMenu()
         levelMenuContainer.style.display="none";
     }
 }
+
+//check to make sure player, enemies, crystals, asteroids are inside boundary
+//rough code, linear update -- should be replaced with sensors that detect object leaving area
+/*function checkWorldBoundary()
+{
+	
+	keepInsideBoundary(playerShip);
+	if(enemyList.head != null)
+	{
+		var temp = enemyList.head;
+		while(temp.next != null )
+		{
+			keepInsideBoundary(temp.stored);
+			temp = temp.next;
+		}
+		keepInsideBoundary(temp.stored);
+	}
+	if(asteroidList.head != null)
+	{
+		var temp = asteroidList.head;
+		while(temp.next != null )
+		{
+			keepInsideBoundary(temp.stored);
+			temp = temp.next;
+		}
+		keepInsideBoundary(temp.stored);
+	}
+	if(crystalList.head != null)
+	{
+		var temp = crystalList.head;
+		while(temp.next != null )
+		{
+			keepInsideBoundary(temp.stored);
+			temp = temp.next;
+		}
+		keepInsideBoundary(temp.stored);
+	}
+}*/
+
+/*function keepInsideBoundary( pBody )
+{
+	var pushStrength = 0.6;
+	var difference;
+	var x = pBody.body.GetPosition().x;
+	var y = pBody.body.GetwPosition().y;
+	
+	if(x < 0)
+	{
+		difference = -x;
+		pBody.body.ApplyImpulse(new b2Vec2(difference * pushStrength,0), pBody.body.GetWorldCenter());
+		
+	}else
+	if(x > worldWidth)
+	{
+		difference = x - worldWidth;
+		pBody.body.ApplyImpulse(new b2Vec2(difference * -pushStrength,0), pBody.body.GetWorldCenter());
+	}
+	
+	if(y < 0)
+	{
+		difference = -y;
+		pBody.body.ApplyImpulse(new b2Vec2(0, difference * pushStrength), pBody.body.GetWorldCenter());
+	}else
+	if(y > worldHeight)
+	{
+		difference = y - worldHeight;
+		pBody.body.ApplyImpulse(new b2Vec2(0,difference * -pushStrength), pBody.body.GetWorldCenter());
+	}
+}*/
