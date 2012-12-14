@@ -16,7 +16,7 @@ var Namer = {
 	
 	NewCrystalID : function(){
 		if (this.recycledCrystalIDs.length == 0){
-			var ID = "B" + this.CrystalIDCount.toString(16);
+			var ID = "C" + this.CrystalIDCount.toString(16);
 			this.CrystalIDCount ++;
 			return ID;
 		}

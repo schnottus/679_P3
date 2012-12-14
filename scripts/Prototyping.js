@@ -255,6 +255,8 @@ Tank.fireRate = 1000;
 var Player = Object.create(Entity);
 extend(Player, { 	currentHP: 20, 
 					crystals: 200,
+					sensorDir : null,
+					sensorList : null,
 					maxSpeed: 1,
 					weaponDamage: 1,				
 					strafeEnabled: false, //boolean for every upgrade for easier sidebar update (except health)
@@ -398,6 +400,8 @@ function makePlayer() {
     scene.add(player.mesh);
 	player.updateMesh();
 	player.ID = Namer.NewPlayerID();
+	player.sensorDir = {};
+    player.sensorList = newDLL();
     return player;
 }
 
