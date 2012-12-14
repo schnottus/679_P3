@@ -250,7 +250,7 @@ function updateHUD()
         warnHealth.innerHTML = "";
     }
     
-    if(playerShip.crystals >= 60 && currentWorld == 1){
+   /*if(playerShip.crystals >= 60 && currentWorld == 1){
         alerts.innerHTML = "You have enough resources to teleport to World 2";
         shown = true;
     }
@@ -269,7 +269,7 @@ function updateHUD()
             alerts.innerHTML = "";
             shown = false;
             }
-    }
+    }*/
 	var health = document.getElementById("playerHealth");
 	health.innerHTML = "Health: " + playerShip.currentHP;
 	

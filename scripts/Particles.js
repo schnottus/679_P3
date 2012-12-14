@@ -1,4 +1,4 @@
-var particleCount = 5000,
+var particleCount = 7500,
 	    particles = new THREE.Geometry(),
 		pMaterial = new THREE.ParticleBasicMaterial({
             size: 1,
@@ -70,7 +70,9 @@ function PlaceMovingParticle(position, velocity, life) {
 
 function getAvailableParticle() {
     if (recycledParticles.length == 0) {
-        particlesUsed++;
+		if(particlesUsed < 7499){
+			particlesUsed++;
+		}
         return particles.vertices[particlesUsed];
     }
     else {
