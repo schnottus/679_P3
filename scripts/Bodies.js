@@ -66,7 +66,7 @@ listener.BeginContact = function (contact) {
 	else if (fixtureA.GetUserData() == 7 || fixtureB.GetUserData() == 7) {
         gamePaused = true;
         atGate = true; 
-        alerts.innerHTML = "You reach the warp gate <br/> Press Z for level menu <br/> R to resume game";
+        alerts.innerHTML = "You reach the warp gate. <br/> Press Z for level menu <br/> R to resume game";
         //levelMenu();
     }
 }

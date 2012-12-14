@@ -48,7 +48,8 @@
 		        W: forward<br/>
 		        S: reverse <br/>
 		        Mouse: rotate<br/>
-		        Click: shoot
+		        Click: shoot<br/>
+		        T: on/off minimap
 		    </p>
 		</div>
 		<!--sidebar-->
@@ -111,7 +112,7 @@
 		                <p>World 3 - 200 crystals</p>
 		            </button>
 		            <button id = "win" class = "purchase" type="button" onclick="winScreen();">
-		                <p>End of War ! - 200 crystals</p>
+		                <p>Back to Earth ! - 200 crystals</p>
 		            </button>
 		            <div id="levelInfo">
 		            </div>
@@ -171,15 +172,14 @@
             </div>
             <div class="float">
                 <img src="resources/warp_gate.png" />
-            </div>
-		    
-		    
+            </div>		    
 		</div>
 		
 		
 	</div>
 	<!--deathscreen-->
     <div id = "deathScreen">
+        <img src="resources/deathScreen.png" />
         <div>
 			<button class="btnReload" type="button" onclick="location.reload()">Restart</button>
 		</div>
@@ -187,6 +187,7 @@
     
     <!--winscreen-->
     <div id = "winScreen">
+        <img src="resources/winScreen.png" />
         <div>
 			<button class="btnReload" type="button" onclick="location.reload()">Play Again</button>
 		</div>

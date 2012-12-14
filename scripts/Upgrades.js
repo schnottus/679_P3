@@ -1,7 +1,5 @@
 //Selections in purchase menu
 
-//CURRENTLY: nothing happens if player purchases something twice, except wasting their resources
-// maybe we might want to add doubled speed/ weapon damage/ missiles etc (after the playtest)?
 
 function strafe(){
     //if not enough crystals
