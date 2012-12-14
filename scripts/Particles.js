@@ -80,7 +80,17 @@ function getAvailableParticle() {
 
 //----------------------------------------------
 
-
+function particleExplosion(position, velocity, life) {
+    var temp = 20;
+    while (temp--) {
+        var particle = getAvailableParticle();
+        particle.x = position.x;
+        particle.y = position.y;
+        particle.velocity.x = .5 - Math.random();
+        particle.velocity.y =  .5 - Math.random();
+        particle.death = (new Date()).getTime() + life;
+    }
+}
 
 
 

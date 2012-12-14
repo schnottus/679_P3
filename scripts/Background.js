@@ -3,8 +3,15 @@
 * Authors: Scott Larson, Joseph Francke, Mik Xin Tan, Dongyoung Cho
 * Date: 5 Dec 2012
 *******************/
+var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space2.jpg' ); 
 
+var mapA = THREE.ImageUtils.loadTexture( "resources/blue_nebula.png" );
+var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
+var mapC = THREE.ImageUtils.loadTexture( "resources/or_nebula.png" );
+var mapD = THREE.ImageUtils.loadTexture( "resources/glow_star.png" );
 
+var mapE = THREE.ImageUtils.loadTexture( "resources/red_nebula.png" );
+var mapF = THREE.ImageUtils.loadTexture( "resources/plasma.png" );
 
 var blueNebula;
 var scale = 1;
@@ -31,7 +38,6 @@ function updateBackground()
 
 function background1(width, height){
     //simple background image (changed to a tileable + less noise backgrd, easier for expansion of plane)
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space2.jpg' ); 
 	floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.wrapS = THREE.RepeatWrapping;
 	floorTexture.repeat.set(5, 5);
@@ -44,10 +50,6 @@ function background1(width, height){
 	background.add(floor);
 	
 	//sprites
-	var mapA = THREE.ImageUtils.loadTexture( "resources/blue_nebula.png" );
-	var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
-	var mapC = THREE.ImageUtils.loadTexture( "resources/or_nebula.png" );
-	var mapD = THREE.ImageUtils.loadTexture( "resources/glow_star.png" );
 	
     spriteGroup = new THREE.Object3D();
 
@@ -91,7 +93,6 @@ function updateBackground1(){
 function background2(width, height){
 
     //simple background image
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space2.jpg' ); 
 	floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.wrapS = THREE.RepeatWrapping;
 	floorTexture.repeat.set(6, 6);
@@ -104,17 +105,13 @@ function background2(width, height){
 	background.add(floor);
 	
 	//sprites
-	var mapA = THREE.ImageUtils.loadTexture( "resources/red_nebula.png" );
-	var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
-	var mapC = THREE.ImageUtils.loadTexture( "resources/plasma.png" );
-	
-	var mapD = THREE.ImageUtils.loadTexture( "resources/glow_star.png" );
+
 	
     spriteGroup = new THREE.Object3D();
 
-    var sprite = new THREE.Sprite( { map: mapA, useScreenCoordinates: false} );
+    var sprite = new THREE.Sprite( { map: mapE, useScreenCoordinates: false} );
     var sprite2 = new THREE.Sprite( { map: mapB, useScreenCoordinates: false} );
-    var sprite3 = new THREE.Sprite( { map: mapC, useScreenCoordinates: false} );
+    var sprite3 = new THREE.Sprite( { map: mapF, useScreenCoordinates: false} );
     
     var sprite4;
     for(var i = 0; i < 150; i++){
@@ -143,7 +140,6 @@ function updateBackground2(){
 
 function background3(width, height){
     //simple background image
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'resources/space2.jpg' ); 
 	floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.wrapS = THREE.RepeatWrapping;
 	floorTexture.repeat.set(6, 6);
@@ -156,14 +152,10 @@ function background3(width, height){
 	background.add(floor);
 	
 	//sprites
-	var mapA = THREE.ImageUtils.loadTexture( "resources/red_nebula.png" );
-	var mapB = THREE.ImageUtils.loadTexture( "resources/earth.png" );
-	var mapC = THREE.ImageUtils.loadTexture( "resources/or_nebula.png" );
-	var mapD = THREE.ImageUtils.loadTexture( "resources/glow_star.png" );
 	
     spriteGroup = new THREE.Object3D();
 
-    var sprite = new THREE.Sprite( { map: mapA, useScreenCoordinates: false} );
+    var sprite = new THREE.Sprite( { map: mapE, useScreenCoordinates: false} );
     var sprite2 = new THREE.Sprite( { map: mapB, useScreenCoordinates: false} );
     var sprite3 = new THREE.Sprite( { map: mapC, useScreenCoordinates: false} );
     

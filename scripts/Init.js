@@ -130,7 +130,7 @@ function init2() {
 					canShoot = false;
 					shootDisabler = false;
 					playerShoot(playerShip.currentWeapon);
-					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 350);  //200ms between bullets
+					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 200);  //200ms between bullets
 				} 
 		};
 		
@@ -367,11 +367,14 @@ function loadingLoop(){
 	    if (geometries.tank == null) {
 	        finishedLoading = false;
 	    }
-		frame = requestAnimationFrame( internalLoadLoop );
+		
 		//render loading screen here
 		 if (finishedLoading){ //this is how the loading loop exits
 			window.cancelAnimationFrame(frame);
 			init2();
+		}
+		else{
+			frame = requestAnimationFrame( internalLoadLoop );
 		}
 	}
 	internalLoadLoop();

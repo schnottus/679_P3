@@ -242,7 +242,7 @@ Player.maxHP = 100;
 Player.radius = 2;
 Player.speed = 8;
 Player.destroy = function () {
-    //playerDeath();
+    playerDeath();
     console.log("player was destroyed");
 }
 
