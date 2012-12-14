@@ -4,7 +4,8 @@
 * Date: 9 Nov 2012
 *******************/
 
-
+var height;
+var width;
 
 //all level setters, getters, creation, etc
 function loadLevel( level )
@@ -36,11 +37,12 @@ function level1()
 
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
 
-	var width = 60;
-	var height = 40;
-
+	width = 60;
+	height = 40;
 	//create a hard boundary so that objects don't escape the screen
 
+	boundary = makeBoundary(width, height);
+	/*
 	var fixDef = new b2FixtureDef;
 	fixDef.density = 1.0;
 	fixDef.friction = 0.5;
@@ -62,7 +64,7 @@ function level1()
 	bodyDef.position.Set(width, 0);
 	rightWall = world.CreateBody(bodyDef);
 	rightWall.CreateFixture(fixDef); //right
-
+*/
 	//debug draw div is 600x400, set draw scale using width
 	
 	//setup debug draw
@@ -100,32 +102,12 @@ function level2()
 	
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
 	
-	var width = 120;
-	var height = 80;
+	width = 120;
+	height = 80;
 
 	//create a hard boundary so that objects don't escape the screen
 
-	var fixDef = new b2FixtureDef;
-	fixDef.density = 1.0;
-	fixDef.friction = 0.5;
-	fixDef.restitution = 0.3;
-	var bodyDef = new b2BodyDef;
-	bodyDef.type = b2Body.b2_staticBody;  //staticBody (never moves)
-	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(width, 0.1);
-	bodyDef.position.Set(0, 0);
-	topWall = world.CreateBody(bodyDef);
-	topWall.CreateFixture(fixDef); //top wall
-	bodyDef.position.Set(0, height);
-	bottomWall = world.CreateBody(bodyDef);
-	bottomWall.CreateFixture(fixDef); //bottom wall
-	fixDef.shape.SetAsBox(0.1, height);
-	bodyDef.position.Set(0, 0);
-	leftWall = world.CreateBody(bodyDef);
-	leftWall.CreateFixture(fixDef); //left wall
-	bodyDef.position.Set(width, 0);
-	rightWall = world.CreateBody(bodyDef);
-	rightWall.CreateFixture(fixDef); //right
+	boundary = makeBoundary(width, height);
 
 	//debug draw div is 600x400, set draw scale using width
 	
@@ -169,32 +151,12 @@ function level3()
 
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
 	
-	var width = 150;
-	var height = 100;
+	width = 150;
+	height = 100;
 
 	//create a hard boundary so that objects don't escape the screen
 
-	var fixDef = new b2FixtureDef;
-	fixDef.density = 1.0;
-	fixDef.friction = 0.5;
-	fixDef.restitution = 0.3;
-	var bodyDef = new b2BodyDef;
-	bodyDef.type = b2Body.b2_staticBody;  //staticBody (never moves)
-	fixDef.shape = new b2PolygonShape;
-	fixDef.shape.SetAsBox(width, 0.1);
-	bodyDef.position.Set(0, 0);
-	topWall = world.CreateBody(bodyDef);
-	topWall.CreateFixture(fixDef); //top wall
-	bodyDef.position.Set(0, height);
-	bottomWall = world.CreateBody(bodyDef);
-	bottomWall.CreateFixture(fixDef); //bottom wall
-	fixDef.shape.SetAsBox(0.1, height);
-	bodyDef.position.Set(0, 0);
-	leftWall = world.CreateBody(bodyDef);
-	leftWall.CreateFixture(fixDef); //left wall
-	bodyDef.position.Set(width, 0);
-	rightWall = world.CreateBody(bodyDef);
-	rightWall.CreateFixture(fixDef); //right
+	boundary = makeBoundary(width, height);
 
 	//debug draw div is 600x400, set draw scale using width
 	
@@ -251,11 +213,11 @@ function destroyLevel()
 	portal.clean();
 	//delete background sprites
 	background.remove(spriteGroup);
-	
+	world.DestroyBody(boundary);
 	
 	//empty box2d world of remaining hard boundaries
-	world.DestroyBody(leftWall);
-	world.DestroyBody(rightWall);
-	world.DestroyBody(topWall);
-	world.DestroyBody(bottomWall);
+	//world.DestroyBody(leftWall);
+	//world.DestroyBody(rightWall);
+	//world.DestroyBody(topWall);
+	//world.DestroyBody(bottomWall);
 }
