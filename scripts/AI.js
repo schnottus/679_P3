@@ -29,8 +29,8 @@ function autoAimVector(shooterBody, shootAtBody, bulletSpeed){
 		t = t1;
 	}
 	
-	relativePosition.x += relativeVelocity.x * t;
-	relativePosition.y += relativeVelocity.y * t;
+	relativePosition.x += relativeVelocity.x * t + 10*(.5 - Math.random());
+	relativePosition.y += relativeVelocity.y * t + 10*(.5 - Math.random());
 	relativePosition.x /= t;
 	relativePosition.y /= t;
 	return relativePosition;
@@ -49,6 +49,12 @@ function freeFloating(thing, sumVec) {
     }
 }
 
+function weightVector(vec, bubble){
+	var length = vec.x * vec.x + vec.y * vec. y;
+	vec.x /= length;
+	vec.y /= length;
+}
+
 function predictCollision(A, B, sumVec){
     var R = A.radius + B.radius;
     R = R * R;
@@ -57,8 +63,8 @@ function predictCollision(A, B, sumVec){
     var a = V.x*V.x + V.y*V.y;
     var b = 2*dotProduct(V,P);
     var c = P.x*P.x + P.y*P.y - R;
-
-		weightVector(P);
+		var bubble = 4;
+		weightVector(P, bubble);
 		vectorAdditionAssignment(sumVec, P);
 		
 	if (b * b >= 4 * a * c && (b < 0)) {

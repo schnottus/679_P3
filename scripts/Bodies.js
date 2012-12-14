@@ -56,7 +56,6 @@ listener.BeginContact = function (contact) {
         destroyList.push(fixtureB.GetBody().userData);
     }
     else if (fixtureA.GetUserData() == 6 || fixtureB.GetUserData() == 6) {
-        console.log("player is docked");
         gamePaused = true;
         playerDocked = true; 
         //show instructions rather than straight away pop up menu
@@ -65,7 +64,6 @@ listener.BeginContact = function (contact) {
         //purchaseMenu();
     }
 	else if (fixtureA.GetUserData() == 7 || fixtureB.GetUserData() == 7) {
-        console.log("player is at the gate");
         gamePaused = true;
         atGate = true; 
         alerts.innerHTML = "You reach the warp gate <br/> Press Z for level menu <br/> R to resume game";
@@ -100,10 +98,8 @@ listener.EndContact = function (contact) {
         delete dir[key];
     }
     else if (contact.GetFixtureA().GetUserData() == 6 || contact.GetFixtureB().GetUserData() == 6) {
-        console.log("player is no longer docked");
     }
 	else if (contact.GetFixtureA().GetUserData() == 7 || contact.GetFixtureB().GetUserData() == 7) {
-        console.log("player is has left the gate");
     }
 
 }

@@ -41,7 +41,7 @@ function damage(){
         showInfo("Weapon damage increased");
         playerShip.crystals -= 30;
 		playerShip.weaponDamageIncrease = true;
-        playerShip.weaponDamage ++;
+        playerShip.weaponDamage += .5;
         updateHUD();
         updateSidebar();
     }

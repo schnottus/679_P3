@@ -130,7 +130,7 @@ function init2() {
 					canShoot = false;
 					shootDisabler = false;
 					playerShoot(playerShip.currentWeapon);
-					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 200);  //200ms between bullets
+					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 350);  //200ms between bullets
 				} 
 		};
 		

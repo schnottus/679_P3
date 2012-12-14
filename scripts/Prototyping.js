@@ -127,6 +127,12 @@ extend(Enemy, { speed : null,
 					var totalRotation = (desiredAngle - nextAngle);
 					while ( totalRotation < -Math.PI ) totalRotation += 2*Math.PI;
 					while ( totalRotation >  Math.PI ) totalRotation -= 2*Math.PI;
+					if (totalRotation > 90){
+						totalRotation = 180 - totalRotation
+					}
+					if (totalRotation < -90){
+						totalRotation = 180 + totalRotation
+					}
 					var desiredAngularVelocity = totalRotation * 3;
 					var torque = this.body.GetInertia() * desiredAngularVelocity / (1/60.0);
 					this.body.ApplyTorque( torque );

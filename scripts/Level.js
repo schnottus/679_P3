@@ -82,6 +82,8 @@ function level1()
 
 	enemyList.add(makeEnemy(1, 40, 20));
 	enemyList.add(makeEnemy(1, 50, 30));
+	enemyList.add(makeEnemy(1, 40, 30));
+	enemyList.add(makeEnemy(1, 50, 20));
 	
 	//add asteroids
 	for(var i = 0; i < 30; ++i) 
@@ -143,9 +145,14 @@ function level2()
 	
 	
 	enemyList.add(makeEnemy(1, 40, 20));
-	enemyList.add(makeEnemy(1, 50, 30));
-	enemyList.add(makeEnemy(0, 70, 30));
-    enemyList.add(makeEnemy(0, 80, 40));
+	enemyList.add(makeEnemy(1, 60, 30));
+	enemyList.add(makeEnemy(0, 80, 30));
+    enemyList.add(makeEnemy(0, 100, 40));
+	
+	enemyList.add(makeEnemy(1, 110, 40));
+	enemyList.add(makeEnemy(1, 90, 50));
+	enemyList.add(makeEnemy(0, 70, 60));
+    enemyList.add(makeEnemy(0, 50, 70));
 	
 	//add asteroids
 	for(var i = 0; i < 50; ++i) 
@@ -205,11 +212,20 @@ function level3()
 	portal = makeWarpGate(width - 10, height / 2);
 	portal.mesh.position.z = 2;
 	
-	enemyList.add(makeEnemy(1, 40, 20));
-	enemyList.add(makeEnemy(1, 50, 30));
-	enemyList.add(makeEnemy(0, 70, 30));
-    enemyList.add(makeEnemy(0, 80, 40));
-	enemyList.add(makeEnemy(2, 140, 90));
+	enemyList.add(makeEnemy(1, 20, 25));
+	enemyList.add(makeEnemy(1, 30, 65));
+    enemyList.add(makeEnemy(1, 40, 85));
+	enemyList.add(makeEnemy(1, 50, 45));
+    enemyList.add(makeEnemy(1, 60, 5));
+
+	enemyList.add(makeEnemy(0, 70, 5));
+	enemyList.add(makeEnemy(0, 80, 45));
+	enemyList.add(makeEnemy(0, 90, 85));
+	enemyList.add(makeEnemy(0, 100, 65));
+	enemyList.add(makeEnemy(0, 110, 25));
+	
+	enemyList.add(makeEnemy(2, 130, 10));
+	enemyList.add(makeEnemy(2, 130, 90));
 	
 	
 	

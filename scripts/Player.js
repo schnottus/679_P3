@@ -72,8 +72,8 @@ function playerShoot( type )
 				canShoot = true;
 			}
 			else{ 
-				bulletList.add(makeBullet( playerShip, 0, 32));
-				if(ShootSound === null)
+				bulletList.add(makeBullet( playerShip, 0, 30));
+				if(ShootSound == null)
 				{
 					ShootSound = new Sound( ['sound/shoot.wav'], 50, 1 );
 				}

@@ -58,13 +58,6 @@ function normalizeVector(vec){
 	vec.y /= length;
 	}
 }
- 
-function weightVector(vec){
-	var length = Math.sqrt(vec.x * vec.x + vec.y * vec. y);
-	length *= length * length;
-	vec.x /= length;
-	vec.y /= length;
-}
 
 var Sound = function ( sources, radius, volume ) {
 	var audio = document.createElement( 'audio' );
