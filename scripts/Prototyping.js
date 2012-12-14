@@ -82,6 +82,13 @@ Asteroid.destroy = function(){
 	for(var i = 0; i < 3; ++i){
 		crystalList.add(makeCrystal(position, velocity));
 	}
+	
+	if(aExplosionSound === null)
+	{
+		aExplosionSound = new Sound( ['sound/AsteroidExplosion.wav'], 50, 1 );
+	}
+	aExplosionSound.play();
+	
 	this.clean();
 }
 
@@ -98,6 +105,13 @@ Crystal.clean = function (){
 	world.DestroyBody(this.body);
 	Namer.recycledCrystalIDs.push(this.ID);
 	crystalList.remove(this.node);
+	
+	if(crystalSound === null)
+	{
+		crystalSound = new Sound( ['sound/crystal.wav'], 50, 1 );
+	}
+	crystalSound.play();
+	
 }
 
 //Enemy mold (inherits Entity)
@@ -194,7 +208,14 @@ extend(Enemy, { speed : null,
  Enemy.destroy = function () {
 		particleExplosion(this.getPosition(), 150);
 		particleExplosion(this.getPosition(), 150);
-        this.clean();
+		
+	if(eExplosionSound === null)
+	{
+		eExplosionSound = new Sound( ['sound/EnemyExplosion.wav'], 50, 1 );
+	}
+	eExplosionSound.play();
+		
+    this.clean();
 }
 Enemy.clean = function () {
     scene.remove(this.mesh);

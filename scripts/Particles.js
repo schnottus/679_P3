@@ -82,6 +82,11 @@ function getAvailableParticle() {
 
 function particleExplosion(position, life) {
     var temp = 20;
+	if(cSound === null)
+	{
+		cSound = new Sound( ['sound/c.wav'], 50, 1 );
+	}
+	cSound.play();
     while (temp--) {
         var particle = getAvailableParticle();
         particle.x = position.x;

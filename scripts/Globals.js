@@ -39,6 +39,10 @@
 	// Sound vars
 	var bgElement = null;
 	var ShootSound = null;
+	var aExplosionSound = null;
+	var eExplosionSound = null;
+	var crystalSound = null;
+	var cSound = null;
 	
 	//level boundaries (delete when soft boundaries are done)
 	//var leftWall;
