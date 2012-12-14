@@ -25,4 +25,7 @@ Source: http://paper-backgrounds.com/textureimages/2012/07/rugged-blue-painted-m
 Source: http://hhh316.deviantart.com/art/Seamless-stone-texture-163563625
 
 9. diff.png
-http://opengameart.org/content/teleporter-circle
+Source: http://opengameart.org/content/teleporter-circle
+
+10. Lunar Target.png
+Source: http://www.spiralgraphics.biz/packs/terrain_desert_barren/previews/Lunar%20Target.jpg
