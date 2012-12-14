@@ -103,3 +103,6 @@
 
 //level background sprites
     var spriteGroup;
+    
+//tell player that they have enough resources to teleport
+    var shown = false;

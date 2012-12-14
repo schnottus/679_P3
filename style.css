@@ -88,6 +88,16 @@ body  p {
 	font-weight: bold;
 }
 
+#warnHealth{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+	color: #D60056;
+	font-size: 30px;
+	font-weight: bold;
+}
+
 #purchaseMenuContainer{
     position:absolute;
     text-align:center;
