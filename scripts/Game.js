@@ -43,9 +43,11 @@ function update()
 		hudFrames = 0;
 		updateHUD();
 		
-		checkWorldBoundary();
+		
 	}
 	hudFrames++;
+	
+	//checkWorldBoundary();
 	
 	updateBackground();
 }
@@ -410,7 +412,7 @@ function levelMenu()
 
 //check to make sure player, enemies, crystals, asteroids are inside boundary
 //rough code, linear update -- should be replaced with sensors that detect object leaving area
-function checkWorldBoundary()
+/*function checkWorldBoundary()
 {
 	
 	keepInsideBoundary(playerShip);
@@ -444,14 +446,14 @@ function checkWorldBoundary()
 		}
 		keepInsideBoundary(temp.stored);
 	}
-}
+}*/
 
-function keepInsideBoundary( pBody )
+/*function keepInsideBoundary( pBody )
 {
 	var pushStrength = 0.6;
 	var difference;
 	var x = pBody.body.GetPosition().x;
-	var y = pBody.body.GetPosition().y;
+	var y = pBody.body.GetwPosition().y;
 	
 	if(x < 0)
 	{
@@ -475,4 +477,4 @@ function keepInsideBoundary( pBody )
 		difference = y - worldHeight;
 		pBody.body.ApplyImpulse(new b2Vec2(0,difference * -pushStrength), pBody.body.GetWorldCenter());
 	}
-}
+}*/
