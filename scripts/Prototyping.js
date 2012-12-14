@@ -184,7 +184,7 @@ extend(Enemy, { speed : null,
 						    }
                             var time = new Date().getTime();
 					        if(time - this.lastShoot > this.fireRate){
-					            bulletList.add(makeBullet(this, 1, 32));
+					            bulletList.add(makeBullet(this, 1, 32, 0));
 					            this.lastShoot = time;
                             }
                         }
@@ -375,8 +375,8 @@ function makePlayer() {
     return player;
 }
 
-//params: owner (b2Body who fired it), AI, speed
-function makeBullet( owner, AI, speed )
+//params: owner (b2Body who fired it), AI, speed, offset (in radians - how much to deviate from straight ahead)
+function makeBullet( owner, AI, speed, offset )
 {
 
 	var bullet;
@@ -384,7 +384,7 @@ function makeBullet( owner, AI, speed )
 	bullet.owner = owner;
 	bullet.power = owner.weaponDamage;
 	bullet.start = Date.now(); 
-	bullet.body = makeBulletBody(owner, bullet, AI, speed); 
+	bullet.body = makeBulletBody(owner, bullet, AI, speed, offset); 
 	bullet.mesh = new THREE.Mesh(new THREE.SphereGeometry(.1,6,6), new THREE.MeshLambertMaterial({
             color: 0xff88ff
 		}));  //change to sprite?

@@ -122,17 +122,36 @@ function init2() {
 	
 	//left click firing
 	container.onmousedown=function(){
-			if(playerShip.currentWeapon == 3)
-			{	//fire one missile
-				playerShoot(3);
-			}else if(canShoot) //regular gun and shotgun
+		switch(playerShip.currentWeapon)
+		{
+			case 1:
+				if(canShoot) //regular gun 
 				{
 					canShoot = false;
 					shootDisabler = false;
 					playerShoot(playerShip.currentWeapon);
-					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 200);  //200ms between bullets
+					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 250);  //200ms between bullets
 				} 
-		};
+				break;
+			case 2:
+				if(canShoot) //scatter gun 
+				{
+					canShoot = false;
+					shootDisabler = false;
+					playerShoot(playerShip.currentWeapon);
+					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 400);  //400ms between bullets
+				} 
+				break;
+			case 3:
+				//fire one missile
+				playerShoot(3);
+				break;
+			default:
+			alert("Game error - invalid weapon.  Resetting to default.");
+			playerShip.currentWeapon = 1;
+		}
+			
+	};
 		
 	container.onmouseup=function(){
 			shootDisabler = true;

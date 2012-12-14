@@ -267,8 +267,8 @@ function makePlayerBody(player) {
 }
 
 //parameters: owner - the b2Body that fired the bullet
-function makeBulletBody(owner, bullet, AI, speed) {
-	var angle = owner.body.GetAngle();
+function makeBulletBody(owner, bullet, AI, speed, offset) {
+	var angle = owner.body.GetAngle() + offset;
 	var vector = {};
 	
 	var bodyDef = new b2BodyDef; 
