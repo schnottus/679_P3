@@ -191,6 +191,11 @@ extend(Enemy, { speed : null,
                     }
                 }
 });
+ Enemy.destroy = function () {
+		particleExplosion(this.getPosition(), 150);
+		particleExplosion(this.getPosition(), 150);
+        this.clean();
+}
 Enemy.clean = function () {
     scene.remove(this.mesh);
     world.DestroyBody(this.body);
