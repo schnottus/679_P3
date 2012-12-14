@@ -204,6 +204,8 @@ function level3()
 function destroyLevel()
 {
 	//delete current level
+	playerShip.sensorDir = {};
+    playerShip.sensorList = newDLL();
 	asteroidList.empty();    
 	enemyList.empty();
 	crystalList.empty();

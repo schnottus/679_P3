@@ -8,6 +8,9 @@ var mask = {
     ENEMY_SENSOR:       0x0040,
     STATION_SENSOR:     0x0080,
 	BOUNDARY:     		0x0100,
+	CRYSTAL_SENSOR:		0x0200,
+	CRYSTAL_MASK:		0x030f,
+	
 
     NON_BULLETS :       0x000f,
     ENEMY_TARGETS :     0x001a,
@@ -58,6 +61,15 @@ listener.BeginContact = function (contact) {
     else if (fixtureA.GetUserData() == 4 && fixtureB.GetUserData() == 3) {
         fixtureA.GetBody().userData.crystals++;
         destroyList.push(fixtureB.GetBody().userData);
+    }
+	else if (fixtureA.GetUserData() == 9) {
+        playerShip.sensorList.add(fixtureB.GetBody());
+        playerShip.sensorDir[fixtureB.GetBody().userData.ID] = playerShip.sensorList.end;
+    }
+    else if (fixtureB.GetUserData() == 9) {
+		
+        playerShip.sensorList.add(fixtureA.GetBody());
+        playerShip.sensorDir[fixtureA.GetBody().userData.ID] = playerShip.sensorList.end;
     }
     else if (fixtureA.GetUserData() == 6 || fixtureB.GetUserData() == 6) {
         gamePaused = true;
@@ -125,6 +137,22 @@ listener.EndContact = function (contact) {
 		outOfBoundsList.add(contact.GetFixtureA().GetBody());
         outOfBoundsDir[fixtureA.GetFixtureB().GetBody().userData.ID] = outOfBoundsList.end;
     }
+	else if (contact.GetFixtureA().GetUserData() == 9) {
+        var dir = playerShip.sensorDir;
+        var key = contact.GetFixtureB().GetBody().userData.ID;
+		if(dir[key]){
+			playerShip.sensorList.remove(dir[key]);
+			delete dir[key];
+		}
+    }
+    else if (contact.GetFixtureB().GetUserData() == 9) {
+        var dir = playerShip.sensorDir;
+        var key = contact.GetFixtureA().GetBody().userData.ID;
+		if (dir[key]){
+			playerShip.sensorList.remove(dir[key]);
+			delete dir[key];
+		}
+    }
 
 }
 listener.PostSolve = function(contact, impulse) {
@@ -191,7 +219,7 @@ function makeCrystalBody(position, velocity, crystal) {
     fixDef.restitution = 0.1;
 	fixDef.userData = 3;
 	fixDef.filter.categoryBits = mask.ASTEROID;
-	fixDef.filter.maskBits = mask.NON_BULLETS + mask.BOUNDARY;
+	fixDef.filter.maskBits = mask.CRYSTAL_MASK;
     body.CreateFixture(fixDef);
 	body.userData = crystal;
 	body.ApplyImpulse(new b2Vec2(velocity.x*body.GetMass(), velocity.y*body.GetMass()), body.GetWorldCenter());
@@ -307,6 +335,14 @@ function makePlayerBody(player) {
 	fixDef.filter.maskBits = mask.ALL;
     body.CreateFixture(fixDef); //add the fixture to the playerShip body.  We could add multiple fixtures here for complicated ships
 	body.userData = player;
+	
+	fixDef = new b2FixtureDef;
+    fixDef.shape = new b2CircleShape(4);
+    fixDef.isSensor = true;
+    fixDef.filter.categoryBits = mask.CRYSTAL_SENSOR;
+    fixDef.filter.maskBits = mask.ASTEROID;
+    fixDef.userData = 9;
+    body.CreateFixture(fixDef);
     return body;
 }
 

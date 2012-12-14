@@ -35,6 +35,9 @@ function update()
 	//updateJetParticles();
 	updateParticles();
 	boundaryPush();
+	if (playerShip.missilesEnabled == true){
+		tractorBeam();
+	}
 
 	//only update hud every 10th frame (dom manipulation is expensive)
 	if( hudFrames >= 10)
@@ -287,6 +290,17 @@ function boundaryPush(){
 		if( position.y > height){
 			body.ApplyImpulse(new b2Vec2(0, (height-position.y)*body.GetMass()/2), body.GetWorldCenter());
 		}
+        temp = temp.next;
+    }
+}
+
+function tractorBeam(){
+	var temp = playerShip.sensorList.head;
+	var positionShip = playerShip.body.GetPosition();
+    while (temp != null) {
+		var body = temp.stored;
+        var vec = vectorSubtraction(positionShip, body.GetPosition());
+		body.ApplyImpulse(new b2Vec2(vec.x/16, vec.y/16), body.GetWorldCenter());
         temp = temp.next;
     }
 }
