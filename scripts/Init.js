@@ -351,9 +351,15 @@ function init2() {
 	
 	//enable start button which calls startGame() and thus, animate();
 	//do not add any code below this button enable line (won't always get run)
+	
+	setTimeout("allowStart()", 2000);
+	
+	
+}
+
+function allowStart()
+{
 	document.getElementById("btnStart").disabled = false; 
-	
-	
 }
 
 //checks if models are loaded before continuing (and animates a loading screen)
