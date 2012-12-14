@@ -7,11 +7,12 @@ var mask = {
     ENEMY_BULLETS :     0x0020,
     ENEMY_SENSOR:       0x0040,
     STATION_SENSOR:     0x0080,
+	BOUNDARY:     		0x0100,
 
     NON_BULLETS :       0x000f,
     ENEMY_TARGETS :     0x001a,
     PLAYER_TARGETS :    0x002d,
-    ALL :      		    0x00ff
+    ALL :      		    0x01ff
 };  
 
 var listener = new Box2D.Dynamics.b2ContactListener;
@@ -72,6 +73,22 @@ listener.BeginContact = function (contact) {
         alerts.innerHTML = "You reach the warp gate. <br/> Press Z for level menu <br/> R to resume game";
         //levelMenu();
     }
+	else if (contact.GetFixtureA().GetUserData() == 8) {
+        var dir = outOfBoundsDir;
+        var key = contact.GetFixtureB().GetBody().userData.ID;
+		if(outOfBoundsDir[key]){
+			outOfBoundsList.remove(outOfBoundsDir[key]);
+			delete outOfBoundsDir[key];
+		}
+    }
+	else if (contact.GetFixtureB().GetUserData() == 8) {
+        var dir = outOfBoundsDir;
+        var key = contact.GetFixtureA().GetBody().userData.ID;
+		if(outOfBoundsDir[key]){
+			outOfBoundsList.remove(outOfBoundsDir[key]);
+			delete outOfBoundsDir[key];
+		}
+    }
 }
 listener.EndContact = function (contact) {
     if (contact.GetFixtureA().GetUserData() == undefined || contact.GetFixtureB().GetUserData() == undefined) {
@@ -100,9 +117,13 @@ listener.EndContact = function (contact) {
         temp.sensorList.remove(dir[key]);
         delete dir[key];
     }
-    else if (contact.GetFixtureA().GetUserData() == 6 || contact.GetFixtureB().GetUserData() == 6) {
+    else if (contact.GetFixtureA().GetUserData() == 8) {
+		outOfBoundsList.add(contact.GetFixtureB().GetBody());
+        outOfBoundsDir[contact.GetFixtureB().GetBody().userData.ID] = outOfBoundsList.end;
     }
-	else if (contact.GetFixtureA().GetUserData() == 7 || contact.GetFixtureB().GetUserData() == 7) {
+	else if (contact.GetFixtureB().GetUserData() == 8) {
+		outOfBoundsList.add(contact.GetFixtureA().GetBody());
+        outOfBoundsDir[fixtureA.GetFixtureB().GetBody().userData.ID] = outOfBoundsList.end;
     }
 
 }
@@ -114,7 +135,26 @@ listener.PreSolve = function(contact, oldManifold) {
 }
 this.world.SetContactListener(listener);
 
-
+function makeBoundary(width, height){
+	var fixDef = new b2FixtureDef;
+	fixDef.density = 1.0;
+	fixDef.friction = 0.5;
+	fixDef.restitution = 0.3;
+	fixDef.isSensor = true;
+	fixDef.filter.categoryBits = mask.BOUNDARY;
+    fixDef.filter.maskBits = mask.NON_BULLETS;
+	fixDef.userData = 8;
+	var bodyDef = new b2BodyDef;
+	bodyDef.type = b2Body.b2_staticBody;  //staticBody (never moves)
+	fixDef.shape = new b2PolygonShape;
+	fixDef.shape.SetAsBox(width/2, height/2);
+	bodyDef.position.Set(width/2, height/2);
+	body = world.CreateBody(bodyDef);
+	body.CreateFixture(fixDef);
+	outOfBoundsDir = {};
+    outOfBoundsList = newDLL();
+	return body;
+}
 	
 function makeAsteroidBody(x, y, asteroid) {
     var AsteroidBodyDef = new b2BodyDef;
@@ -140,7 +180,7 @@ function makeCrystalBody(position, velocity, crystal) {
 	var y = position.y;
 	x += Math.random();
 	y += Math.random();
-    var bodyDef = new b2BodyDef;
+	var bodyDef = new b2BodyDef;
     bodyDef.type = b2Body.b2_dynamicBody;
     bodyDef.position.Set(x, y);
     var body = world.CreateBody(bodyDef);
@@ -151,12 +191,16 @@ function makeCrystalBody(position, velocity, crystal) {
     fixDef.restitution = 0.1;
 	fixDef.userData = 3;
 	fixDef.filter.categoryBits = mask.ASTEROID;
-	fixDef.filter.maskBits = mask.NON_BULLETS;
+	fixDef.filter.maskBits = mask.NON_BULLETS + mask.BOUNDARY;
     body.CreateFixture(fixDef);
 	body.userData = crystal;
 	body.ApplyImpulse(new b2Vec2(velocity.x*body.GetMass(), velocity.y*body.GetMass()), body.GetWorldCenter());
 	body.SetLinearDamping(0.2);
 	randomImpulse(body, .3);
+	if( position.x < 0 || position.x > width || position.y < 0 || position.y > height){
+		outOfBoundsList.add(body);
+		outOfBoundsDir[crystal.ID] = outOfBoundsList.end;
+    }
     return body;
 }
 

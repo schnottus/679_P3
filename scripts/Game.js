@@ -34,6 +34,7 @@ function update()
 	updateEnemies();
 	//updateJetParticles();
 	updateParticles();
+	boundaryPush();
 
 	//only update hud every 10th frame (dom manipulation is expensive)
 	//check player boundary every 10th frame (current search is costly)
@@ -273,6 +274,27 @@ function updateUpgradeInfo(element, enable)
 function updateGameState()
 {
 	
+}
+
+function boundaryPush(){
+	var temp = outOfBoundsList.head;
+    while (temp != null) {
+        var position = temp.stored.GetPosition();
+		var body = temp.stored;
+		if( position.x < 0){
+			body.ApplyImpulse(new b2Vec2(-position.x*body.GetMass()/2, 0), body.GetWorldCenter());
+		}
+		if( position.x > width){
+			body.ApplyImpulse(new b2Vec2((width-position.x)*body.GetMass()/2, 0), body.GetWorldCenter());
+		}
+		if( position.y < 0){
+			body.ApplyImpulse(new b2Vec2(0, -position.y*body.GetMass()/2), body.GetWorldCenter());
+		}
+		if( position.y > height){
+			body.ApplyImpulse(new b2Vec2(0, (height-position.y)*body.GetMass()/2), body.GetWorldCenter());
+		}
+        temp = temp.next;
+    }
 }
 
 function playerDeath()

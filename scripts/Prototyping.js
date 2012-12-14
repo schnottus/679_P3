@@ -294,11 +294,11 @@ WarpGate.clean = function () {
 function makeAsteroid(x, y) {
     var asteroid;
     asteroid = Object.create(Asteroid);
+	asteroid.ID = Namer.NewAsteroidID();
 	asteroid.body = makeAsteroidBody(x, y, asteroid);
 	makeAsteroidMesh(asteroid);
 	asteroid.updateMesh();
     asteroid.currentHP = asteroid.maxHP;
-	asteroid.ID = Namer.NewAsteroidID();
     return asteroid;
 }
 

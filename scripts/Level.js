@@ -4,7 +4,8 @@
 * Date: 9 Nov 2012
 *******************/
 
-
+var height;
+var width;
 
 //all level setters, getters, creation, etc
 function loadLevel( level )
@@ -62,7 +63,7 @@ function level1()
 	bodyDef.position.Set(worldWidth, 0);
 	rightWall = world.CreateBody(bodyDef);
 	rightWall.CreateFixture(fixDef); //right*/
-
+*/
 	//debug draw div is 600x400, set draw scale using width
 	
 	//setup debug draw
@@ -251,7 +252,7 @@ function destroyLevel()
 	portal.clean();
 	//delete background sprites
 	background.remove(spriteGroup);
-	
+	world.DestroyBody(boundary);
 	
 	//empty box2d world of remaining hard boundaries
 	/*world.DestroyBody(leftWall);

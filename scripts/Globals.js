@@ -41,10 +41,14 @@
 	var ShootSound = null;
 	
 	//level boundaries (delete when soft boundaries are done)
-	var leftWall;
-	var rightWall;
-	var topWall;
-	var bottomWall;
+	//var leftWall;
+	//var rightWall;
+	//var topWall;
+	//var bottomWall;
+	
+	var boundary;
+	var outOfBoundsDir;
+    var outOfBoundsList;
 
 //three.js vars
 	var scene = new THREE.Scene();
