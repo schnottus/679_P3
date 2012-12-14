@@ -243,6 +243,33 @@ function updateEnemies() {
 
 function updateHUD()
 {
+    if(playerShip.currentHP < 8){
+        warnHealth.innerHTML = "WARNING: Low Health. Dock to buy more health";
+    }
+    else{
+        warnHealth.innerHTML = "";
+    }
+    
+    if(playerShip.crystals >= 60 && currentWorld == 1){
+        alerts.innerHTML = "You have enough resources to teleport to World 2";
+        shown = true;
+    }
+    
+    else if(playerShip.crystals >= 80 && currentWorld == 2){
+        alerts.innerHTML = "You have enough resources to teleport to World 3";
+        shown = true;
+    }
+    
+    else if(playerShip.crystals >= 100 && currentWorld == 3){
+        alerts.innerHTML = "You have enough resources to teleport back to Earth!";
+        shown = true;
+    }
+    else{
+        if(shown){
+            alerts.innerHTML = "";
+            shown = false;
+            }
+    }
 	var health = document.getElementById("playerHealth");
 	health.innerHTML = "Health: " + playerShip.currentHP;
 	

@@ -35,6 +35,14 @@ function loadLevel( level )
 function level1()
 {
 
+    alerts.innerHTML = "World 1<br/> Good Luck!";
+    setTimeout(function(){alerts.innerHTML = ""},3000);
+    
+    setTimeout(function(){
+        alerts.innerHTML = "Buy upgrades to destroy asteroids faster";
+        setTimeout(function(){alerts.innerHTML = ""},3000);
+        }, 15000);
+        
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
 
 	width = 60;
@@ -99,7 +107,10 @@ function level1()
 
 function level2()
 {
-
+    
+    alerts.innerHTML = "World 2<br/> One step closer to Earth!";
+    setTimeout(function(){alerts.innerHTML = ""},3000);
+    
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
 
 	width = 120;
@@ -148,6 +159,8 @@ function level2()
  
 function level3() 
 {
+    alerts.innerHTML = "World 3<br/> One gate away from Earth!";
+    setTimeout(function(){alerts.innerHTML = ""},3000);
 
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
 

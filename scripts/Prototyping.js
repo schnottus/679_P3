@@ -254,7 +254,7 @@ Tank.fireRate = 1000;
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
 extend(Player, { 	currentHP: 20, 
-					crystals: 200,
+					crystals: 0,
 					sensorDir : null,
 					sensorList : null,
 					maxSpeed: 1,

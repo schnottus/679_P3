@@ -89,20 +89,20 @@ function xtraHealth(){
 
 function changeLevel(level)
 {
-    if(level == 1 && playerShip.crystals < 80){
+    if(level == 1 && playerShip.crystals < 40){
         showInfo2("Not enough resources");
     }
-    else if(level == 2 && playerShip.crystals < 100){
+    else if(level == 2 && playerShip.crystals < 60){
         showInfo2("Not enough resources");
     }
-    else if(level == 3 && playerShip.crystals < 200){
+    else if(level == 3 && playerShip.crystals < 80){
         showInfo2("Not enough resources");
     }
     else{
         switch(level){
-            case 1: playerShip.crystals -= 80; break;
-            case 2: playerShip.crystals -= 100; break;
-            case 3: playerShip.crystals -= 200; break;
+            case 1: playerShip.crystals -= 40; break;
+            case 2: playerShip.crystals -= 60; break;
+            case 3: playerShip.crystals -= 80; break;
         }
         
         updateHUD();
