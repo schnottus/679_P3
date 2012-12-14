@@ -131,34 +131,52 @@
 	</div>
 	<div id="startMenu" class="menuPage" style="display: block;">
 		<h1>Space Fighter</h1>
-		<img id="loadImage" src="resources/loadImage.png"/>
-		<div class = "center">
-            <div class="instructions">
-                <h3>Instructions</h3>
-                <div>
-                    <p>Collect <span class="important">resources</span> by destroying asteroids<br/>
-                        and buy <span class="important">upgrades</span> to help you advance to next level. <br/>
-                        Upgrades can be purchased by docking at the ship's 
-                        <span class="important">home base</span> [see image above]. <br/>
-                        Go to the <span class="important">warp gate</span> when you get enough resources to teleport to higher level. <br/>
-                        Player wins after getting through <span class="important">level 3</span> gate. <br/>
-                        Stay alive by avoiding or attacking <span class="important">enemies</span>.
-                    </p>
-                </div>
+		<div id = "story">
+		    <p>
+		    You are the best space fighter who has the great responsibility of protecting the Earth from 
+            <span class="important">evil Martians</span> who constantly try to conquer other planets.
+            </p>
+            <p>
+            This time, the Martians are <span class="important">back</span> again! 
+            </p>
+            <p>
+            Unfortunately, you were caught off guard and got <span class="important">teleported</span> a few lightyears away from Earth.<br/>
+            Now, you need to teleport back to the Earth before the Martians take over the Earth!<br/>
+            </p>
+            
+            <h3>Here is what you need to do:</h3>
+            <p>
+            You will have to get through <span class="important">3 warp gates</span> in 3 different worlds before you reach Earth.<br/>
+            You can teleport through the warp gate once you have enough <span class="important">resources (crystals)</span>.<br/>
+            To collect resources, <span class="important">destroy asteroids</span> by shooting them and get the crystals left behind.<br/>
+            Be aware that there will be some Martian space fighters that try to destroy you before
+            you get to the gate!<br/>
+            <span class="important">Upgrades</span> can be purchased by docking at the home base.
+            </p>
+            
+            <div class="float">
+                <img src="resources/home_base.png" />
             </div>
-            <div class="controls">
-                <h3>Controls</h3>
-                <div>
-                    <p>Use the <span class="important">W-set</span> to move forward/backward</br>
-                        Use <span class="important">mouse</span> to rotate and click to shoot.</br>
-                        Upgrades control will be shown after you purchased it.<br/>
-                        "t" disables debug draw overlay</br></p>
-                </div>
+            <div class="float">
+            <h3>Controls:</h3>
+            <p>
+                W - forward<br/>
+                S - reverse<br/>
+                Mouse - rotate<br/>
+                Click - shoot<br/>
+            </p>
+            <div class="startBtnWrapper">
+			    <button id="btnStart" type="button" onclick="startGame();" disabled="disabled">Start</button>
+		    </div>
             </div>
-        </div>
-		<div class="startBtnWrapper">
-			<button id="btnStart" type="button" onclick="startGame();" disabled="disabled">Start</button>
+            <div class="float">
+                <img src="resources/warp_gate.png" />
+            </div>
+		    
+		    
 		</div>
+		
+		
 	</div>
 	<!--deathscreen-->
     <div id = "deathScreen">
