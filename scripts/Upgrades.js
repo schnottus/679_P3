@@ -45,15 +45,15 @@ function damage(){
     }
 }
 
-function missiles(){
+function tractor(){
     //if not enough crystals
     if(playerShip.crystals < 40){
         showInfo("Not enough resources");
     }
     else{
-        showInfo("Missiles acquired");
+        showInfo("Tractor beam acquired");
         playerShip.crystals -= 40;
-        playerShip.missilesEnabled = true;
+        playerShip.tractorEnabled = true;
         updateHUD();
         updateSidebar();
     }

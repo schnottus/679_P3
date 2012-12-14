@@ -35,7 +35,7 @@ function update()
 	//updateJetParticles();
 	updateParticles();
 	boundaryPush();
-	if (playerShip.missilesEnabled == true){
+	if (playerShip.tractorEnabled == true){
 		tractorBeam();
 	}
 
@@ -259,7 +259,7 @@ function updateSidebar(){
     updateUpgradeInfo("strafeIcon", playerShip.strafeEnabled);
     updateUpgradeInfo("speedIcon", playerShip.speedIncrease);
     updateUpgradeInfo("damageIcon", playerShip.weaponDamageIncrease);
-    updateUpgradeInfo("missilesIcon", playerShip.missilesEnabled);
+    updateUpgradeInfo("tractorIcon", playerShip.tractorEnabled);
     updateUpgradeInfo("gunIcon", playerShip.gunEnabled);
     
 }

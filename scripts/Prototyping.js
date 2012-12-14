@@ -262,7 +262,7 @@ extend(Player, { 	currentHP: 20,
 					strafeEnabled: false, //boolean for every upgrade for easier sidebar update (except health)
 					speedIncrease: false,
 					weaponDamageIncrease: false,
-					missilesEnabled: false,
+					tractorEnabled: false,
 					gunEnabled: false,
 					currentWeapon: 1
 				});

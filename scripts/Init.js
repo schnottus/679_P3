@@ -230,7 +230,7 @@ function init2() {
 			case 51: //3
 				//destroyLevel();
 				//loadLevel(3);
-				if(playerShip.missilesEnabled) playerShip.currentWeapon = 3;
+				//if(playerShip.missilesEnabled) playerShip.currentWeapon = 3;
 				break;
 			case 40: //down arrow
 				var angle = playerShip.body.GetAngle();
