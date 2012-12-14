@@ -50,7 +50,8 @@ function freeFloating(thing, sumVec) {
 }
 
 function weightVector(vec, bubble){
-	var length = vec.x * vec.x + vec.y * vec. y;
+	var length = Math.sqrt(vec.x * vec.x + vec.y * vec. y) - bubble;
+	length *= length;
 	vec.x /= length;
 	vec.y /= length;
 }
@@ -63,7 +64,7 @@ function predictCollision(A, B, sumVec){
     var a = V.x*V.x + V.y*V.y;
     var b = 2*dotProduct(V,P);
     var c = P.x*P.x + P.y*P.y - R;
-		var bubble = 4;
+		var bubble = 2;
 		weightVector(P, bubble);
 		vectorAdditionAssignment(sumVec, P);
 		

@@ -1,4 +1,4 @@
-var particleCount = 500,
+var particleCount = 5000,
 	    particles = new THREE.Geometry(),
 		pMaterial = new THREE.ParticleBasicMaterial({
             size: 1,
@@ -15,8 +15,8 @@ for (var p = 0; p < particleCount; p++) {
 
 		    // create a particle with random
 		    // position values, -250 -> 250
-		    var pX = 5 - Math.random() * 10,
-			pY = 5 - Math.random() * 10,
+		    var pX = - 1000,
+			pY = - 1000,
 			pZ = 1,
 		    particle = 
 				new THREE.Vector3(pX, pY, pZ)

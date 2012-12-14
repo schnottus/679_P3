@@ -127,11 +127,11 @@ extend(Enemy, { speed : null,
 					var totalRotation = (desiredAngle - nextAngle);
 					while ( totalRotation < -Math.PI ) totalRotation += 2*Math.PI;
 					while ( totalRotation >  Math.PI ) totalRotation -= 2*Math.PI;
-					if (totalRotation > 90){
-						totalRotation = 180 - totalRotation
+					if (totalRotation > 60){
+						totalRotation = 60;
 					}
-					if (totalRotation < -90){
-						totalRotation = 180 + totalRotation
+					if (totalRotation < -60){
+						totalRotation = -60;
 					}
 					var desiredAngularVelocity = totalRotation * 3;
 					var torque = this.body.GetInertia() * desiredAngularVelocity / (1/60.0);
@@ -144,7 +144,11 @@ extend(Enemy, { speed : null,
                     //    normalizeVector(targetVec);
                     //}
 					normalizeVector(targetVec);
-                    if (dodge != 0 && totalRotation < Math.PI/16 && totalRotation > -Math.PI/16){
+					//calculate forward coordinate for foward/reverse(forward is positive)
+					targetVec.x = Math.cos( this.body.GetAngle() );
+					targetVec.y = Math.sin( this.body.GetAngle() );
+                    if (dodge != 0 && totalRotation < Math.PI/32 && totalRotation > -Math.PI/32){
+						PlaceMovingParticle(this.getPosition(), targetVec, 200);
 						targetVec.x *= .25;
 						targetVec.y *= .25;
                         this.body.ApplyImpulse(new b2Vec2(targetVec.x,targetVec.y), this.body.GetWorldCenter());
@@ -158,16 +162,17 @@ extend(Enemy, { speed : null,
 							this.body.SetLinearVelocity(velocity);
 						}
                     }
-					else if (dodge == 0 && totalRotation < Math.PI/16 && totalRotation > -Math.PI/16){
+					else if (dodge == 0 && totalRotation < Math.PI/32 && totalRotation > -Math.PI/32){
 						var difference = vectorSubtraction(this.body.GetPosition(), playerShip.body.GetPosition());
 						var distance = Math.sqrt(difference.x*difference.x+difference.y*difference.y)
                         if(distance < 16){
 						    if (distance > 12){
+								PlaceMovingParticle(this.getPosition(), targetVec, 200);
 							    var func = Math.sqrt(distance - 12)
 							    targetVec.x *= func;
 							    targetVec.y *= func;
 							    this.body.ApplyImpulse(new b2Vec2(targetVec.x,targetVec.y), this.body.GetWorldCenter());
-							
+
 							    var velocity = this.body.GetLinearVelocity();
 							    var length = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
 							    if (length > this.speed){
