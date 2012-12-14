@@ -68,7 +68,7 @@ listener.BeginContact = function (contact) {
         console.log("player is at the gate");
         gamePaused = true;
         atGate = true; 
-        alerts.innerHTML = "You reach the warp gate <br/> Press Z for level menu <br/> R to resume game";
+        alerts.innerHTML = "You reach the warp gate. <br/> Press Z for level menu <br/> R to resume game";
         //levelMenu();
     }
 }

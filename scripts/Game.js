@@ -255,6 +255,7 @@ function updateSidebar(){
 //used by updateSidebar()
 function updateUpgradeInfo(element, enable)
 {
+    
     var upgradedItem = document.getElementById(element);
     if(enable)
         upgradedItem.style.display = "block";
@@ -270,6 +271,8 @@ function updateGameState()
 
 function playerDeath()
 {
+    bgElement.pause();
+    
     var divContainer = document.getElementById("container");
 	divContainer.style.display = "none";
 	
