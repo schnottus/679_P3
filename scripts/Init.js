@@ -121,41 +121,41 @@ function init2() {
 	//var firstShotPress = true;
 	
 	//left click firing
-	container.onmousedown=function(){
-		switch(playerShip.currentWeapon)
-		{
-			case 1:
-				if(canShoot) //regular gun 
-				{
-					canShoot = false;
-					shootDisabler = false;
-					playerShoot(playerShip.currentWeapon);
-					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 250);  //200ms between bullets
-				} 
-				break;
-			case 2:
-				if(canShoot) //scatter gun 
-				{
-					canShoot = false;
-					shootDisabler = false;
-					playerShoot(playerShip.currentWeapon);
-					shootInterval = setInterval('playerShoot(playerShip.currentWeapon)', 400);  //400ms between bullets
-				} 
-				break;
-			case 3:
-				//fire one missile
-				playerShoot(3);
-				break;
-			default:
-			alert("Game error - invalid weapon.  Resetting to default.");
-			playerShip.currentWeapon = 1;
+	container.onmousedown=function(event){
+			
+		switch (event.which) {
+        case 1:
+			if(canShoot)
+			{
+				canShoot = false;
+				shootDisabler = false;
+				playerShoot1();
+				shootInterval = setInterval('playerShoot1()', 250);  //200ms between bullets
+			}
+            break;
+  
+        case 3:
+            if(canScatter && playerShip.gunEnabled) //scatter gun 
+			{
+				nextIsScatter = true;
+				canScatter = false;
+				setTimeout('playerShoot2()', 1200);  //400ms between bullets
+			} 
+            break;
+        default:
 		}
 			
 	};
 		
-	container.onmouseup=function(){
+	container.onmouseup=function(event){
+		switch (event.which){
+		case 1:
 			shootDisabler = true;
-		};
+			break;
+		default:
+		
+		}
+	}
 	
 	//Add event listeners for our controls
 	document.addEventListener("keydown", function(e) {
@@ -220,16 +220,16 @@ function init2() {
 				//temporarily used to switch levels
 				//destroyLevel();
 				//loadLevel(1);
-				playerShip.currentWeapon = 1;
+				
 				break;
 			case 50: //2
 				//destroyLevel();
 				//loadLevel(2);
-				if(playerShip.gunEnabled) playerShip.currentWeapon = 2;
 				break;
 			case 51: //3
 				//destroyLevel();
 				//loadLevel(3);
+				playerShip.crystals += 40;
 				//if(playerShip.missilesEnabled) playerShip.currentWeapon = 3;
 				break;
 			case 40: //down arrow
@@ -352,7 +352,7 @@ function init2() {
 	//enable start button which calls startGame() and thus, animate();
 	//do not add any code below this button enable line (won't always get run)
 	
-	setTimeout("allowStart()", 2000);
+	setTimeout("allowStart()", 2500);
 	
 	
 }

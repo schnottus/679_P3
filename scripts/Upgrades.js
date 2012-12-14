@@ -24,7 +24,7 @@ function speed(){
         showInfo("Speed increased");
         playerShip.crystals -= 20;
         playerShip.speedIncrease = true;
-		playerShip.speed += 1;
+		playerShip.speed += 2;
         updateHUD();
         updateSidebar();
     }
@@ -77,11 +77,16 @@ function xtraHealth(){
     //if not enough crystals
     if(playerShip.crystals < 20){
         showInfo("Not enough resources");
-    }
-    else{
-        showInfo("Health increased by 20");
+    }else if(playerShip.currentHP >= playerShip.maxHP){
+		showInfo("Max health reached, cannot purchase more");
+	}else{
+        showInfo("Health increased by 10");
         playerShip.crystals -= 20;
-        playerShip.currentHP += 20;
+        playerShip.currentHP += 10;
+		if(playerShip.maxHP < playerShip.currentHP)
+		{
+			playerShip.currentHP = playerShip.maxHP;
+		}
         updateHUD();
         updateSidebar();
     }
@@ -89,20 +94,20 @@ function xtraHealth(){
 
 function changeLevel(level)
 {
-    if(level == 1 && playerShip.crystals < 80){
+    if(level == 1 && playerShip.crystals < 25){
         showInfo2("Not enough resources");
     }
-    else if(level == 2 && playerShip.crystals < 100){
+    else if(level == 2 && playerShip.crystals < 50){
         showInfo2("Not enough resources");
     }
-    else if(level == 3 && playerShip.crystals < 200){
+    else if(level == 3 && playerShip.crystals < 100){
         showInfo2("Not enough resources");
     }
     else{
         switch(level){
-            case 1: playerShip.crystals -= 80; break;
-            case 2: playerShip.crystals -= 100; break;
-            case 3: playerShip.crystals -= 200; break;
+            case 1: playerShip.crystals -= 25; break;
+            case 2: playerShip.crystals -= 50; break;
+            case 3: playerShip.crystals -= 100; break;
         }
         
         updateHUD();

@@ -254,7 +254,7 @@ Tank.fireRate = 1000;
 //Player mold (inherits Entity)
 var Player = Object.create(Entity);
 extend(Player, { 	currentHP: 20, 
-					crystals: 200,
+					crystals: 50,
 					sensorDir : null,
 					sensorList : null,
 					maxSpeed: 1,
@@ -263,10 +263,9 @@ extend(Player, { 	currentHP: 20,
 					speedIncrease: false,
 					weaponDamageIncrease: false,
 					tractorEnabled: false,
-					gunEnabled: false,
-					currentWeapon: 1
-				});
-Player.maxHP = 100;
+					gunEnabled: false
+					});
+Player.maxHP = 50;
 Player.radius = 2;
 Player.speed = 8;
 Player.destroy = function () {

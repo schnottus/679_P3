@@ -48,7 +48,8 @@
 		        W: forward<br/>
 		        S: reverse <br/>
 		        Mouse: rotate<br/>
-		        Click: shoot<br/>
+		        Left Click: shoot<br/>
+				Right Click: scatter
 		        T: on/off minimap
 		    </p>
 		</div>
@@ -67,7 +68,7 @@
 		        <p>Tractor Beam</br><span class = "controls"></span></p>
             </div>
             <div id = "gunIcon" class = "upgradedItem">
-		        <p>Scatter gun</br><span class = "controls">2</span></p>
+		        <p>Scatter gun</br><span class = "controls">Right click</span></p>
             </div>
 		</div>
 		<div id="purchaseMenuContainer">
@@ -103,16 +104,16 @@
 		        <h3>World Transporter</h3>
 		        <p class = "description">Teleport to another World or stay in this World to collect more resources</p>
 					<button id = "world1" class = "purchase" type="button" onclick="changeLevel(1);">
-		                <p>World 1 - 80 crystals</p>
+		                <p>World 1 - 25 crystals</p>
 		            </button>
 		            <button id = "world2" class = "purchase" type="button" onclick="changeLevel(2);">
-		                <p>World 2 - 100 crystals</p>
+		                <p>World 2 - 50 crystals</p>
 		            </button>
 		            <button id = "world3" class = "purchase" type="button" onclick="changeLevel(3);">
-		                <p>World 3 - 200 crystals</p>
+		                <p>World 3 - 100 crystals</p>
 		            </button>
 		            <button id = "win" class = "purchase" type="button" onclick="winScreen();">
-		                <p>Back to Earth ! - 200 crystals</p>
+		                <p>Back to Earth ! - 100 crystals</p>
 		            </button>
 		            <div id="levelInfo">
 		            </div>
@@ -197,7 +198,8 @@
                 W - forward<br/>
                 S - reverse<br/>
                 Mouse - rotate<br/>
-                Click - shoot<br/>
+                Left Click - shoot<br/>
+				Right Click - Scatter shot (if purchased)
             </p>
             <div class="startBtnWrapper">
 			    <button id="btnStart" type="button" onclick="startGame();" disabled="disabled">Start</button>

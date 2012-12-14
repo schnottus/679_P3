@@ -86,6 +86,8 @@
 	var canShoot = true;
 	var shootInterval;
 	var shootDisabler = false;
+	var nextIsScatter = false;
+	var canScatter = true;
 	var mouseX;
 	var mouseY;
 	
