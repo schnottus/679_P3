@@ -255,12 +255,12 @@ function updateHUD()
         shown = true;
     }
     
-    else if(playerShip.crystals >= 80 && currentWorld == 2){
+    else if(playerShip.crystals >= 60 && currentWorld == 2){
         alerts.innerHTML = "You have enough resources to teleport to World 3";
         shown = true;
     }
     
-    else if(playerShip.crystals >= 100 && currentWorld == 3){
+    else if(playerShip.crystals >= 80 && currentWorld == 3){
         alerts.innerHTML = "You have enough resources to teleport back to Earth!";
         shown = true;
     }
@@ -352,7 +352,7 @@ function playerDeath()
 }
 
 function winScreen(){
-    if(playerShip.crystals < 200){
+    if(playerShip.crystals < 80){
         showInfo("Not enough resources");
     }
     else{
@@ -416,25 +416,34 @@ function levelMenu()
     var show;
     switch(currentWorld){
         case 1: hide = document.getElementById("world1");
-                hide.style.display = "none";
+                hide.style.opacity = "0.2";
+                hide.disabled = true; 
                 show = document.getElementById("world2");
-                show.style.display = "block";
-                show = document.getElementById("world3");
-                show.style.display = "block";
+                show.style.opacity = "0.7";
+                show.disabled = false;
+                hide = document.getElementById("world3");
+                hide.style.opacity = "0.2";
+                hide.disabled = true; 
                 break;
         case 2: hide = document.getElementById("world2");
-                hide.style.display = "none";
-                show = document.getElementById("world1");
-                show.style.display = "block";
+                hide.style.opacity = "0.2";
+                hide.disabled = true; 
+                show = document.getElementById("world1"); //so that player can choose to go back and get more resources if not enough
+                show.style.opacity = "0.7";
+                show.disabled = false;
                 show = document.getElementById("world3");
-                show.style.display = "block";
+                show.style.opacity = "0.7";
+                show.disabled = false;
                 break;
         case 3: hide = document.getElementById("world3");
-                hide.style.display = "none";
+                hide.style.opacity = "0.2";
+                hide.disabled = true; 
                 show = document.getElementById("world1");
-                show.style.display = "block";
+                show.style.opacity = "0.7";
+                show.disabled = false;
                 show = document.getElementById("world2");
-                show.style.display = "block";
+                show.style.opacity = "0.7";
+                show.disabled = false;
                 
                 //and display "winning" button for last level...
                 show = document.getElementById("win");

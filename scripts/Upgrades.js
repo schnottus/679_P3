@@ -47,12 +47,12 @@ function damage(){
 
 function tractor(){
     //if not enough crystals
-    if(playerShip.crystals < 40){
+    if(playerShip.crystals < 30){
         showInfo("Not enough resources");
     }
     else{
         showInfo("Tractor beam acquired");
-        playerShip.crystals -= 40;
+        playerShip.crystals -= 30;
         playerShip.tractorEnabled = true;
         updateHUD();
         updateSidebar();
@@ -61,12 +61,12 @@ function tractor(){
 
 function gun(){
     //if not enough crystals
-    if(playerShip.crystals < 40){
+    if(playerShip.crystals < 30){
         showInfo("Not enough resources");
     }
     else{
         showInfo("Scatter gun acquired");
-        playerShip.crystals -= 40;
+        playerShip.crystals -= 30;
         playerShip.gunEnabled = true;
         updateHUD();
         updateSidebar();
@@ -102,7 +102,7 @@ function changeLevel(level)
         switch(level){
             case 1: playerShip.crystals -= 40; break;
             case 2: playerShip.crystals -= 60; break;
-            case 3: playerShip.crystals -= 80; break;
+            case 3: playerShip.crystals -= 60; break;
         }
         
         updateHUD();
