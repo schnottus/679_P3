@@ -72,7 +72,7 @@ function playerShoot( type )
 				canShoot = true;
 			}
 			else{ 
-				bulletList.add(makeBullet( playerShip, 0, 30));
+				bulletList.add(makeBullet( playerShip, 0, 30, 0));
 				if(ShootSound == null)
 				{
 					ShootSound = new Sound( ['sound/shoot.wav'], 50, 1 );
@@ -87,7 +87,9 @@ function playerShoot( type )
 			}
 			else{ 
 				//update makebullet to allow for different directions
-				bulletList.add(makeBullet( playerShip, 0, 32));
+				bulletList.add(makeBullet( playerShip, 0, 32, 0.3));
+				bulletList.add(makeBullet( playerShip, 0, 32, 0));
+				bulletList.add(makeBullet( playerShip, 0, 32, -0.3));
 				if(ShootSound === null)
 				{
 					ShootSound = new Sound( ['sound/shoot.wav'], 50, 1 );
