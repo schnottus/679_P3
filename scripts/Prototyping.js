@@ -247,7 +247,7 @@ Scout.fireRate = 1400;
 //Tank mold (inherits Enemy)
 var Tank = Object.create(Enemy); //tank is an example enemy type
 extend(Enemy, {});
-Tank.maxHP = 15; 
+Tank.maxHP = 25; 
 Tank.speed = 3;
 Tank.fireRate = 1000; 
 

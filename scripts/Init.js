@@ -218,18 +218,18 @@ function init2() {
 				break;
 			case 49: //1
 				//temporarily used to switch levels
-				destroyLevel();
-				loadLevel(1);
+				//destroyLevel();
+				//loadLevel(1);
 				playerShip.currentWeapon = 1;
 				break;
 			case 50: //2
-				destroyLevel();
-				loadLevel(2);
+				//destroyLevel();
+				//loadLevel(2);
 				if(playerShip.gunEnabled) playerShip.currentWeapon = 2;
 				break;
 			case 51: //3
-				destroyLevel();
-				loadLevel(3);
+				//destroyLevel();
+				//loadLevel(3);
 				if(playerShip.missilesEnabled) playerShip.currentWeapon = 3;
 				break;
 			case 40: //down arrow

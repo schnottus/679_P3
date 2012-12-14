@@ -10,10 +10,10 @@ var width;
 //all level setters, getters, creation, etc
 function loadLevel( level )
 {
-	
+
 	//update current level var
 	currentWorld = level;
-	
+
 	//load new level
 	switch(level)
 		{
@@ -66,7 +66,7 @@ function level1()
 	rightWall.CreateFixture(fixDef); //right
 */
 	//debug draw div is 600x400, set draw scale using width
-	
+
 	//setup debug draw
 	var debugDraw = new b2DebugDraw();
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
@@ -76,7 +76,7 @@ function level1()
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
-	
+
 	homeStation = makeStation(10, height / 2);
 	portal = makeWarpGate(width - 10, height / 2);
 	portal.mesh.position.z = 2;
@@ -86,22 +86,22 @@ function level1()
 	enemyList.add(makeEnemy(1, 50, 30));
 	enemyList.add(makeEnemy(1, 40, 30));
 	enemyList.add(makeEnemy(1, 50, 20));
-	
+
 	//add asteroids
 	for(var i = 0; i < 30; ++i) 
 	{
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
-	
+
 	//load background image and sprites
 	background1(width, height);
 }
 
 function level2()
 {
-	
+
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
-	
+
 	width = 120;
 	height = 80;
 
@@ -110,7 +110,7 @@ function level2()
 	boundary = makeBoundary(width, height);
 
 	//debug draw div is 600x400, set draw scale using width
-	
+
 	//setup debug draw
 	var debugDraw = new b2DebugDraw();3
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
@@ -120,28 +120,28 @@ function level2()
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
-	
+
 	homeStation = makeStation(10, height / 2);
 	portal = makeWarpGate(width - 10, height / 2);
 	portal.mesh.position.z = 2;
-	
-	
+
+
 	enemyList.add(makeEnemy(1, 40, 20));
 	enemyList.add(makeEnemy(1, 60, 30));
 	enemyList.add(makeEnemy(0, 80, 30));
     enemyList.add(makeEnemy(0, 100, 40));
-	
+
 	enemyList.add(makeEnemy(1, 110, 40));
 	enemyList.add(makeEnemy(1, 90, 50));
 	enemyList.add(makeEnemy(0, 70, 60));
     enemyList.add(makeEnemy(0, 50, 70));
-	
+
 	//add asteroids
 	for(var i = 0; i < 50; ++i) 
 	{
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
-	
+
 	//load background image and sprites
 	background2(width, height);
 }
@@ -150,7 +150,7 @@ function level3()
 {
 
 	playerShip.body.SetPosition(new b2Vec2( 10, 10 ));
-	
+
 	width = 150;
 	height = 100;
 
@@ -159,7 +159,7 @@ function level3()
 	boundary = makeBoundary(width, height);
 
 	//debug draw div is 600x400, set draw scale using width
-	
+
 	//setup debug draw
 	var debugDraw = new b2DebugDraw();
 		debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
@@ -169,11 +169,11 @@ function level3()
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 	world.SetDebugDraw(debugDraw);
-	
+
 	homeStation = makeStation(10, height / 2);
 	portal = makeWarpGate(width - 10, height / 2);
 	portal.mesh.position.z = 2;
-	
+
 	enemyList.add(makeEnemy(1, 20, 25));
 	enemyList.add(makeEnemy(1, 30, 65));
     enemyList.add(makeEnemy(1, 40, 85));
@@ -185,18 +185,18 @@ function level3()
 	enemyList.add(makeEnemy(0, 90, 85));
 	enemyList.add(makeEnemy(0, 100, 65));
 	enemyList.add(makeEnemy(0, 110, 25));
-	
+
 	enemyList.add(makeEnemy(2, 130, 10));
 	enemyList.add(makeEnemy(2, 130, 90));
-	
-	
-	
+
+
+
 	//add asteroids
 	for(var i = 0; i < 60; ++i) 
 	{
 	    asteroidList.add(makeAsteroid(Math.random() * width, Math.random() * height));
 	}
-	
+
 	//load background image and sprites
 	background3(width, height);
 }
@@ -214,7 +214,7 @@ function destroyLevel()
 	//delete background sprites
 	background.remove(spriteGroup);
 	world.DestroyBody(boundary);
-	
+
 	//empty box2d world of remaining hard boundaries
 	//world.DestroyBody(leftWall);
 	//world.DestroyBody(rightWall);
