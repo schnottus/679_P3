@@ -276,16 +276,16 @@ function boundaryPush(){
         var position = temp.stored.GetPosition();
 		var body = temp.stored;
 		if( position.x < 0){
-			body.ApplyImpulse(new b2Vec2(-position.x, 0), body.GetWorldCenter());
+			body.ApplyImpulse(new b2Vec2(-position.x*body.GetMass()/2, 0), body.GetWorldCenter());
 		}
 		if( position.x > width){
-			body.ApplyImpulse(new b2Vec2(width-position.x, 0), body.GetWorldCenter());
+			body.ApplyImpulse(new b2Vec2((width-position.x)*body.GetMass()/2, 0), body.GetWorldCenter());
 		}
 		if( position.y < 0){
-			body.ApplyImpulse(new b2Vec2(0, -position.y), body.GetWorldCenter());
+			body.ApplyImpulse(new b2Vec2(0, -position.y*body.GetMass()/2), body.GetWorldCenter());
 		}
 		if( position.y > height){
-			body.ApplyImpulse(new b2Vec2(0, height-position.y), body.GetWorldCenter());
+			body.ApplyImpulse(new b2Vec2(0, (height-position.y)*body.GetMass()/2), body.GetWorldCenter());
 		}
         temp = temp.next;
     }

@@ -7,11 +7,12 @@ var mask = {
     ENEMY_BULLETS :     0x0020,
     ENEMY_SENSOR:       0x0040,
     STATION_SENSOR:     0x0080,
+	BOUNDARY:     		0x0100,
 
     NON_BULLETS :       0x000f,
     ENEMY_TARGETS :     0x001a,
     PLAYER_TARGETS :    0x002d,
-    ALL :      		    0x00ff
+    ALL :      		    0x01ff
 };  
 
 var listener = new Box2D.Dynamics.b2ContactListener;
@@ -140,7 +141,7 @@ function makeBoundary(width, height){
 	fixDef.friction = 0.5;
 	fixDef.restitution = 0.3;
 	fixDef.isSensor = true;
-	fixDef.filter.categoryBits = mask.ENEMY_SENSOR;
+	fixDef.filter.categoryBits = mask.BOUNDARY;
     fixDef.filter.maskBits = mask.NON_BULLETS;
 	fixDef.userData = 8;
 	var bodyDef = new b2BodyDef;
@@ -179,7 +180,7 @@ function makeCrystalBody(position, velocity, crystal) {
 	var y = position.y;
 	x += Math.random();
 	y += Math.random();
-    var bodyDef = new b2BodyDef;
+	var bodyDef = new b2BodyDef;
     bodyDef.type = b2Body.b2_dynamicBody;
     bodyDef.position.Set(x, y);
     var body = world.CreateBody(bodyDef);
@@ -190,11 +191,15 @@ function makeCrystalBody(position, velocity, crystal) {
     fixDef.restitution = 0.1;
 	fixDef.userData = 3;
 	fixDef.filter.categoryBits = mask.ASTEROID;
-	fixDef.filter.maskBits = mask.NON_BULLETS;
+	fixDef.filter.maskBits = mask.NON_BULLETS + mask.BOUNDARY;
     body.CreateFixture(fixDef);
 	body.userData = crystal;
 	body.ApplyImpulse(new b2Vec2(velocity.x*body.GetMass(), velocity.y*body.GetMass()), body.GetWorldCenter());
 	randomImpulse(body, .3);
+	if( position.x < 0 || position.x > width || position.y < 0 || position.y > height){
+		outOfBoundsList.add(body);
+		outOfBoundsDir[crystal.ID] = outOfBoundsList.end;
+    }
     return body;
 }
 
